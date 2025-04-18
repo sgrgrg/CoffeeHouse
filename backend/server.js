@@ -16,7 +16,7 @@ dotenv.config();
 const app = express();
 // Enable CORS for all routes
 app.use(cors({
-    origin: ['http://localhost:5173', 'https://frontend-sxwv.onrender.com/'], // Allow only the frontend domains
+    origin: 'http://localhost:5173', // Allow only the frontend domain
     methods: ['GET', 'POST', 'PUT', 'DELETE','PATCH'], // Allowed methods
     allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
   }));
@@ -44,5 +44,5 @@ app.get("/", (req, res) => {
 });
 
 // Start the Server
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
