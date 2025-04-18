@@ -1,0 +1,64 @@
+@media print {
+    body {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }}
+.cv-container {
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .cv-header {
+    animation: fadeInDown 1s ease-in-out;
+  }
+  
+  .cv-section {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 8px;
+    backdrop-filter: blur(5px);
+    animation: fadeInUp 1s ease-in-out;
+  }
+  
+  h2 {
+    border-bottom: 2px solid white;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .cv-download {
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .cv-download:hover {
+    background: white;
+    color: #2575fc;
+  }
+  
+  /* Animations */
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  

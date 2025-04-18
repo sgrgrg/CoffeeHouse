@@ -1,0 +1,90 @@
+/* General Text Styles */
+.text-primary {
+    color: #6A3D2A !important;
+  }
+  
+  .text-secondary {
+    color: #5a331f !important;
+  }
+  
+  /* Buttons */
+  .btn-primary {
+    background-color: #6A3D2A;
+    border-color: #6A3D2A;
+  }
+  
+  .btn-primary:hover {
+    background-color: #5a331f;
+    border-color: #5a331f;
+  }
+  
+  /* Social Links */
+  .social-links {
+    margin-top: 10px;
+  }
+  
+  .social-links a {
+    font-size: 1.5rem;
+    color: #6A3D2A;
+    margin-right: 15px;
+    text-decoration: none;
+  }
+  
+  .social-links a:hover {
+    color: #5a331f;
+  }
+  
+  /* Map Container */
+  .map-container {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Contact Form */
+  form .form-label {
+    font-weight: 600;
+  }
+  
+  form .form-control {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  form .form-control:focus {
+    box-shadow: 0 0 5px rgba(106, 61, 42, 0.5);
+    border-color: #6A3D2A;
+  }
+  
+  form button {
+    font-weight: bold;
+    padding: 10px 20px;
+  }
+  
+  /* Branch Section */
+  .row > .col-md-6 {
+    margin-bottom: 30px;
+  }
+  
+  .row h4 {
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  
+  .row p {
+    line-height: 1.8;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .social-links a {
+      font-size: 1.25rem;
+      margin-right: 10px;
+    }
+  
+    .btn-primary {
+      width: 100%;
+    }
+  }
+  

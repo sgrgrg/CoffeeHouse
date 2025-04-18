@@ -1,0 +1,17 @@
+  /* Set the coffee.svg as the background */
+  body {
+    background-image: url('/src/assets/images/coffee.svg');
+    
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 70px 0px 0px 0px;
+  }
+  /* Apply Poppins font globally */
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* You can apply it to other elements as needed */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', sans-serif;
+}

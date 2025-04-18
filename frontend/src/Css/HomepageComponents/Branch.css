@@ -1,0 +1,85 @@
+.branch-container {
+    background-image: url("../../assets/images/find.svg");
+    background-repeat: no-repeat;
+   
+  }
+  
+  .branch-img {
+    width: 100%;
+    height: 203px;
+    border-radius: 15px;
+  }
+  
+  .branch {
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    background-color: #ffffff;
+    transition: transform 0.3s ease;
+  }
+  
+  .branch:hover {
+    transform: scale(1.05);
+  }
+  
+  .findus-title {
+    font-weight: 700;
+    font-size: 2.25rem; 
+    line-height: 2.5rem;
+  }
+  
+  .findus-description {
+    font-weight: 400;
+    font-size: 1.125rem; 
+    line-height: 2rem; 
+    color: #68737f;
+  }
+  
+  .row-findus {
+    padding-top: 70px
+  }
+  
+  .branch-location {
+    font-weight: 800;
+    font-size: 1rem; 
+    line-height: 1.5rem; 
+    padding-top: 1rem;
+    color: #000000;
+  }
+ /* Modal styles */
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.modal-content {
+  position: relative;
+  max-width: 90%;
+  max-height: 90%;
+}
+
+.modal-img {
+  width: 100%;
+  height: 550px;
+  object-fit: fill;
+}
+
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 4rem;
+  color: white;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+}
