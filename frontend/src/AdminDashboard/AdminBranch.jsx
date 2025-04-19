@@ -106,7 +106,7 @@ const AdminBranch = () => {
       </form>
 
       <h3>Branches</h3>
-      {branches.map((branch) => (
+      {branches && Array.isArray(branches) && branches.map((branch) => (
         <div key={branch._id} style={{ marginBottom: "20px" }}>
           <p>Location: {branch.location}</p>
           <p>Featured: {branch.featured ? "Yes" : "No"}</p>
@@ -133,11 +133,11 @@ const AdminBranch = () => {
             <form onSubmit={(e) => handleBranchEditSubmit(e, branch._id)}>
               <label>
                 New Location:
-            <input
-              type="text"
-              value={editFormData.location || ""}
-              onChange={(e) => setEditFormData({ ...editFormData, location: e.target.value })}
-            />
+                <input
+                  type="text"
+                  value={editFormData.location || ""}
+                  onChange={(e) => setEditFormData({ ...editFormData, location: e.target.value })}
+                />
               </label>
               <label>
                 New Image:
