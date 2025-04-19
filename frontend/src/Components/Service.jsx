@@ -16,7 +16,7 @@ const Service = () => {
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const response = await axios.get("https://coffeehouse-4yii.onrender.comapi/service");
+        const response = await axios.get("https://coffeehouse-4yii.onrender.com/api/service");
         setServices(response.data);
       } catch (err) {
         console.error("Error fetching services:", err);
@@ -28,7 +28,7 @@ const Service = () => {
 
     const fetchTitleDescribeService = async () => {
       try {
-        const response = await axios.get("https://coffeehouse-4yii.onrender.comapi/service/title-describe");
+        const response = await axios.get("https://coffeehouse-4yii.onrender.com/api/service/title-describe");
         if (response.data.length > 0) {
           setTitle(response.data[0].title);
           setDescription(response.data[0].description);
