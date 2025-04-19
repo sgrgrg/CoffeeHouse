@@ -12,20 +12,7 @@ import Footer from "./Components/Footer";
 import Menu from "./Components/Menu";
 import CV from "./Components/CV";
 
-const Layout = ({ children }) => {
-  const location = useLocation();
-  const hideNavFooterRoutes = ["/admin", "/menu"];
 
-  const shouldHideNavFooter = hideNavFooterRoutes.includes(location.pathname);
-
-  return (
-    <>
-      {!shouldHideNavFooter && <Navbar />}
-      {children}
-      {!shouldHideNavFooter && <Footer />}
-    </>
-  );
-};
 
 const App = () => {
   return (
