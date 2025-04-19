@@ -59,7 +59,7 @@ const Menu = () => {
           <div className="col-md-4 mb-3" key={item._id}>
             <div className="card">
               <img
-                src={`https://coffeehouse-4yii.onrender.com${item.image}`}
+                src={`https://coffeehouse-4yii.onrender.com/${item.image}`}
                 alt={item.name}
                 className="card-img-top"
               />
@@ -89,7 +89,7 @@ const Menu = () => {
           <div className="col-md-4 mb-3" key={item._id}>
             <div className="card">
               <img
-                src={`https://coffeehouse-4yii.onrender.com${item.image}`}
+                src={`https://coffeehouse-4yii.onrender.com/${item.image}`}
                 alt={item.name}
                 className="card-img-top"
               />
