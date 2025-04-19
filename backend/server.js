@@ -16,7 +16,7 @@ dotenv.config();
 const app = express();
 // Enable CORS for all routes
 app.use(cors({
-    origin: 'http://localhost:5173', // Allow only the frontend domain
+    origin: ['http://localhost:5173', 'https://coffeehouse-4yii.onrender.com'],
     methods: ['GET', 'POST', 'PUT', 'DELETE','PATCH'], // Allowed methods
     allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
   }));

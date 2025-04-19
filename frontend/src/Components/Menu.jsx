@@ -15,7 +15,7 @@ const Menu = () => {
   const itemsPerPage = 10;
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/menu").then((res) => {
+    axios.get("https://coffeehouse-4yii.onrender.com/api/menu").then((res) => {
       const { menuItems , titleDescribe } = res.data;
       setMenuItems(menuItems);
       setFeaturedItems(menuItems.filter((item) => item.featured));
@@ -59,7 +59,7 @@ const Menu = () => {
           <div className="col-md-4 mb-3" key={item._id}>
             <div className="card">
               <img
-                src={`http://localhost:5000/${item.image}`}
+                src={`https://coffeehouse-4yii.onrender.com/${item.image}`}
                 alt={item.name}
                 className="card-img-top"
               />
@@ -89,7 +89,7 @@ const Menu = () => {
           <div className="col-md-4 mb-3" key={item._id}>
             <div className="card">
               <img
-                src={`http://localhost:5000/${item.image}`}
+                src={`https://coffeehouse-4yii.onrender.com/${item.image}`}
                 alt={item.name}
                 className="card-img-top"
               />

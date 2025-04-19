@@ -13,7 +13,7 @@ const AdminServiceTitleAndDescribe = () => {
   // Fetch the current title and description from the database
   const fetchServices = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/service/title-describe");
+      const response = await axios.get("https://coffeehouse-4yii.onrender.com/api/service/title-describe");
       setServices(response.data);
       if (response.data.length > 0) {
         setTitle(response.data[0].title);
@@ -32,7 +32,7 @@ const AdminServiceTitleAndDescribe = () => {
     e.preventDefault();
     try {
       // Send the updated title and description to the server
-      await axios.post("http://localhost:5000/api/service/title-describe", {
+      await axios.post("https://coffeehouse-4yii.onrender.com/api/service/title-describe", {
         title,
         description,
       });

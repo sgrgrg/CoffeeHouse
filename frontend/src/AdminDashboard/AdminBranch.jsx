@@ -12,7 +12,7 @@ const AdminBranch = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/branch")
+      .get("https://coffeehouse-4yii.onrender.com/api/branch")
       .then((res) => {
         setBranches(res.data.branches || []);
         setTitle(res.data.title || "");
@@ -24,7 +24,7 @@ const AdminBranch = () => {
   const handleTitleDescriptionSubmit = (e) => {
     e.preventDefault();
     axios
-      .put("http://localhost:5000/api/branch/title-description", { title, description })
+      .put("https://coffeehouse-4yii.onrender.com/api/branch/title-description", { title, description })
       .then((res) => setFeedbackMessage(res.data.message))
       .catch((err) => console.error(err));
   };
@@ -36,7 +36,7 @@ const AdminBranch = () => {
     formData.append("image", newBranch.image);
 
     axios
-      .post("http://localhost:5000/api/branch/add", formData)
+      .post("https://coffeehouse-4yii.onrender.com/api/branch/add", formData)
       .then((res) => {
         setBranches(res.data.branch.branches);
         setFeedbackMessage(res.data.message);
@@ -46,7 +46,7 @@ const AdminBranch = () => {
 
   const handleBranchDelete = (branchId) => {
     axios
-      .delete(`http://localhost:5000/api/branch/delete/${branchId}`)
+      .delete(`https://coffeehouse-4yii.onrender.com/api/branch/delete/${branchId}`)
       .then((res) => {
         setBranches(res.data.branch.branches);
         setFeedbackMessage(res.data.message);
@@ -66,7 +66,7 @@ const AdminBranch = () => {
     if (editFormData.image) formData.append("image", editFormData.image);
 
     axios
-      .put(`http://localhost:5000/api/branch/edit/${branchId}`, formData)
+      .put(`https://coffeehouse-4yii.onrender.com/api/branch/edit/${branchId}`, formData)
       .then((res) => {
         setBranches(res.data.branch.branches);
         setEditingBranch(null); // Close the editing form
@@ -77,7 +77,7 @@ const AdminBranch = () => {
 
   const handleToggleFeatured = (branchId) => {
     axios
-      .put(`http://localhost:5000/api/branch/toggle-featured/${branchId}`)
+      .put(`https://coffeehouse-4yii.onrender.com/api/branch/toggle-featured/${branchId}`)
       .then((res) => {
         setBranches(res.data.branch.branches);
         setFeedbackMessage(res.data.message);
@@ -111,7 +111,7 @@ const AdminBranch = () => {
           <p>Featured: {branch.featured ? "Yes" : "No"}</p>
           
           <img 
-            src={`http://localhost:5000/${branch.image}`} 
+            src={`https://coffeehouse-4yii.onrender.com/${branch.image}`} 
             alt={branch.location} 
             width="100" 
             style={{ marginBottom: '10px' }}
