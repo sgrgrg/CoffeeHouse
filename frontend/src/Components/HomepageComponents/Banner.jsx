@@ -4,6 +4,7 @@ import { FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa";
 import axios from "axios";
 import AOS from "aos"; 
 import "aos/dist/aos.css"; 
+import bannerSvg from "../../assets/images/banner.svg";
 
 const Banner = () => {
   const [bannerData, setBannerData] = useState({
@@ -61,7 +62,7 @@ const Banner = () => {
             />
           ) : (
             <img
-              src={require("../../assets/images/banner.svg").default}
+              src={bannerSvg}
               alt="Default Banner"
               className="img-fluid animated-img"
             />
