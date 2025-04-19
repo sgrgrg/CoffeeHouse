@@ -12,7 +12,7 @@ const AdminReview = () => {
 
   const fetchReviews = async () => {
     try {
-      const { data } = await axios.get("backend-production-402e.up.railway.app/api/reviews");
+      const { data } = await axios.get("https://coffeehouse-4yii.onrender.com/api/reviews");
       setReviews(data);
     } catch (err) {
       console.error(err);
@@ -42,10 +42,10 @@ const AdminReview = () => {
 
     try {
       if (editId) {
-        await axios.put(`backend-production-402e.up.railway.app/api/reviews/${editId}`, formData);
+        await axios.put(`https://coffeehouse-4yii.onrender.com/api/reviews/${editId}`, formData);
         alert("Review updated successfully!");
       } else {
-        await axios.post("backend-production-402e.up.railway.app/api/reviews", formData);
+        await axios.post("https://coffeehouse-4yii.onrender.com/api/reviews", formData);
         alert("Review added successfully!");
       }
       setForm({ name: "", rating: "", comment: "", image: null });
@@ -67,7 +67,7 @@ const AdminReview = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`backend-production-402e.up.railway.app/api/reviews/${id}`);
+      await axios.delete(`https://coffeehouse-4yii.onrender.com/api/reviews/${id}`);
       alert("Review deleted successfully!");
       fetchReviews();
     } catch (err) {
@@ -77,7 +77,7 @@ const AdminReview = () => {
 
   const toggleFeature = async (id) => {
     try {
-      await axios.patch(`backend-production-402e.up.railway.app/api/reviews/${id}/toggle-feature`);
+      await axios.patch(`https://coffeehouse-4yii.onrender.com/api/reviews/${id}/toggle-feature`);
       fetchReviews();
     } catch (err) {
       console.error(err);
@@ -125,7 +125,7 @@ const AdminReview = () => {
             <p>{review.comment}</p>
             {review.image && (
               <img
-                src={`backend-production-402e.up.railway.app/${review.image}`}
+                src={`https://coffeehouse-4yii.onrender.com/${review.image}`}
                 alt="Review"
                 width="100"
               />

@@ -17,7 +17,7 @@ dotenv.config();
 const app = express();
 // Enable CORS for all routes
 app.use(cors({
-    origin: [ 'https://frontend-production-0bd9.up.railway.app'],
+    origin: [ 'https://coffeehouse-4yii.onrender.com'],
     methods: ['GET', 'POST', 'PUT', 'DELETE','PATCH'], // Allowed methods
     allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
   }));

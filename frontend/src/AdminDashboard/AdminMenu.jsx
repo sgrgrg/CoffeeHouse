@@ -10,7 +10,7 @@ const AdminMenu = () => {
   const [editFormData, setEditFormData] = useState({ name: "", price: "", image: null });
 
   useEffect(() => {
-    axios.get("backend-production-402e.up.railway.app/api/menu").then((res) => {
+    axios.get("https://coffeehouse-4yii.onrender.com/api/menu").then((res) => {
       setMenuItems(res.data.menuItems || []);
       setTitle(res.data.titleDescribe?.title || "");
       setDescription(res.data.titleDescribe?.description || "");
@@ -20,7 +20,7 @@ const AdminMenu = () => {
   const handleTitleDescriptionSubmit = (e) => {
     e.preventDefault();
     axios
-      .put("backend-production-402e.up.railway.app/api/menu/title-describe", { title, description })
+      .put("https://coffeehouse-4yii.onrender.com/api/menu/title-describe", { title, description })
       .then((res) => alert(res.data.message));
   };
 
@@ -31,7 +31,7 @@ const AdminMenu = () => {
     formData.append("price", newItem.price);
     formData.append("image", newItem.image);
 
-    axios.post("backend-production-402e.up.railway.app/api/menu/add", formData).then((res) => {
+    axios.post("https://coffeehouse-4yii.onrender.com/api/menu/add", formData).then((res) => {
       setMenuItems(res.data.menuItems);
       setNewItem({ name: "", price: "", image: null });
       alert(res.data.message);
@@ -45,7 +45,7 @@ const AdminMenu = () => {
     formData.append("price", editFormData.price);
     if (editFormData.image) formData.append("image", editFormData.image);
 
-    axios.put(`backend-production-402e.up.railway.app/api/menu/edit/${id}`, formData).then((res) => {
+    axios.put(`https://coffeehouse-4yii.onrender.com/api/menu/edit/${id}`, formData).then((res) => {
       setMenuItems(res.data.menuItems);
       setEditingItem(null);
       alert(res.data.message);
@@ -53,14 +53,14 @@ const AdminMenu = () => {
   };
 
   const handleDeleteMenuItem = (id) => {
-    axios.delete(`backend-production-402e.up.railway.app/api/menu/delete/${id}`).then((res) => {
+    axios.delete(`https://coffeehouse-4yii.onrender.com/api/menu/delete/${id}`).then((res) => {
       setMenuItems(res.data.menuItems);
       alert(res.data.message);
     });
   };
 
   const handleToggleFeatured = (id) => {
-    axios.put(`backend-production-402e.up.railway.app/api/menu/toggle-featured/${id}`).then((res) => {
+    axios.put(`https://coffeehouse-4yii.onrender.com/api/menu/toggle-featured/${id}`).then((res) => {
       setMenuItems(res.data.menuItems);
       alert(res.data.message);
     }).catch((err) => {
@@ -81,7 +81,7 @@ const AdminMenu = () => {
       {menuItems.map((item) => (
         <div key={item._id}>
           <p>{item.name} - {item.price}</p>
-          <img src={`backend-production-402e.up.railway.app/${item.image}`} alt={item.name} width="100" />
+          <img src={`https://coffeehouse-4yii.onrender.com/${item.image}`} alt={item.name} width="100" />
           <p>Featured: {item.featured ? "Yes" : "No"}</p>
           <button onClick={() => handleToggleFeatured(item._id)}>
             {item.featured ? "Unfeature" : "Feature"}
