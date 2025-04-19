@@ -19,8 +19,17 @@ const EditBanner = () => {
   useEffect(() => {
     axios.get("https://coffeehouse-4yii.onrender.com/api/banner")
       .then((res) => {
-        setBanner(res.data || {});
-        setPreviewImage(res.data?.image ? `https://coffeehouse-4yii.onrender.com/${res.data.image}` : "");
+        const data = res.data || {};
+        setBanner({
+          title: data.title || "",
+          description: data.description || "",
+          facebook: data.facebook || "",
+          instagram: data.instagram || "",
+          youtube: data.youtube || "",
+          image: data.image || null,
+          _id: data._id || null,
+        });
+        setPreviewImage(data.image ? `https://coffeehouse-4yii.onrender.com/${data.image}` : "");
       })
       .catch((err) => console.error(err));
   }, []);

@@ -7,6 +7,7 @@ const bannerRoute = require("./routes/bannerRoute");
 const serviceRoute = require('./routes/serviceRoute');
 const titleDescribeServiceRoute = require("./routes/title_describe_Service_route");
 const branchRoute = require('./routes/branchRoute');
+const messageRoute = require('./routes/messageRoute');
 const menuRoute = require("./routes/menuRoute");
 const reviewRoute = require('./routes/reviewRoute');
 
@@ -16,7 +17,7 @@ dotenv.config();
 const app = express();
 // Enable CORS for all routes
 app.use(cors({
-    origin: ['http://localhost:5173', 'https://coffeehouse-4yii.onrender.com'],
+    origin: [ 'https://coffeehouse-4yii.onrender.com'],
     methods: ['GET', 'POST', 'PUT', 'DELETE','PATCH'], // Allowed methods
     allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
   }));
@@ -28,7 +29,8 @@ app.use("/api/banner", bannerRoute);
 app.use("/uploads", express.static("uploads"));
 app.use('/api/service', serviceRoute);
 app.use("/api/service/title-describe", titleDescribeServiceRoute);
-app.use('/api/branch', branchRoute);
+app.use('/api/admin/branches', branchRoute);
+app.use('/api/admin/messages', messageRoute);
 app.use("/api/menu", menuRoute);
 app.use('/api/reviews', reviewRoute);
 
