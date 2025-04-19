@@ -65,8 +65,6 @@ const AdminMenu = () => {
       alert(res.data.message);
     }).catch((err) => {
       alert(err.response?.data?.error || "An error occurred");
-    });
-  };
 
   return (
     <div>
@@ -81,7 +79,7 @@ const AdminMenu = () => {
       {menuItems.map((item) => (
         <div key={item._id}>
           <p>{item.name} - {item.price}</p>
-          <img src={`https://coffeehouse-4yii.onrender.com/${item.image}`} alt={item.name} width="100" />
+          <img src={`https://coffeehouse-4yii.onrender.com${item.image}`} alt={item.name} width="100" />
           <p>Featured: {item.featured ? "Yes" : "No"}</p>
           <button onClick={() => handleToggleFeatured(item._id)}>
             {item.featured ? "Unfeature" : "Feature"}

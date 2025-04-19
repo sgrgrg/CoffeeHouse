@@ -18,7 +18,7 @@ const Banner = () => {
 
   useEffect(() => {
     // Fetch banner data from backend
-    axios.get("https://coffeehouse-4yii.onrender.com/api/banner")
+    axios.get("https://coffeehouse-4yii.onrender.comapi/banner")
       .then((res) => setBannerData(res.data || {}))
       .catch((err) => console.error(err));
 
@@ -56,7 +56,7 @@ const Banner = () => {
         <div className="banner-image" data-aos="fade-left"> 
           {bannerData.image ? (
             <img
-              src={`https://coffeehouse-4yii.onrender.com/${bannerData.image}`}
+              src={`https://coffeehouse-4yii.onrender.com${bannerData.image}`}
               alt={bannerData.title || "Banner Image"}
               className="img-fluid animated-img"
             />
