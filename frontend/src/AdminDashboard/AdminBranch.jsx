@@ -14,9 +14,10 @@ const AdminBranch = () => {
     axios
       .get("https://coffeehouse-4yii.onrender.com/api/admin/branches")
       .then((res) => {
-        setBranches(res.data.branch ? res.data.branch.branches : []);
-        setTitle(res.data.branch ? res.data.branch.title : "");
-        setDescription(res.data.branch ? res.data.branch.description : "");
+        const branchData = res.data.branch;
+        setBranches(branchData && Array.isArray(branchData.branches) ? branchData.branches : []);
+        setTitle(branchData ? branchData.title : "");
+        setDescription(branchData ? branchData.description : "");
       })
       .catch((err) => console.error(err));
   }, []);
@@ -95,11 +96,11 @@ const AdminBranch = () => {
       <form onSubmit={handleTitleDescriptionSubmit}>
         <label>
           Title:
-          <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+          <input type="text" value={title || ""} onChange={(e) => setTitle(e.target.value)} />
         </label>
         <label>
           Description:
-          <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
+          <textarea value={description || ""} onChange={(e) => setDescription(e.target.value)} />
         </label>
         <button type="submit">Save</button>
       </form>
@@ -132,11 +133,11 @@ const AdminBranch = () => {
             <form onSubmit={(e) => handleBranchEditSubmit(e, branch._id)}>
               <label>
                 New Location:
-                <input
-                  type="text"
-                  value={editFormData.location}
-                  onChange={(e) => setEditFormData({ ...editFormData, location: e.target.value })}
-                />
+            <input
+              type="text"
+              value={editFormData.location || ""}
+              onChange={(e) => setEditFormData({ ...editFormData, location: e.target.value })}
+            />
               </label>
               <label>
                 New Image:
@@ -157,7 +158,7 @@ const AdminBranch = () => {
           Location:
           <input
             type="text"
-            value={newBranch.location}
+            value={newBranch.location || ""}
             onChange={(e) => setNewBranch({ ...newBranch, location: e.target.value })}
           />
         </label>

@@ -4,7 +4,7 @@ import axios from "axios";
 const AdminContact = () => {
   const [messages, setMessages] = useState([]);
   const [branches, setBranches] = useState([]);
-  const [reply, setReply] = useState({ email: "", message: "" });
+  const [replyContent, setReplyContent] = useState({});
   const [branchForm, setBranchForm] = useState({});
 
   useEffect(() => {
@@ -13,15 +13,33 @@ const AdminContact = () => {
       .catch((err) => console.error(err));
 
     axios.get("https://coffeehouse-4yii.onrender.com/api/admin/branches")
-      .then((res) => setBranches(res.data.branch ? res.data.branch.branches : []))
+      .then((res) => {
+        const branchData = res.data.branch;
+        setBranches(branchData && Array.isArray(branchData.branches) ? branchData.branches : []);
+      })
       .catch((err) => console.error(err));
   }, []);
 
-  const handleReply = (id) => {
-    axios.patch(`https://coffeehouse-4yii.onrender.com/api/admin/messages/${id}/reply`, reply)
-      .then((res) => alert("Reply sent"))
-      .catch((err) => console.error(err));
+  const handleReplyChange = (id, value) => {
+    setReplyContent((prev) => ({ ...prev, [id]: value }));
+  };
 
+  const handleReply = (id) => {
+    const content = replyContent[id];
+    if (!content) {
+      alert("Reply content cannot be empty.");
+      return;
+    }
+    axios.patch(`https://coffeehouse-4yii.onrender.com/api/admin/messages/${id}/reply`, { replyContent: content })
+      .then((res) => {
+        alert("Reply sent");
+        setReplyContent((prev) => {
+          const newReply = { ...prev };
+          delete newReply[id];
+          return newReply;
+        });
+      })
+      .catch((err) => console.error(err));
   };
 
   const handleDeleteMessage = (id) => {
@@ -41,7 +59,8 @@ const AdminContact = () => {
     setBranchForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleBranchSubmit = () => {
+  const handleBranchSubmit = (e) => {
+    e.preventDefault();
     axios.post("https://coffeehouse-4yii.onrender.com/api/admin/branches/add", branchForm)
       .then((res) => setBranches([...branches, res.data.branch]))
       .catch((err) => console.error(err));
@@ -55,8 +74,14 @@ const AdminContact = () => {
         {messages.map((msg) => (
           <div key={msg._id}>
             <p><strong>{msg.name} ({msg.email}):</strong> {msg.message}</p>
+            <textarea
+              placeholder="Type your reply here"
+              value={replyContent[msg._id] || ""}
+              onChange={(e) => handleReplyChange(msg._id, e.target.value)}
+            />
+            <button onClick={() => handleReply(msg._id)}>Send Reply</button>
             <button onClick={() => handleDeleteMessage(msg._id)}>Delete</button>
-            <button onClick={() => handleBlockSender(msg.email)}>Block</button>
+            <button onClick={() => handleBlockSender(msg._id, msg.email)}>Block</button>
           </div>
         ))}
       </div>
@@ -64,9 +89,9 @@ const AdminContact = () => {
       <div>
         <h3>Branches</h3>
         <form onSubmit={handleBranchSubmit}>
-          <input name="name" placeholder="Branch Name" onChange={handleBranchForm} />
-          <input name="address" placeholder="Address" onChange={handleBranchForm} />
-          <input name="phone" placeholder="Phone" onChange={handleBranchForm} />
+          <input name="name" placeholder="Branch Name" value={branchForm.name || ""} onChange={handleBranchForm} />
+          <input name="address" placeholder="Address" value={branchForm.address || ""} onChange={handleBranchForm} />
+          <input name="phone" placeholder="Phone" value={branchForm.phone || ""} onChange={handleBranchForm} />
           <button type="submit">Add Branch</button>
         </form>
         <div>
@@ -74,7 +99,7 @@ const AdminContact = () => {
           {branches.length === 0 && <p>No branches available.</p>}
           {branches.map((branch, index) => (
             <div key={index}>
-              <p><strong>Name:</strong> {branch.location || branch.name || "N/A"}</p>
+              <p><strong>Name:</strong> {branch.name || branch.location || "N/A"}</p>
               <p><strong>Address:</strong> {branch.address || "N/A"}</p>
               <p><strong>Phone:</strong> {branch.phone || "N/A"}</p>
             </div>
