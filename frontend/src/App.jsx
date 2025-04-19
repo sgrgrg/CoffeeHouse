@@ -1,11 +1,6 @@
 import React from "react";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 
-
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route
-} from "react-router-dom";
 import Navbar from "./Components/Navbar";
 import Home from "./Components/Home";
 import About from "./Components/About";
@@ -17,21 +12,36 @@ import Footer from "./Components/Footer";
 import Menu from "./Components/Menu";
 import CV from "./Components/CV";
 
+const Layout = ({ children }) => {
+  const location = useLocation();
+  const hideNavFooterRoutes = ["/admin", "/menu"];
+
+  const shouldHideNavFooter = hideNavFooterRoutes.includes(location.pathname);
+
+  return (
+    <>
+      {!shouldHideNavFooter && <Navbar />}
+      {children}
+      {!shouldHideNavFooter && <Footer />}
+    </>
+  );
+};
+
 const App = () => {
   return (
-    <Router basename="/coffeehouse">
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/service" element={<Service/>}/>
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/trainings" element={<Trainings />} />
-        <Route path="/admin" element={<Admin />} />
-        <Route path="/menu" element={<Menu/>} />
-        <Route path="/cv" element={<CV/>} />
-      </Routes>
-      <Footer/>
+    <Router>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/service" element={<Service />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/trainings" element={<Trainings />} />
+          <Route path="/cv" element={<CV />} />
+          <Route path="/menu" element={<Menu />} />
+          <Route path="/admin" element={<Admin />} />
+        </Routes>
+      </Layout>
     </Router>
   );
 };
