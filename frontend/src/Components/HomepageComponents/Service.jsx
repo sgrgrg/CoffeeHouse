@@ -16,7 +16,7 @@ const Service = () => {
     // Fetch the title and description from the API
     const fetchTitleDescribeService = async () => {
       try {
-        const response = await axios.get("https:/coffeehouse-4yii.onrender.com/api/service/title-describe");
+        const response = await axios.get("https://coffeehouse-4yii.onrender.com/api/service/title-describe");
         if (response.data.length > 0) {
           setTitle(response.data[0].title);
           setDescription(response.data[0].description);
@@ -29,7 +29,7 @@ const Service = () => {
     // Fetch only featured services
     const fetchFeaturedServices = async () => {
       try {
-        const response = await axios.get("https:/coffeehouse-4yii.onrender.com/api/service/featured");
+        const response = await axios.get("https://coffeehouse-4yii.onrender.com/api/service/featured");
         setFeaturedServices(response.data);
       } catch (error) {
         console.error("Error fetching featured services:", error);
@@ -67,7 +67,7 @@ const Service = () => {
                   data-aos="fade-up"
                 >
                   <img
-                    src={`https:/coffeehouse-4yii.onrender.com${service.image}`}
+                    src={`https://coffeehouse-4yii.onrender.com${service.image}`}
                     alt={service.title}
                     className="service-icon mb-3"
                     width="80"
