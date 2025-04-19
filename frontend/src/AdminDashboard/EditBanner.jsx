@@ -19,7 +19,21 @@ const EditBanner = () => {
   useEffect(() => {
     axios.get("https://coffeehouse-4yii.onrender.com/api/banner")
       .then((res) => {
-        const data = res.data || {};
+        const data = res.data;
+        if (!data) {
+          // No banner found, clear banner state and preview image
+          setBanner({
+            title: "",
+            description: "",
+            facebook: "",
+            instagram: "",
+            youtube: "",
+            image: null,
+            _id: null,
+          });
+          setPreviewImage("");
+          return;
+        }
         setBanner({
           title: data.title || "",
           description: data.description || "",
@@ -52,6 +66,11 @@ const EditBanner = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!banner._id) {
+      alert("No banner exists to update.");
+      return;
+    }
 
     const formData = new FormData();
     formData.append("title", banner.title);
