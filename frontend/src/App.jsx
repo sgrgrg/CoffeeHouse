@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from "react-route
 import Layout from "./Components/Layout";
 import Home from "./Components/Home";
 import About from "./Components/About";
-import Contact from "./Components/Contact";
+import Contact from "./Components/ContactForm";
 import Trainings from "./Components/Trainings";
 import Service from "./Components/Service";
 import Admin from "./AdminDashboard/Admin";

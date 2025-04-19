@@ -17,7 +17,7 @@ const ContactForm = () => {
     e.preventDefault();
     setStatus("");
     try {
-      const response = await axios.post("https://coffeehouse-4yii.onrender.com/api/messages", formData);
+      const response = await axios.post("https://coffeehouse-4yii.onrender.com/api/admin/messages", formData);
       if (response.status === 201) {
         setStatus("Message sent successfully!");
         setFormData({ name: "", email: "", message: "" });
