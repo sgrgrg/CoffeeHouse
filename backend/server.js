@@ -13,13 +13,11 @@ const reviewRoute = require('./routes/reviewRoute');
 
 const port = 5000;
 
-const path = require('path');
-
 dotenv.config();
 const app = express();
 // Enable CORS for all routes
 app.use(cors({
-    origin: [ 'https://coffeehouse-4yii.onrender.com', 'https://coffeehouse-1.onrender.com'],
+    origin: [ 'https://coffeehouse-1.onrender.com'],
     methods: ['GET', 'POST', 'PUT', 'DELETE','PATCH'], // Allowed methods
     allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
   }));
@@ -36,14 +34,6 @@ app.use('/api/admin/messages', messageRoute);
 app.use("/api/menu", menuRoute);
 app.use('/api/reviews', reviewRoute);
 
-// Serve frontend static files
-const frontendBuildPath = path.join(__dirname, '..', 'frontend', 'dist');
-app.use(express.static(frontendBuildPath));
-
-// Fallback route to serve index.html for client-side routing
-app.get('*', (req, res) => {
-  res.sendFile(path.join(frontendBuildPath, 'index.html'));
-});
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGO_URI)
