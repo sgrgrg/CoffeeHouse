@@ -19,7 +19,7 @@ import CV from "./Components/CV";
 
 const App = () => {
   return (
-    <Router>
+    <Router basename="/coffeehouse">
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
