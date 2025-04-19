@@ -69,6 +69,17 @@ const AdminContact = () => {
           <input name="phone" placeholder="Phone" onChange={handleBranchForm} />
           <button type="submit">Add Branch</button>
         </form>
+        <div>
+          <h4>Branch List</h4>
+          {branches.length === 0 && <p>No branches available.</p>}
+          {branches.map((branch, index) => (
+            <div key={index}>
+              <p><strong>Name:</strong> {branch.location || branch.name || "N/A"}</p>
+              <p><strong>Address:</strong> {branch.address || "N/A"}</p>
+              <p><strong>Phone:</strong> {branch.phone || "N/A"}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
