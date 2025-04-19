@@ -3,6 +3,7 @@ import axios from "axios";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import "../../Css/HomepageComponents/Menu.css";
+import { Link } from "react-router-dom";
 
 const Menu = () => {
   const [featuredItems, setFeaturedItems] = useState([]);
@@ -45,9 +46,9 @@ const Menu = () => {
 
       {/* Link to Full Menu */}
       <div className="text-end mt-4" data-aos="fade-up" data-aos-delay="400">
-        <a href="/menu" className="view-all-link">
+        <Link to="/menu" className="view-all-link">
           View All
-        </a>
+        </Link>
       </div>
 
       {/* Featured Menu Items */}
