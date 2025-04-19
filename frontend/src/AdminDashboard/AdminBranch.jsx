@@ -12,7 +12,7 @@ const AdminBranch = () => {
 
   useEffect(() => {
     axios
-      .get("https://coffeehouse-4yii.onrender.com/api/admin/branches")
+      .get("backend-production-402e.up.railway.app/api/admin/branches")
       .then((res) => {
         setBranches(res.data.branch ? res.data.branch.branches : []);
         setTitle(res.data.branch ? res.data.branch.title : "");
@@ -24,7 +24,7 @@ const AdminBranch = () => {
   const handleTitleDescriptionSubmit = (e) => {
     e.preventDefault();
     axios
-      .put("https://coffeehouse-4yii.onrender.com/api/admin/branches/title-description", { title, description })
+      .put("backend-production-402e.up.railway.app/api/admin/branches/title-description", { title, description })
       .then((res) => setFeedbackMessage(res.data.message))
       .catch((err) => console.error(err));
   };
@@ -36,7 +36,7 @@ const AdminBranch = () => {
     formData.append("image", newBranch.image);
 
     axios
-      .post("https://coffeehouse-4yii.onrender.com/api/admin/branches/add", formData)
+      .post("backend-production-402e.up.railway.app/api/admin/branches/add", formData)
       .then((res) => {
         setBranches(res.data.branch.branches);
         setFeedbackMessage(res.data.message);
@@ -46,7 +46,7 @@ const AdminBranch = () => {
 
   const handleBranchDelete = (branchId) => {
     axios
-      .delete(`https://coffeehouse-4yii.onrender.com/api/admin/branches/delete/${branchId}`)
+      .delete(`backend-production-402e.up.railway.app/api/admin/branches/delete/${branchId}`)
       .then((res) => {
         setBranches(res.data.branch.branches);
         setFeedbackMessage(res.data.message);
@@ -66,7 +66,7 @@ const AdminBranch = () => {
     if (editFormData.image) formData.append("image", editFormData.image);
 
     axios
-      .put(`https://coffeehouse-4yii.onrender.com/api/admin/branches/edit/${branchId}`, formData)
+      .put(`backend-production-402e.up.railway.app/api/admin/branches/edit/${branchId}`, formData)
       .then((res) => {
         setBranches(res.data.branch.branches);
         setEditingBranch(null); // Close the editing form
@@ -77,7 +77,7 @@ const AdminBranch = () => {
 
   const handleToggleFeatured = (branchId) => {
     axios
-      .put(`https://coffeehouse-4yii.onrender.com/api/admin/branches/toggle-featured/${branchId}`)
+      .put(`backend-production-402e.up.railway.app/api/admin/branches/toggle-featured/${branchId}`)
       .then((res) => {
         setBranches(res.data.branch.branches);
         setFeedbackMessage(res.data.message);
@@ -111,7 +111,7 @@ const AdminBranch = () => {
           <p>Featured: {branch.featured ? "Yes" : "No"}</p>
           
           <img 
-            src={`https://coffeehouse-4yii.onrender.com/${branch.image}`} 
+            src={`backend-production-402e.up.railway.app/${branch.image}`} 
             alt={branch.location} 
             width="100" 
             style={{ marginBottom: '10px' }}

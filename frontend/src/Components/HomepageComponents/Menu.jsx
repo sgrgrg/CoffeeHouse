@@ -17,7 +17,7 @@ const Menu = () => {
 
     // Fetch menu title, description, and featured items from backend
     axios
-      .get("https://coffeehouse-4yii.onrender.com/api/menu")
+      .get("backend-production-402e.up.railway.app/api/menu")
       .then((res) => {
         const { menuItems, titleDescribe } = res.data;
         const featured = menuItems.filter((item) => item.featured); // Get featured items
@@ -62,7 +62,7 @@ const Menu = () => {
             >
               <div className="menu-item d-flex align-items-center">
                 <img
-                  src={`https://coffeehouse-4yii.onrender.com/${item.image}`}
+                  src={`backend-production-402e.up.railway.app/${item.image}`}
                   alt={item.name}
                   className="menu-img me-3"
                 />

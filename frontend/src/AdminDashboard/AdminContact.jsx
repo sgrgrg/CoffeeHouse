@@ -8,30 +8,30 @@ const AdminContact = () => {
   const [branchForm, setBranchForm] = useState({});
 
   useEffect(() => {
-    axios.get("https://coffeehouse-4yii.onrender.com/api/admin/messages")
+    axios.get("backend-production-402e.up.railway.app/api/admin/messages")
       .then((res) => setMessages(res.data))
       .catch((err) => console.error(err));
 
-    axios.get("https://coffeehouse-4yii.onrender.com/api/admin/branches")
+    axios.get("backend-production-402e.up.railway.app/api/admin/branches")
       .then((res) => setBranches(res.data.branch ? res.data.branch.branches : []))
       .catch((err) => console.error(err));
   }, []);
 
   const handleReply = (id) => {
-    axios.patch(`https://coffeehouse-4yii.onrender.com/api/admin/messages/${id}/reply`, reply)
+    axios.patch(`backend-production-402e.up.railway.app/api/admin/messages/${id}/reply`, reply)
       .then((res) => alert("Reply sent"))
       .catch((err) => console.error(err));
 
   };
 
   const handleDeleteMessage = (id) => {
-    axios.delete(`https://coffeehouse-4yii.onrender.com/api/admin/messages/${id}`)
+    axios.delete(`backend-production-402e.up.railway.app/api/admin/messages/${id}`)
       .then(() => setMessages(messages.filter((msg) => msg._id !== id)))
       .catch((err) => console.error(err));
   };
 
   const handleBlockSender = (id, email) => {
-    axios.patch(`https://coffeehouse-4yii.onrender.com/api/admin/messages/${id}/block`)
+    axios.patch(`backend-production-402e.up.railway.app/api/admin/messages/${id}/block`)
       .then(() => alert(`Blocked ${email}`))
       .catch((err) => console.error(err));
   };
@@ -42,7 +42,7 @@ const AdminContact = () => {
   };
 
   const handleBranchSubmit = () => {
-    axios.post("https://coffeehouse-4yii.onrender.com/api/admin/branches/add", branchForm)
+    axios.post("backend-production-402e.up.railway.app/api/admin/branches/add", branchForm)
       .then((res) => setBranches([...branches, res.data.branch]))
       .catch((err) => console.error(err));
   };

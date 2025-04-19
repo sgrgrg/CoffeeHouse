@@ -12,7 +12,7 @@ const AdminService = () => {
 
   useEffect(() => {
     axios
-      .get('https://coffeehouse-4yii.onrender.com/api/service')
+      .get('backend-production-402e.up.railway.app/api/service')
       .then((response) => {
         setServices(response.data);
         setFeaturedServices(response.data.filter((service) => service.isFeatured).slice(0, 4));
@@ -33,7 +33,7 @@ const AdminService = () => {
     formData.append('image', newService.image);
 
     axios
-      .post('https://coffeehouse-4yii.onrender.com/api/service', formData)
+      .post('backend-production-402e.up.railway.app/api/service', formData)
       .then((response) => {
         alert(response.data.message);
         setNewService({ title: '', description: '', image: '' });
@@ -54,7 +54,7 @@ const AdminService = () => {
     }
 
     axios
-      .put(`https://coffeehouse-4yii.onrender.com/api/service/${serviceId}`, { isFeatured: isAddingToFeatured })
+      .put(`backend-production-402e.up.railway.app/api/service/${serviceId}`, { isFeatured: isAddingToFeatured })
       .then((response) => {
         alert(response.data.message);
         setServices((prev) =>
@@ -83,7 +83,7 @@ const AdminService = () => {
     }
 
     axios
-      .put(`https://coffeehouse-4yii.onrender.com/api/service/${serviceId}`, formData)
+      .put(`backend-production-402e.up.railway.app/api/service/${serviceId}`, formData)
       .then((response) => {
         alert(response.data.message);
         setEditingService(null);
@@ -98,7 +98,7 @@ const AdminService = () => {
 
   const handleDelete = (serviceId) => {
     axios
-      .delete(`https://coffeehouse-4yii.onrender.com/api/service/${serviceId}`)
+      .delete(`backend-production-402e.up.railway.app/api/service/${serviceId}`)
       .then((response) => {
         alert(response.data.message);
         setServices((prev) => prev.filter((service) => service._id !== serviceId));
@@ -146,7 +146,7 @@ const AdminService = () => {
       <div className="services-list">
         {services.map((service) => (
           <div key={service._id} className="service-item">
-            <img src={`https://coffeehouse-4yii.onrender.com${service.image}`} alt={service.title} width="100" />
+            <img src={`backend-production-402e.up.railway.app${service.image}`} alt={service.title} width="100" />
             <h4>{service.title}</h4>
             <p>{service.description}</p>
             <button onClick={() => setEditingService(service)}>Edit</button>
@@ -191,7 +191,7 @@ const AdminService = () => {
       <div className="featured-services">
         {featuredServices.map((service) => (
           <div key={service._id} className="service-item">
-            <img src={`https://coffeehouse-4yii.onrender.com${service.image}`} alt={service.title} width="100" />
+            <img src={`backend-production-402e.up.railway.app${service.image}`} alt={service.title} width="100" />
             <h4>{service.title}</h4>
             <p>{service.description}</p>
           </div>
