@@ -1,14 +1,13 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 
-import Navbar from "./Components/Navbar";
+import Layout from "./Components/Layout";
 import Home from "./Components/Home";
 import About from "./Components/About";
 import Contact from "./Components/Contact";
 import Trainings from "./Components/Trainings";
 import Service from "./Components/Service";
 import Admin from "./AdminDashboard/Admin";
-import Footer from "./Components/Footer";
 import Menu from "./Components/Menu";
 import CV from "./Components/CV";
 
