@@ -17,7 +17,7 @@ const Menu = () => {
 
     // Fetch menu title, description, and featured items from backend
     axios
-      .get("https://https://coffeehouse-4yii.onrender.com/api/menu")
+      .get("https://coffeehouse-4yii.onrender.com/api/menu")
       .then((res) => {
         const { menuItems, titleDescribe } = res.data;
         const featured = Array.isArray(menuItems) ? menuItems.filter((item) => item.featured) : [];

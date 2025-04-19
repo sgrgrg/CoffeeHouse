@@ -20,7 +20,7 @@ const Review = () => {
     // Fetch featured reviews
     const fetchFeaturedReviews = async () => {
       try {
-        const { data } = await axios.get("https://https://coffeehouse-4yii.onrender.com/api/reviews");
+        const { data } = await axios.get("https://coffeehouse-4yii.onrender.com/api/reviews");
         // Filter for featured reviews
         const filteredReviews = Array.isArray(data) ? data.filter((review) => review.isFeatured) : [];
         setFeaturedReviews(filteredReviews);

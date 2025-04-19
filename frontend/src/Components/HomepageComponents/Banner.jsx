@@ -61,7 +61,7 @@ const Banner = () => {
             />
           ) : (
             <img
-              src="/src/assets/images/banner.svg"
+              src={require("../../assets/images/banner.svg").default}
               alt="Default Banner"
               className="img-fluid animated-img"
             />
