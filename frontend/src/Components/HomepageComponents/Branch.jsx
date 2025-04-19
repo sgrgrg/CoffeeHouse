@@ -19,7 +19,7 @@ const Branch = () => {
     });
 
     // Fetch the branches and title/description
-    axios.get('https://coffeehouse-4yii.onrender.com/api/branch')
+    axios.get('https://coffeehouse-4yii.onrender.com/api/admin/branches')
       .then((response) => {
         const allBranches = response.data.branch?.branches || [];
         const featured = allBranches.filter(branch => branch.featured);
