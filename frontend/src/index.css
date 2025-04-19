@@ -1,6 +1,6 @@
   /* Set the coffee.svg as the background */
   body {
-    background-image: url('./src/assets/images/coffee.svg');
+    background-image: url('/src/assets/images/coffee.svg');
     
     background-repeat: no-repeat;
     margin: 0;
