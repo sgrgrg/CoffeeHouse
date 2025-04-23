@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { io } from "socket.io-client";
+
+const socket = io("https://coffeehouse-4yii.onrender.com");
 
 const AdminContact = () => {
   const [messages, setMessages] = useState([]);
@@ -18,6 +21,22 @@ const AdminContact = () => {
         setBranches(branchData && Array.isArray(branchData.branches) ? branchData.branches : []);
       })
       .catch((err) => console.error(err));
+
+    // Socket event listeners
+    socket.on("newMessage", (newMessage) => {
+      setMessages((prevMessages) => [...prevMessages, newMessage]);
+    });
+
+    socket.on("messageReply", (updatedMessage) => {
+      setMessages((prevMessages) =>
+        prevMessages.map((msg) => (msg._id === updatedMessage._id ? updatedMessage : msg))
+      );
+    });
+
+    return () => {
+      socket.off("newMessage");
+      socket.off("messageReply");
+    };
   }, []);
 
   const handleReplyChange = (id, value) => {
@@ -73,7 +92,7 @@ const AdminContact = () => {
         <h3>Messages</h3>
         {messages.map((msg) => (
           <div key={msg._id}>
-            <p><strong>{msg.name} ({msg.email}):</strong> {msg.message}</p>
+          <p><strong>{msg.name} ({msg.email}):</strong> {msg.content}</p>
             <textarea
               placeholder="Type your reply here"
               value={replyContent[msg._id] || ""}
@@ -109,5 +128,4 @@ const AdminContact = () => {
     </div>
   );
 };
-
 export default AdminContact;
