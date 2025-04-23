@@ -24,6 +24,7 @@ const UserProfile = () => {
     const fetchProfile = async () => {
       try {
         setLoading(true);
+        console.log("Using token in UserProfile:", authData?.token);
         const res = await axios.get("https://coffeehouse-4yii.onrender.com/api/user/profile", {
           headers: { Authorization: `Bearer ${authData?.token}` },
         });

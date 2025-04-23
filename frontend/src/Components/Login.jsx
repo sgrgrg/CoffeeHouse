@@ -20,6 +20,7 @@ const Login = () => {
     setMessage("");
     try {
       const res = await axios.post("https://coffeehouse-4yii.onrender.com/api/auth/login", form);
+      console.log("Login response token:", res.data.token);
       setAuthData(res.data);
       setMessage("Login successful");
     } catch (error) {
