@@ -25,7 +25,7 @@ const UserProfile = () => {
       try {
         setLoading(true);
         console.log("Using token in UserProfile:", authData?.token);
-        const res = await axios.get("http://localhost:5000/api/user/profile", {
+        const res = await axios.get("https://coffeehouse-4yii.onrender.com/api/user/profile", {
           headers: { Authorization: `Bearer ${authData?.token}` },
         });
         setProfile(res.data);
@@ -66,7 +66,7 @@ const UserProfile = () => {
       if (profilePictureFile) formData.append("profilePicture", profilePictureFile);
       if (backgroundPictureFile) formData.append("profileBackgroundPicture", backgroundPictureFile);
 
-      const res = await axios.put("http://localhost:5000/api/user/profile", formData, {
+      const res = await axios.put("https://coffeehouse-4yii.onrender.com/api/user/profile", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${authData?.token}`,
