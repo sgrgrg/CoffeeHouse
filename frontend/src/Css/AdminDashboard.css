@@ -1,5 +1,5 @@
 /* Admin Dashboard Layout */
-.admin-dashboard {
+.admindash-dashboard {
   display: flex;
   height: 100vh;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -8,7 +8,7 @@
 }
 
 /* Sidebar */
-.admin-sidebar {
+.admindash-sidebar {
   width: 250px;
   background-color: #2c3e50;
   color: #ecf0f1;
@@ -17,7 +17,7 @@
   padding: 20px;
 }
 
-.admin-sidebar h2 {
+.admindash-sidebar h2 {
   font-size: 24px;
   margin-bottom: 30px;
   text-align: center;
@@ -25,14 +25,14 @@
   letter-spacing: 1px;
 }
 
-.admin-sidebar ul {
+.admindash-sidebar ul {
   list-style: none;
   padding: 0;
   margin: 0;
   flex-grow: 1;
 }
 
-.admin-sidebar ul li {
+.admindash-sidebar ul li {
   padding: 15px 20px;
   margin-bottom: 10px;
   cursor: pointer;
@@ -40,13 +40,13 @@
   transition: background-color 0.3s ease;
 }
 
-.admin-sidebar ul li:hover,
-.admin-sidebar ul li.active {
+.admindash-sidebar ul li:hover,
+.admindash-sidebar ul li.active {
   background-color: #34495e;
 }
 
 /* Header */
-.admin-header {
+.admindash-header {
   height: 60px;
   background-color: #fff;
   border-bottom: 1px solid #ddd;
@@ -57,26 +57,26 @@
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
-.admin-header .brand {
+.admindash-header .brand {
   font-size: 20px;
   font-weight: 700;
   color: #2c3e50;
 }
 
-.admin-header .user-info {
+.admindash-header .user-info {
   font-size: 16px;
   color: #666;
 }
 
 /* Content Area */
-.admin-content {
+.admindash-content {
   flex-grow: 1;
   padding: 30px;
   overflow-y: auto;
 }
 
 /* Card style for sections */
-.admin-section {
+.admindash-section {
   background-color: #fff;
   border-radius: 10px;
   padding: 25px;
@@ -85,7 +85,7 @@
 }
 
 /* Buttons */
-button {
+.admindash-dashboard button {
   background-color: #2c3e50;
   color: #ecf0f1;
   border: none;
@@ -96,29 +96,29 @@ button {
   transition: background-color 0.3s ease;
 }
 
-button:hover {
+.admindash-dashboard button:hover {
   background-color: #34495e;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-  .admin-dashboard {
+  .admindash-dashboard {
     flex-direction: column;
   }
-  .admin-sidebar {
+  .admindash-sidebar {
     width: 100%;
     flex-direction: row;
     overflow-x: auto;
   }
-  .admin-sidebar ul {
+  .admindash-sidebar ul {
     display: flex;
     flex-direction: row;
   }
-  .admin-sidebar ul li {
+  .admindash-sidebar ul li {
     margin-right: 15px;
     margin-bottom: 0;
   }
-  .admin-content {
+  .admindash-content {
     padding: 15px;
   }
 }

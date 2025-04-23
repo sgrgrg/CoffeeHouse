@@ -108,25 +108,25 @@ const Chatbot = () => {
         <div className="chatbot-window">
           <div className="chatbot-header">
             <h4>Chat with Admin</h4>
-            <button className="close-btn" onClick={toggleChat} aria-label="Close chat">
+            <button className="chatbot-close-btn" onClick={toggleChat} aria-label="Close chat">
               &times;
             </button>
           </div>
           <div className="chatbot-messages">
-            {messages.length === 0 && <p className="no-messages">No messages yet.</p>}
+            {messages.length === 0 && <p className="chatbot-no-messages">No messages yet.</p>}
             {messages.map((msg) => (
-              <div key={msg._id} className="chatbot-message user-message">
-                <div className="message-content">{msg.content}</div>
-                <div className="message-time">
+              <div key={msg._id} className="chatbot-message chatbot-user-message">
+                <div className="chatbot-message-content">{msg.content}</div>
+                <div className="chatbot-message-time">
                   {new Date(msg.createdAt).toLocaleTimeString([], {
                     hour: "2-digit",
                     minute: "2-digit",
                   })}
                 </div>
                 {msg.replyContent && (
-                  <div className="chatbot-message admin-message reply-message">
-                    <div className="message-content">{msg.replyContent}</div>
-                    <div className="message-time">
+                  <div className="chatbot-message chatbot-admin-message chatbot-reply-message">
+                    <div className="chatbot-message-content">{msg.replyContent}</div>
+                    <div className="chatbot-message-time">
                       {new Date(msg.updatedAt || msg.createdAt).toLocaleTimeString([], {
                         hour: "2-digit",
                         minute: "2-digit",
@@ -151,7 +151,7 @@ const Chatbot = () => {
                   onKeyDown={handleInputKeyDown}
                   rows={2}
                 />
-                <button className="send-btn" onClick={handleSend} aria-label="Send message">
+                <button className="chatbot-send-btn" onClick={handleSend} aria-label="Send message">
                   Send
                 </button>
               </>
@@ -164,5 +164,3 @@ const Chatbot = () => {
 };
 
 export default Chatbot;
-
-

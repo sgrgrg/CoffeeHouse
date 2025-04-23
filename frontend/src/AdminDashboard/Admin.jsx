@@ -34,8 +34,8 @@ const Admin = () => {
   };
 
   return (
-    <div className="admin-dashboard">
-      <aside className="admin-sidebar">
+    <div className="admindash-dashboard">
+      <aside className="admindash-sidebar">
         <h2>Coffee House Admin</h2>
         <ul>
           <li
@@ -82,12 +82,12 @@ const Admin = () => {
           </li>
         </ul>
       </aside>
-      <div className="admin-content">
-        <header className="admin-header">
+      <div className="admindash-content">
+        <header className="admindash-header">
           <div className="brand">Coffee House Admin Dashboard</div>
           <div className="user-info">Admin User</div>
         </header>
-        <section className="admin-section">{renderSection()}</section>
+        <section className="admindash-section">{renderSection()}</section>
       </div>
     </div>
   );

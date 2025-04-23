@@ -4,39 +4,39 @@ import "../Css/Contact.css";
 const Contact = () => {
   return (
     <div className="container my-5">
-      <div className="row">
+      <div className="contact-row">
         {/* Contact Form Section */}
-        <div className="col-md-6">
-          <h2 className="mb-4 text-primary">Contact Us</h2>
+        <div className="contact-col-md-6">
+          <h2 className="mb-4 contact-text-primary">Contact Us</h2>
           <form>
             <div className="mb-3">
-              <label htmlFor="name" className="form-label">
+              <label htmlFor="name" className="contact-form-label">
                 Name
               </label>
-              <input type="text" className="form-control" id="name" placeholder="Your Name" required />
+              <input type="text" className="contact-form-control" id="name" placeholder="Your Name" required />
             </div>
             <div className="mb-3">
-              <label htmlFor="email" className="form-label">
+              <label htmlFor="email" className="contact-form-label">
                 Email
               </label>
-              <input type="email" className="form-control" id="email" placeholder="Your Email" required />
+              <input type="email" className="contact-form-control" id="email" placeholder="Your Email" required />
             </div>
             <div className="mb-3">
-              <label htmlFor="message" className="form-label">
+              <label htmlFor="message" className="contact-form-label">
                 Message
               </label>
-              <textarea className="form-control" id="message" rows="4" placeholder="Your Message" required></textarea>
+              <textarea className="contact-form-control" id="message" rows="4" placeholder="Your Message" required></textarea>
             </div>
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="contact-btn-primary">
               Send Message
             </button>
           </form>
         </div>
 
         {/* Main Location Section */}
-        <div className="col-md-6">
-          <h2 className="mb-4 text-primary">Our Location</h2>
-          <div className="map-container mb-4">
+        <div className="contact-col-md-6">
+          <h2 className="mb-4 contact-text-primary">Our Location</h2>
+          <div className="contact-map-container mb-4">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d113032.65322787261!2d85.24373135767756!3d27.708935957714655!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb198a307baabf%3A0xb5137c1bf18db1ea!2sKathmandu%2044600!5e0!3m2!1sen!2snp!4v1738050874736!5m2!1sen!2snp"
               width="100%"
@@ -62,12 +62,12 @@ const Contact = () => {
 
       {/* Branches Section */}
       <div className="mt-5">
-        <h2 className="mb-4 text-primary">Our Branches</h2>
-        <div className="row">
+        <h2 className="mb-4 contact-text-primary">Our Branches</h2>
+        <div className="contact-row">
           {/* Main Branch */}
-          <div className="col-md-6 mb-4">
-            <h4 className="text-secondary">Main Branch</h4>
-            <div className="map-container mb-3">
+          <div className="contact-col-md-6 mb-4">
+            <h4 className="contact-text-secondary">Main Branch</h4>
+            <div className="contact-map-container mb-3">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d113032.65322787261!2d85.24373135767756!3d27.708935957714655!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb198a307baabf%3A0xb5137c1bf18db1ea!2sTridevi%20Marg%2C%20Thamel!5e0!3m2!1sen!2snp!4v1738050874736!5m2!1sen!2snp"
                 width="100%"
@@ -83,7 +83,7 @@ const Contact = () => {
               <br />
               <strong>Phone:</strong> +977-(01)-4435171
             </p>
-            <div className="social-links">
+            <div className="contact-social-links">
               <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
                 <i className="bi bi-facebook"></i>
               </a>
@@ -100,9 +100,9 @@ const Contact = () => {
           </div>
 
           {/* Durbar Marg Branch */}
-          <div className="col-md-6 mb-4">
-            <h4 className="text-secondary">Durbar Marg</h4>
-            <div className="map-container mb-3">
+          <div className="contact-col-md-6 mb-4">
+            <h4 className="contact-text-secondary">Durbar Marg</h4>
+            <div className="contact-map-container mb-3">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.2397084095984!2d85.3173215!3d27.7088757!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb18fd856f5297%3A0x77f2c72fb3c7b561!2sDurbar%20Marg%2C%20Kathmandu!5e0!3m2!1sen!2snp!4v1738050874736!5m2!1sen!2snp"
                 width="100%"
@@ -118,7 +118,7 @@ const Contact = () => {
               <br />
               <strong>Phone:</strong> +977-(01)-4441234
             </p>
-            <div className="social-links">
+            <div className="contact-social-links">
               <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
                 <i className="bi bi-facebook"></i>
               </a>

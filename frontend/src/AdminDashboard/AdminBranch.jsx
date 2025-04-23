@@ -11,7 +11,8 @@ const AdminBranch = () => {
     fbLink: "",
     instaLink: "",
     youtubeLink: "",
-    email: "",
+    emails: [""],
+    phoneNumbers: [""],
     isMain: false,
   });
   const [editingBranch, setEditingBranch] = useState(null);
@@ -21,7 +22,8 @@ const AdminBranch = () => {
     fbLink: "",
     instaLink: "",
     youtubeLink: "",
-    email: "",
+    emails: [""],
+    phoneNumbers: [""],
     isMain: false,
   });
   const [feedbackMessage, setFeedbackMessage] = useState("");
@@ -53,7 +55,12 @@ const AdminBranch = () => {
     formData.append("fbLink", newBranch.fbLink);
     formData.append("instaLink", newBranch.instaLink);
     formData.append("youtubeLink", newBranch.youtubeLink);
-    formData.append("email", newBranch.email);
+    newBranch.emails.forEach((email, index) => {
+      formData.append(`emails[${index}]`, email);
+    });
+    newBranch.phoneNumbers.forEach((phone, index) => {
+      formData.append(`phoneNumbers[${index}]`, phone);
+    });
     formData.append("isMain", newBranch.isMain);
     if (newBranch.image) formData.append("image", newBranch.image);
 
@@ -68,7 +75,8 @@ const AdminBranch = () => {
           fbLink: "",
           instaLink: "",
           youtubeLink: "",
-          email: "",
+          emails: [""],
+          phoneNumbers: [""],
           isMain: false,
         });
       })
@@ -93,9 +101,34 @@ const AdminBranch = () => {
       fbLink: branch.fbLink || "",
       instaLink: branch.instaLink || "",
       youtubeLink: branch.youtubeLink || "",
-      email: branch.email || "",
+      emails: branch.emails && branch.emails.length > 0 ? branch.emails : [""],
+      phoneNumbers: branch.phoneNumbers && branch.phoneNumbers.length > 0 ? branch.phoneNumbers : [""],
       isMain: branch.isMain || false,
     });
+  };
+
+  // Enforce only one main branch in new branch form
+  const handleNewBranchIsMainChange = (e) => {
+    const isMain = e.target.checked;
+    if (isMain) {
+      // Unset isMain for all other branches in state
+      const updatedBranches = branches.map((b) => ({ ...b, isMain: false }));
+      setBranches(updatedBranches);
+    }
+    setNewBranch({ ...newBranch, isMain });
+  };
+
+  // Enforce only one main branch in edit form
+  const handleEditBranchIsMainChange = (e) => {
+    const isMain = e.target.checked;
+    if (isMain) {
+      // Unset isMain for all other branches in state
+      const updatedBranches = branches.map((b) =>
+        b._id === editingBranch ? { ...b, isMain: true } : { ...b, isMain: false }
+      );
+      setBranches(updatedBranches);
+    }
+    setEditFormData({ ...editFormData, isMain });
   };
 
   const handleBranchEditSubmit = (e, branchId) => {
@@ -119,18 +152,6 @@ const AdminBranch = () => {
       .catch((err) => console.error(err));
   };
 
-  const handleToggleFeatured = (branchId) => {
-    axios
-      .put(`https://coffeehouse-4yii.onrender.com/api/admin/branches/toggle-featured/${branchId}`)
-      .then((res) => {
-        setBranches(res.data.branch.branches);
-        setFeedbackMessage(res.data.message);
-      })
-      .catch((err) => {
-        alert(err.response?.data?.error || "An error occurred");
-      });
-  };
-
   return (
     <div className="admin-branch">
       {feedbackMessage && <p className="success-message">{feedbackMessage}</p>}
@@ -152,7 +173,8 @@ const AdminBranch = () => {
       {branches && Array.isArray(branches) && branches.map((branch) => (
         <div key={branch._id} style={{ marginBottom: "20px" }}>
           <p>Location: {branch.location}</p>
-          <p>Email: {branch.email}</p>
+          <p>Emails: {branch.emails ? branch.emails.join(", ") : branch.email}</p>
+          <p>Phone Numbers: {branch.phoneNumbers ? branch.phoneNumbers.join(", ") : "N/A"}</p>
           <p>Facebook Link: {branch.fbLink}</p>
           <p>Instagram Link: {branch.instaLink}</p>
           <p>YouTube Link: {branch.youtubeLink}</p>
@@ -165,10 +187,6 @@ const AdminBranch = () => {
             style={{ marginBottom: '10px' }}
           />
           
-          <button onClick={() => handleToggleFeatured(branch._id)}>
-            {branch.featured ? "Unfeature" : "Feature"}
-          </button>
-
           <button onClick={() => handleEditButtonClick(branch)}>
             Edit
           </button>
@@ -187,12 +205,26 @@ const AdminBranch = () => {
                 />
               </label>
               <label>
-                New Email:
-                <input
-                  type="email"
-                  value={editFormData.email || ""}
-                  onChange={(e) => setEditFormData({ ...editFormData, email: e.target.value })}
-                />
+                Emails:
+                {editFormData.emails.map((email, index) => (
+                  <input
+                    key={index}
+                    type="email"
+                    value={email}
+                    onChange={(e) => {
+                      const newEmails = [...editFormData.emails];
+                      newEmails[index] = e.target.value;
+                      setEditFormData({ ...editFormData, emails: newEmails });
+                    }}
+                    style={{ display: "block", marginBottom: "5px" }}
+                  />
+                ))}
+                <button
+                  type="button"
+                  onClick={() => setEditFormData({ ...editFormData, emails: [...editFormData.emails, ""] })}
+                >
+                  Add Email
+                </button>
               </label>
               <label>
                 New Facebook Link:
@@ -219,6 +251,28 @@ const AdminBranch = () => {
                 />
               </label>
               <label>
+                Phone Numbers:
+                {editFormData.phoneNumbers.map((phone, index) => (
+                  <input
+                    key={index}
+                    type="text"
+                    value={phone}
+                    onChange={(e) => {
+                      const newPhones = [...editFormData.phoneNumbers];
+                      newPhones[index] = e.target.value;
+                      setEditFormData({ ...editFormData, phoneNumbers: newPhones });
+                    }}
+                    style={{ display: "block", marginBottom: "5px" }}
+                  />
+                ))}
+                <button
+                  type="button"
+                  onClick={() => setEditFormData({ ...editFormData, phoneNumbers: [...editFormData.phoneNumbers, ""] })}
+                >
+                  Add Phone Number
+                </button>
+              </label>
+              <label>
                 New Image:
                 <input
                   type="file"
@@ -230,7 +284,7 @@ const AdminBranch = () => {
                 <input
                   type="checkbox"
                   checked={editFormData.isMain || false}
-                  onChange={(e) => setEditFormData({ ...editFormData, isMain: e.target.checked })}
+                  onChange={handleEditBranchIsMainChange}
                 />
               </label>
               <button type="submit">Save Changes</button>
@@ -238,66 +292,6 @@ const AdminBranch = () => {
           )}
         </div>
       ))}
-
-      <h3>Add New Branch</h3>
-      <form onSubmit={handleBranchAdd}>
-        <label>
-          Location:
-          <input
-            type="text"
-            value={newBranch.location || ""}
-            onChange={(e) => setNewBranch({ ...newBranch, location: e.target.value })}
-          />
-        </label>
-        <label>
-          Email:
-          <input
-            type="email"
-            value={newBranch.email || ""}
-            onChange={(e) => setNewBranch({ ...newBranch, email: e.target.value })}
-          />
-        </label>
-        <label>
-          Facebook Link:
-          <input
-            type="text"
-            value={newBranch.fbLink || ""}
-            onChange={(e) => setNewBranch({ ...newBranch, fbLink: e.target.value })}
-          />
-        </label>
-        <label>
-          Instagram Link:
-          <input
-            type="text"
-            value={newBranch.instaLink || ""}
-            onChange={(e) => setNewBranch({ ...newBranch, instaLink: e.target.value })}
-          />
-        </label>
-        <label>
-          YouTube Link:
-          <input
-            type="text"
-            value={newBranch.youtubeLink || ""}
-            onChange={(e) => setNewBranch({ ...newBranch, youtubeLink: e.target.value })}
-          />
-        </label>
-        <label>
-          Image:
-          <input
-            type="file"
-            onChange={(e) => setNewBranch({ ...newBranch, image: e.target.files[0] })}
-          />
-        </label>
-        <label>
-          Is Main Branch:
-          <input
-            type="checkbox"
-            checked={newBranch.isMain || false}
-            onChange={(e) => setNewBranch({ ...newBranch, isMain: e.target.checked })}
-          />
-        </label>
-        <button type="submit">Add Branch</button>
-      </form>
     </div>
   );
 };
