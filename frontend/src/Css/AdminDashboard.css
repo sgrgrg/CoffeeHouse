@@ -5,6 +5,7 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f5f7fa;
   color: #333;
+  overflow: hidden;
 }
 
 /* Sidebar */
@@ -15,6 +16,8 @@
   display: flex;
   flex-direction: column;
   padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto;
 }
 
 .admindash-sidebar h2 {
@@ -23,6 +26,7 @@
   text-align: center;
   font-weight: 700;
   letter-spacing: 1px;
+  user-select: none;
 }
 
 .admindash-sidebar ul {
@@ -37,12 +41,14 @@
   margin-bottom: 10px;
   cursor: pointer;
   border-radius: 6px;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  user-select: none;
 }
 
 .admindash-sidebar ul li:hover,
 .admindash-sidebar ul li.active {
   background-color: #34495e;
+  color: #fff;
 }
 
 /* Header */
@@ -55,6 +61,8 @@
   justify-content: space-between;
   padding: 0 30px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  box-sizing: border-box;
+  user-select: none;
 }
 
 .admindash-header .brand {
@@ -73,6 +81,11 @@
   flex-grow: 1;
   padding: 30px;
   overflow-y: auto;
+  box-sizing: border-box;
+  background-color: #fff;
+  border-radius: 8px;
+  margin: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 /* Card style for sections */
@@ -94,31 +107,52 @@
   cursor: pointer;
   font-weight: 600;
   transition: background-color 0.3s ease;
+  user-select: none;
 }
 
 .admindash-dashboard button:hover {
   background-color: #34495e;
 }
 
+/* Scrollbar styling for sidebar */
+.admindash-sidebar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.admindash-sidebar::-webkit-scrollbar-track {
+  background: #2c3e50;
+}
+
+.admindash-sidebar::-webkit-scrollbar-thumb {
+  background-color: #34495e;
+  border-radius: 4px;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .admindash-dashboard {
     flex-direction: column;
+    height: auto;
   }
   .admindash-sidebar {
     width: 100%;
     flex-direction: row;
     overflow-x: auto;
+    padding: 10px 0;
   }
   .admindash-sidebar ul {
     display: flex;
     flex-direction: row;
+    margin: 0 10px;
   }
   .admindash-sidebar ul li {
     margin-right: 15px;
     margin-bottom: 0;
+    padding: 10px 15px;
   }
   .admindash-content {
     padding: 15px;
+    margin: 10px;
+    border-radius: 6px;
   }
 }
