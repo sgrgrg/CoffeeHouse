@@ -1,0 +1,87 @@
+.user-profile-container {
+  max-width: 600px;
+  margin: 40px auto;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+.user-profile-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-weight: 700;
+  font-size: 28px;
+}
+
+.user-profile-error {
+  background-color: #f8d7da;
+  color: #842029;
+  padding: 12px 20px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.user-profile-success {
+  background-color: #d1e7dd;
+  color: #0f5132;
+  padding: 12px 20px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.user-profile-form label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  margin-top: 15px;
+}
+
+.user-profile-form input[type="text"],
+.user-profile-form input[type="email"],
+.user-profile-form input[type="file"] {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.user-profile-form button {
+  margin-top: 25px;
+  width: 100%;
+  background-color: #2c3e50;
+  color: #ecf0f1;
+  border: none;
+  padding: 12px 0;
+  font-size: 18px;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.user-profile-form button:hover {
+  background-color: #34495e;
+}
+
+.profile-picture-section,
+.profile-background-section {
+  margin-bottom: 20px;
+}
+
+.profile-picture-preview,
+.profile-background-preview {
+  display: block;
+  max-width: 100%;
+  max-height: 150px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 1px solid #ccc;
+}

@@ -13,6 +13,7 @@ import Menu from "./Components/Menu";
 import CV from "./Components/CV";
 import Login from "./Components/Login";
 import Register from "./Components/Register";
+import UserProfile from "./Components/UserProfile";
 
 const App = () => {
   return (
@@ -30,6 +31,7 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/search" element={<SearchResult />} />
+          <Route path="/profile" element={<UserProfile />} />
         </Routes>
       </Layout>
     </Router>

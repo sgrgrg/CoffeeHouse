@@ -69,12 +69,12 @@ const Admin = () => {
           <FaSearch className="search-icon" />
           <input
             type="text"
-            placeholder={sidebarCollapsed ? "Expand sidebar to search" : "Search..."}
+            placeholder="Search..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             disabled={false}
-            style={{ cursor: sidebarCollapsed ? "not-allowed" : "text" }}
-            readOnly={sidebarCollapsed}
+            style={{ cursor: "text" }}
+            readOnly={false}
           />
         </div>
         <ul>
