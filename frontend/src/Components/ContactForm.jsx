@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "../Css/ContactForm.css";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -32,27 +33,73 @@ const ContactForm = () => {
   };
 
   return (
-    <div className="contact-form-container">
-      <h2>Contact Us</h2>
+    <div className="container my-5">
+      <h2 className="mb-4 text-primary">Contact Us</h2>
       {status && <p>{status}</p>}
       <form onSubmit={handleSubmit}>
-        <label>
-          Name:
-          <input type="text" name="name" value={formData.name} onChange={handleChange} required />
-        </label>
-        <label>
-          Email:
-          <input type="email" name="email" value={formData.email} onChange={handleChange} required />
-        </label>
-        <label>
-          Subject:
-          <input type="text" name="subject" value={formData.subject} onChange={handleChange} required />
-        </label>
-        <label>
-          Message:
-          <textarea name="content" value={formData.content} onChange={handleChange} required />
-        </label>
-        <button type="submit">Send Message</button>
+        <div className="mb-3">
+          <label htmlFor="name" className="form-label">
+            Name
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="name"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+            placeholder="Your Name"
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="email" className="form-label">
+            Email
+          </label>
+          <input
+            type="email"
+            className="form-control"
+            id="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+            placeholder="Your Email"
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="subject" className="form-label">
+            Subject
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="subject"
+            name="subject"
+            value={formData.subject}
+            onChange={handleChange}
+            required
+            placeholder="Subject"
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="content" className="form-label">
+            Message
+          </label>
+          <textarea
+            className="form-control"
+            id="content"
+            name="content"
+            value={formData.content}
+            onChange={handleChange}
+            required
+            placeholder="Your Message"
+            rows="4"
+          />
+        </div>
+        <button type="submit" className="btn btn-primary">
+          Send Message
+        </button>
       </form>
     </div>
   );
