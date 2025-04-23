@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import "../Css/UserProfile.css";
+import { AuthContext } from "../contexts/AuthContext";
 
 const UserProfile = () => {
+  const { authData } = useContext(AuthContext);
+
   const [profile, setProfile] = useState({
     name: "",
     address: "",
@@ -21,7 +24,9 @@ const UserProfile = () => {
     const fetchProfile = async () => {
       try {
         setLoading(true);
-        const res = await axios.get("https://coffeehouse-4yii.onrender.com/api/user/profile", { withCredentials: true });
+        const res = await axios.get("https://coffeehouse-4yii.onrender.com/api/user/profile", {
+          headers: { Authorization: `Bearer ${authData?.token}` },
+        });
         setProfile(res.data);
         setLoading(false);
       } catch (err) {
@@ -29,8 +34,13 @@ const UserProfile = () => {
         setLoading(false);
       }
     };
-    fetchProfile();
-  }, []);
+    if (authData?.token) {
+      fetchProfile();
+    } else {
+      setLoading(false);
+      setError("User not authenticated");
+    }
+  }, [authData]);
 
   const handleChange = (e) => {
     setProfile({ ...profile, [e.target.name]: e.target.value });
@@ -56,8 +66,10 @@ const UserProfile = () => {
       if (backgroundPictureFile) formData.append("profileBackgroundPicture", backgroundPictureFile);
 
       const res = await axios.put("https://coffeehouse-4yii.onrender.com/api/user/profile", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-        withCredentials: true,
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${authData?.token}`,
+        },
       });
       setProfile(res.data);
       setSuccessMsg("Profile updated successfully.");
