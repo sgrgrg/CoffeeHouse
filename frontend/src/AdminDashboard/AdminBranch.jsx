@@ -42,7 +42,7 @@ const AdminBranch = () => {
   const fetchBranches = () => {
     setLoading(true);
     axios
-      .get("http://localhost:5000/api/admin/branches")
+      .get("https://coffeehouse-4yii.onrender.com/api/admin/branches")
       .then((res) => {
         const branchData = res.data.branch;
         setBranches(branchData && Array.isArray(branchData.branches) ? branchData.branches : []);
@@ -59,7 +59,7 @@ const AdminBranch = () => {
   const handleTitleDescriptionSubmit = (e) => {
     e.preventDefault();
     axios
-      .put("http://localhost:5000/api/admin/branches/title-description", { title, description })
+      .put("https://coffeehouse-4yii.onrender.com/api/admin/branches/title-description", { title, description })
       .then((res) => setFeedbackMessage(res.data.message))
       .catch((err) => console.error(err));
   };
@@ -114,7 +114,7 @@ const AdminBranch = () => {
     if (newBranch.image) formData.append("image", newBranch.image);
 
     axios
-      .post("http://localhost:5000/api/admin/branches/add", formData)
+      .post("https://coffeehouse-4yii.onrender.com/api/admin/branches/add", formData)
       .then((res) => {
         setBranches(res.data.branch.branches);
         setFeedbackMessage(res.data.message);
@@ -141,7 +141,7 @@ const AdminBranch = () => {
     if (!window.confirm("Are you sure you want to delete this branch?")) return;
     setLoading(true);
     axios
-      .delete(`http://localhost:5000/api/admin/branches/delete/${branchId}`)
+      .delete(`https://coffeehouse-4yii.onrender.com/api/admin/branches/delete/${branchId}`)
       .then((res) => {
         setBranches(res.data.branch.branches);
         setFeedbackMessage(res.data.message);
@@ -214,7 +214,7 @@ const AdminBranch = () => {
     if (editFormData.image) formData.append("image", editFormData.image);
 
     axios
-      .put(`http://localhost:5000/api/admin/branches/edit/${branchId}`, formData)
+      .put(`https://coffeehouse-4yii.onrender.com/api/admin/branches/edit/${branchId}`, formData)
       .then((res) => {
         setBranches(res.data.branch.branches);
         setEditingBranch(null);
@@ -254,7 +254,7 @@ const AdminBranch = () => {
     setLoading(true);
     Promise.all(
       Array.from(selectedBranches).map((branchId) =>
-        axios.delete(`http://localhost:5000/api/admin/branches/delete/${branchId}`)
+        axios.delete(`https://coffeehouse-4yii.onrender.com/api/admin/branches/delete/${branchId}`)
       )
     )
       .then(() => {
@@ -334,7 +334,7 @@ const AdminBranch = () => {
             <p>Is Main Branch: {branch.isMain ? "Yes" : "No"}</p>
 
             <img
-              src={`http://localhost:5000/${branch.image}`}
+              src={`https://coffeehouse-4yii.onrender.com/${branch.image}`}
               alt={branch.location}
               width="100"
               style={{ marginBottom: "10px" }}

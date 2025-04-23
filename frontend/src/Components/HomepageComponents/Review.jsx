@@ -20,7 +20,7 @@ const Review = () => {
     // Fetch featured reviews
     const fetchFeaturedReviews = async () => {
       try {
-        const { data } = await axios.get("http://localhost:5000/api/reviews");
+        const { data } = await axios.get("https://coffeehouse-4yii.onrender.com/api/reviews");
         // Filter for featured reviews
         const filteredReviews = Array.isArray(data) ? data.filter((review) => review.isFeatured) : [];
         setFeaturedReviews(filteredReviews);
@@ -58,7 +58,7 @@ const Review = () => {
                   >
                     <div className="reviewer-img-container">
                       <img
-                        src={`http://localhost:5000/${review.image}`}
+                        src={`https://coffeehouse-4yii.onrender.com/${review.image}`}
                         alt="Reviewer"
                         className="reviewer-img"
                         data-aos="flip-right" // Animation for the image
