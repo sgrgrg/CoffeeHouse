@@ -57,14 +57,15 @@ const Navbar = () => {
             <li className="nav-item">
               <Link className="nav-link" to="/service">Service</Link>
             </li>
+          
+            <li className="nav-item">
+              <Link className="nav-link" to="/trainings">Trainings</Link>
+            </li>
             <li className="nav-item">
               {/* Logo */}
               <Link className="navbar-brand" to="/">
                 <img src={logo} alt="Logo" className="navbar-logo" />
               </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/trainings">Trainings</Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/contact">Contact</Link>
