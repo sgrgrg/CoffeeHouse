@@ -17,7 +17,7 @@ const ContactForm = () => {
   useEffect(() => {
     const fetchBranches = async () => {
       try {
-        const response = await axios.get("https://coffeehouse-4yii.onrender.com/api/admin/branches");
+        const response = await axios.get("http://localhost:5000/api/admin/branches");
         if (response.data && response.data.branch && response.data.branch.branches) {
           const branches = response.data.branch.branches;
           const main = branches.find((b) => b.isMain);
@@ -40,7 +40,7 @@ const ContactForm = () => {
     e.preventDefault();
     setStatus("");
     try {
-      const response = await axios.post("https://coffeehouse-4yii.onrender.com/api/admin/messages", formData);
+      const response = await axios.post("http://localhost:5000/api/admin/messages", formData);
       if (response.status === 201) {
         setStatus("Message sent successfully!");
         setFormData({ name: "", email: "", subject: "", content: "" });
@@ -56,7 +56,7 @@ const ContactForm = () => {
   const getImageUrl = (imagePath) => {
     if (!imagePath) return "";
     if (imagePath.startsWith("http") || imagePath.startsWith("https")) return imagePath;
-    return `https://coffeehouse-4yii.onrender.com/${imagePath}`;
+    return `http://localhost:5000/${imagePath}`;
   };
 
   return (

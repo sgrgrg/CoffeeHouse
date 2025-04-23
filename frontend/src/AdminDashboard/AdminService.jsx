@@ -24,7 +24,7 @@ const AdminService = () => {
   const fetchServices = () => {
     setLoading(true);
     axios
-      .get('https://coffeehouse-4yii.onrender.com/api/service')
+      .get('http://localhost:5000/api/service')
       .then((response) => {
         setServices(response.data);
         setFeaturedServices(response.data.filter((service) => service.isFeatured).slice(0, 4));
@@ -77,7 +77,7 @@ const AdminService = () => {
     formData.append('image', newService.image);
 
     axios
-      .post('https://coffeehouse-4yii.onrender.com/api/service', formData)
+      .post('http://localhost:5000/api/service', formData)
       .then((response) => {
         alert(response.data.message);
         setNewService({ title: '', description: '', image: '' });
@@ -104,7 +104,7 @@ const AdminService = () => {
 
     setLoading(true);
     axios
-      .put(`https://coffeehouse-4yii.onrender.com/api/service/${serviceId}`, { isFeatured: isAddingToFeatured })
+      .put(`http://localhost:5000/api/service/${serviceId}`, { isFeatured: isAddingToFeatured })
       .then((response) => {
         alert(response.data.message);
         fetchServices();
@@ -132,7 +132,7 @@ const AdminService = () => {
     }
 
     axios
-      .put(`https://coffeehouse-4yii.onrender.com/api/service/${serviceId}`, formData)
+      .put(`http://localhost:5000/api/service/${serviceId}`, formData)
       .then((response) => {
         alert(response.data.message);
         setEditingService(null);
@@ -150,7 +150,7 @@ const AdminService = () => {
     if (!window.confirm('Are you sure you want to delete this service?')) return;
     setLoading(true);
     axios
-      .delete(`https://coffeehouse-4yii.onrender.com/api/service/${serviceId}`)
+      .delete(`http://localhost:5000/api/service/${serviceId}`)
       .then((response) => {
         alert(response.data.message);
         fetchServices();
@@ -189,7 +189,7 @@ const AdminService = () => {
     setLoading(true);
     Promise.all(
       Array.from(selectedServices).map((serviceId) =>
-        axios.delete(`https://coffeehouse-4yii.onrender.com/api/service/${serviceId}`)
+        axios.delete(`http://localhost:5000/api/service/${serviceId}`)
       )
     )
       .then(() => {
@@ -277,7 +277,7 @@ const AdminService = () => {
               checked={selectedServices.has(service._id)}
               onChange={() => handleSelectService(service._id)}
             />
-            <img src={`https://coffeehouse-4yii.onrender.com${service.image}`} alt={service.title} width="100" />
+            <img src={`http://localhost:5000${service.image}`} alt={service.title} width="100" />
             <h4>{service.title}</h4>
             <p>{service.description}</p>
             <button onClick={() => setEditingService(service)}>Edit</button>
@@ -341,7 +341,7 @@ const AdminService = () => {
       <div className="featured-services">
         {featuredServices.map((service) => (
           <div key={service._id} className="service-item">
-            <img src={`https://coffeehouse-4yii.onrender.com${service.image}`} alt={service.title} width="100" />
+            <img src={`http://localhost:5000${service.image}`} alt={service.title} width="100" />
             <h4>{service.title}</h4>
             <p>{service.description}</p>
           </div>

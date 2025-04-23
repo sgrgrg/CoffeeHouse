@@ -19,7 +19,7 @@ const Branch = () => {
     });
 
     // Fetch the branches and title/description
-    axios.get('https://coffeehouse-4yii.onrender.com/api/admin/branches')
+    axios.get('http://localhost:5000/api/admin/branches')
       .then((response) => {
         const allBranches = response.data.branch?.branches || [];
         const featured = allBranches.filter(branch => branch.featured);
@@ -57,10 +57,10 @@ const Branch = () => {
               <div key={branch._id} className="col-6 col-md-3 mb-4" data-aos="zoom-in" data-aos-delay={(index + 1) * 100}>
                 <div className="branch">
                   <img
-                    src={`https://coffeehouse-4yii.onrender.com/${branch.image}`} 
+                    src={`http://localhost:5000/${branch.image}`} 
                     alt={branch.location} 
                     className="img-fluid branch-img"
-                    onClick={() => openModal(`https://coffeehouse-4yii.onrender.com/${branch.image}`)} // Open modal with the clicked image
+                    onClick={() => openModal(`http://localhost:5000/${branch.image}`)} // Open modal with the clicked image
                   />
                   <p className="branch-location">{branch.location}</p>
                 </div>

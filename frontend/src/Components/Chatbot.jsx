@@ -4,7 +4,7 @@ import axios from "axios";
 import "../Css/Chatbot.css";
 import { AuthContext } from "../contexts/AuthContext";
 
-const socket = io("https://coffeehouse-4yii.onrender.com");
+const socket = io("http://localhost:5000");
 
 const Chatbot = () => {
   const { authData } = useContext(AuthContext);
@@ -16,7 +16,7 @@ const Chatbot = () => {
   useEffect(() => {
     // Fetch initial messages for the user
     axios
-      .get("https://coffeehouse-4yii.onrender.com/api/admin/messages")
+      .get("http://localhost:5000/api/admin/messages")
       .then((res) => {
         setMessages(res.data);
       })
@@ -69,7 +69,7 @@ const Chatbot = () => {
 
     axios
       .post(
-        "https://coffeehouse-4yii.onrender.com/api/admin/messages",
+        "http://localhost:5000/api/admin/messages",
         {
           name: authData.user.username,
           email: authData.user.email,
