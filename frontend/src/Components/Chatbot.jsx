@@ -16,7 +16,7 @@ const Chatbot = () => {
   useEffect(() => {
     // Fetch initial messages for the user
     axios
-      .get("https://coffeehouse-4yii.onrender.com/api/messages") // Corrected API endpoint
+      .get("https://coffeehouse-4yii.onrender.com/api/admin/messages") // Correct API endpoint from backend
       .then((res) => {
         setMessages(res.data);
       })
@@ -60,7 +60,7 @@ const Chatbot = () => {
 
     // Send message to backend
     axios
-      .post("https://coffeehouse-4yii.onrender.com/api/messages", {
+      .post("https://coffeehouse-4yii.onrender.com/api/admin/messages", {
         name,
         email,
         subject: "User message",
@@ -99,12 +99,7 @@ const Chatbot = () => {
           <div className="chatbot-messages">
             {messages.length === 0 && <p className="no-messages">No messages yet.</p>}
             {messages.map((msg) => (
-              <div
-                key={msg._id}
-                className={`chatbot-message ${
-                  msg.from === "admin" ? "admin-message" : "user-message"
-                }`}
-              >
+              <div key={msg._id} className="chatbot-message user-message">
                 <div className="message-content">{msg.content}</div>
                 <div className="message-time">
                   {new Date(msg.createdAt).toLocaleTimeString([], {
@@ -112,6 +107,17 @@ const Chatbot = () => {
                     minute: "2-digit",
                   })}
                 </div>
+                {msg.replyContent && (
+                  <div className="chatbot-message admin-message reply-message">
+                    <div className="message-content">{msg.replyContent}</div>
+                    <div className="message-time">
+                      {new Date(msg.updatedAt || msg.createdAt).toLocaleTimeString([], {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })}
+                    </div>
+                  </div>
+                )}
               </div>
             ))}
             <div ref={messagesEndRef} />
