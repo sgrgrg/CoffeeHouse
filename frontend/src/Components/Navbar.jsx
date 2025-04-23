@@ -1,9 +1,13 @@
-import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from '../assets/images/logo.svg';
 import '../Css/Navbar.css';
+import { AuthContext } from '../contexts/AuthContext';
 
 const Navbar = () => {
+  const { authData, logout } = useContext(AuthContext);
+  const navigate = useNavigate();
+
   useEffect(() => {
     const handleScroll = () => {
       const navbar = document.querySelector('.navbar');
@@ -22,6 +26,11 @@ const Navbar = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  };
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light navbar-transparent fixed-top">
@@ -63,6 +72,22 @@ const Navbar = () => {
             <li className="nav-item">
               <Link className="nav-link" to="/cv">CV</Link>
             </li>
+            {!authData ? (
+              <>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/login">Login</Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/register">Register</Link>
+                </li>
+              </>
+            ) : (
+              <li className="nav-item">
+                <button className="btn btn-link nav-link" onClick={handleLogout}>
+                  Logout
+                </button>
+              </li>
+            )}
             <li className="nav-item">
               <button className="btn btn-link search-btn">
                 <i className="bi bi-search"></i>

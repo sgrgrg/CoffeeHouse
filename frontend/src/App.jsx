@@ -10,8 +10,8 @@ import Service from "./Components/Service";
 import Admin from "./AdminDashboard/Admin";
 import Menu from "./Components/Menu";
 import CV from "./Components/CV";
-
-
+import Login from "./Components/Login";
+import Register from "./Components/Register";
 
 const App = () => {
   return (
@@ -26,6 +26,8 @@ const App = () => {
           <Route path="/cv" element={<CV />} />
           <Route path="/menu" element={<Menu />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </Layout>
     </Router>

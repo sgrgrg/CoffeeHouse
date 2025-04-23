@@ -1,8 +1,13 @@
 .branch-container {
-    background-image: url("../../assets/images/find.svg");
+    background-image: url("/src/assets/images/find.svg");
     background-repeat: no-repeat;
    
   }
+
+.aos-init, .aos-animate {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
   
   .branch-img {
     width: 100%;

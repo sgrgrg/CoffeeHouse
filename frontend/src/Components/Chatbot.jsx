@@ -1,28 +1,28 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { io } from "socket.io-client";
 import axios from "axios";
 import "../Css/Chatbot.css";
+import { AuthContext } from "../contexts/AuthContext";
 
 const socket = io("https://coffeehouse-4yii.onrender.com");
 
 const Chatbot = () => {
+  const { authData } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
     // Fetch initial messages for the user
     axios
-      .get("https://coffeehouse-4yii.onrender.com/api/admin/messages") // Correct API endpoint from backend
+      .get("https://coffeehouse-4yii.onrender.com/api/admin/messages")
       .then((res) => {
         setMessages(res.data);
       })
       .catch((err) => console.error(err));
 
-    // Listen for new messages from admin or user
+    // Listen for new messages
     socket.on("newMessage", (newMessage) => {
       setMessages((prev) => [...prev, newMessage]);
     });
@@ -42,7 +42,6 @@ const Chatbot = () => {
   }, []);
 
   useEffect(() => {
-    // Scroll to bottom when messages update
     if (messagesEndRef.current) {
       messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
     }
@@ -53,22 +52,33 @@ const Chatbot = () => {
   };
 
   const handleSend = () => {
-    if (!input.trim() || !name.trim() || !email.trim()) {
-      alert("Please enter your name, email, and message.");
+    if (!input.trim()) {
+      alert("Please enter your message.");
+      return;
+    }
+    if (!authData) {
+      alert("Please login to send messages.");
       return;
     }
 
-    // Send message to backend
     axios
-      .post("https://coffeehouse-4yii.onrender.com/api/admin/messages", {
-        name,
-        email,
-        subject: "User message",
-        content: input,
-      })
-      .then((res) => {
+      .post(
+        "https://coffeehouse-4yii.onrender.com/api/admin/messages",
+        {
+          name: authData.user.username,
+          email: authData.user.email,
+          subject: "User message",
+          content: input,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${authData.token}`,
+          },
+        }
+      )
+      .then(() => {
         setInput("");
-        // The new message will be added via socket event
+        // message will be added through socket event
       })
       .catch((err) => console.error(err));
   };
@@ -123,31 +133,23 @@ const Chatbot = () => {
             <div ref={messagesEndRef} />
           </div>
           <div className="chatbot-input-area">
-          <input
-            className="chatbot-input-name"
-            type="text"
-            placeholder="Your name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <input
-            className="chatbot-input-email"
-            type="email"
-            placeholder="Your email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <textarea
-            className="chatbot-input"
-            placeholder="Type your message..."
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={handleInputKeyDown}
-            rows={2}
-          />
-          <button className="send-btn" onClick={handleSend} aria-label="Send message">
-            Send
-          </button>
+            {!authData ? (
+              <p>Please login to send messages.</p>
+            ) : (
+              <>
+                <textarea
+                  className="chatbot-input"
+                  placeholder="Type your message..."
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={handleInputKeyDown}
+                  rows={2}
+                />
+                <button className="send-btn" onClick={handleSend} aria-label="Send message">
+                  Send
+                </button>
+              </>
+            )}
           </div>
         </div>
       )}
@@ -156,3 +158,5 @@ const Chatbot = () => {
 };
 
 export default Chatbot;
+
+
