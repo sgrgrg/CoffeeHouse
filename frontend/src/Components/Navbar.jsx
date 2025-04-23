@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import logo from '../assets/images/logo.svg';
 import '../Css/Navbar.css';
@@ -7,6 +7,9 @@ import { AuthContext } from '../contexts/AuthContext';
 const Navbar = () => {
   const { authData, logout } = useContext(AuthContext);
   const navigate = useNavigate();
+
+  const [searchVisible, setSearchVisible] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,9 +35,29 @@ const Navbar = () => {
     navigate('/');
   };
 
+  const toggleSearch = () => {
+    setSearchVisible(!searchVisible);
+  };
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (searchTerm.trim() !== '') {
+      navigate(`/search?q=${encodeURIComponent(searchTerm.trim())}`);
+      setSearchTerm('');
+      setSearchVisible(false);
+    }
+  };
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light navbar-transparent fixed-top">
-      <div className="container-fluid d-flex justify-content-center align-items-center">
+      <div className="container">
+        <Link className="navbar-brand d-lg-none" to="/">
+          <img src={logo} alt="Logo" className="navbar-logo" />
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -46,8 +69,9 @@ const Navbar = () => {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
+
         <div className="collapse navbar-collapse" id="navbarContent">
-          <ul className="navbar-nav mx-auto">
+          <ul className="navbar-nav ">
             <li className="nav-item">
               <Link className="nav-link" to="/">Home</Link>
             </li>
@@ -57,16 +81,16 @@ const Navbar = () => {
             <li className="nav-item">
               <Link className="nav-link" to="/service">Service</Link>
             </li>
-          
             <li className="nav-item">
               <Link className="nav-link" to="/trainings">Trainings</Link>
             </li>
-            <li className="nav-item">
-              {/* Logo */}
-              <Link className="navbar-brand" to="/">
-                <img src={logo} alt="Logo" className="navbar-logo" />
-              </Link>
-            </li>
+          </ul>
+
+          <Link className="navbar-brand d-none d-lg-block mx-5" to="/">
+            <img src={logo} alt="Logo" className="navbar-logo" />
+          </Link>
+
+          <ul className="navbar-nav  align-items-lg-center">
             <li className="nav-item">
               <Link className="nav-link" to="/contact">Contact</Link>
             </li>
@@ -89,10 +113,26 @@ const Navbar = () => {
                 </button>
               </li>
             )}
-            <li className="nav-item">
-              <button className="btn btn-link search-btn">
+            <li className="nav-item search-container">
+              <button
+                className="btn btn-link search-btn"
+                aria-label="Search"
+                onClick={toggleSearch}
+              >
                 <i className="bi bi-search"></i>
               </button>
+              {searchVisible && (
+                <form className="search-form" onSubmit={handleSearchSubmit}>
+                  <input
+                    type="text"
+                    className="search-input"
+                    placeholder="Search..."
+                    value={searchTerm}
+                    onChange={handleSearchChange}
+                    autoFocus
+                  />
+                </form>
+              )}
             </li>
           </ul>
         </div>

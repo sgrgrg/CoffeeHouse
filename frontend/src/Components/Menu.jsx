@@ -1,22 +1,32 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import '../Css/Menu.css';
 
 const Menu = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const [menuItems, setMenuItems] = useState([]);
   const [featuredItems, setFeaturedItems] = useState([]);
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-    const [title, setTitle] = useState("Menu");
-    const [description, setDescription] = useState(
-      "While most of the food in our menu changes from kitchen to kitchen and from cook to cook, what remains the same is our product from the bakery."
-    );
+  const [title, setTitle] = useState("Menu");
+  const [description, setDescription] = useState(
+    "While most of the food in our menu changes from kitchen to kitchen and from cook to cook, what remains the same is our product from the bakery."
+  );
   const itemsPerPage = 10;
 
   useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const query = params.get("q") || "";
+    setSearch(query);
+  }, [location.search]);
+
+  useEffect(() => {
     axios.get("https://coffeehouse-4yii.onrender.com/api/menu").then((res) => {
-      const { menuItems , titleDescribe } = res.data;
+      const { menuItems, titleDescribe } = res.data;
       setMenuItems(menuItems);
       setFeaturedItems(menuItems.filter((item) => item.featured));
       if (titleDescribe) {
@@ -40,18 +50,19 @@ const Menu = () => {
     setCurrentPage(page);
   };
 
+  const handleSearchChange = (e) => {
+    const value = e.target.value;
+    setSearch(value);
+    navigate(`/menu?q=${encodeURIComponent(value)}`);
+  };
+
   return (
     <div className="container menu-container">
-    {/* Page Title */}
-    <h2 className="text-center mb-3 menu-title">
-        {title}
-      </h2>
+      {/* Page Title */}
+      <h2 className="text-center mb-3 menu-title">{title}</h2>
 
       {/* Page Description */}
-      <p className="text-center mb-4 menu-describe" >
-        {description}
-      </p>
-
+      <p className="text-center mb-4 menu-describe">{description}</p>
 
       <h2 style={{ color: "#6A3D2A" }}>Featured Items</h2>
       <div className="row">
@@ -72,7 +83,9 @@ const Menu = () => {
         ))}
       </div>
 
-      <h2 className="mt-5" style={{ color: "#6A3D2A" }}>All Items</h2>
+      <h2 className="mt-5" style={{ color: "#6A3D2A" }}>
+        All Items
+      </h2>
 
       <div className="d-flex justify-content-between align-items-center mb-3">
         <input
@@ -80,7 +93,7 @@ const Menu = () => {
           className="form-control w-50"
           placeholder="Search items..."
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={handleSearchChange}
         />
       </div>
 

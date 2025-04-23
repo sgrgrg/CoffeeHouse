@@ -5,6 +5,7 @@ import Layout from "./Components/Layout";
 import Home from "./Components/Home";
 import About from "./Components/About";
 import Contact from "./Components/ContactForm";
+import SearchResult from "./Components/SearchResult";
 import Trainings from "./Components/Trainings";
 import Service from "./Components/Service";
 import Admin from "./AdminDashboard/Admin";
@@ -28,6 +29,7 @@ const App = () => {
           <Route path="/admin" element={<Admin />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/search" element={<SearchResult />} />
         </Routes>
       </Layout>
     </Router>
