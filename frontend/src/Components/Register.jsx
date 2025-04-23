@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import "../Css/Auth.css";
 
 const Register = () => {
@@ -9,6 +10,7 @@ const Register = () => {
     password: "",
   });
   const [message, setMessage] = useState("");
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -21,6 +23,8 @@ const Register = () => {
       const res = await axios.post("https://coffeehouse-4yii.onrender.com/api/auth/register", form);
       setMessage(res.data.message);
       setForm({ username: "", email: "", password: "" });
+      // Redirect to login after successful registration
+      navigate("/login");
     } catch (error) {
       setMessage(error.response?.data?.message || "Registration failed");
     }
