@@ -1,58 +1,91 @@
 /* Admin Dashboard Layout */
-.admindash-dashboard {
+.admin-dashboard {
   display: flex;
   height: 100vh;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f5f7fa;
   color: #333;
-  overflow: hidden;
+  transition: all 0.3s ease;
 }
 
-/* Sidebar */
-.admindash-sidebar {
+.admin-dashboard.collapsed .admin-sidebar {
+  width: 70px;
+  padding: 20px 10px;
+}
+
+.admin-dashboard.collapsed .admin-sidebar h2,
+.admin-dashboard.collapsed .admin-sidebar ul li span {
+  display: none;
+}
+
+.admin-sidebar {
   width: 250px;
   background-color: #2c3e50;
   color: #ecf0f1;
   display: flex;
   flex-direction: column;
   padding: 20px;
-  box-sizing: border-box;
-  overflow-y: auto;
+  transition: width 0.3s ease;
 }
 
-.admindash-sidebar h2 {
+.admin-sidebar h2 {
   font-size: 24px;
   margin-bottom: 30px;
   text-align: center;
   font-weight: 700;
   letter-spacing: 1px;
-  user-select: none;
 }
 
-.admindash-sidebar ul {
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.collapse-btn {
+  background: none;
+  border: none;
+  color: #ecf0f1;
+  font-size: 24px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.collapse-btn:hover {
+  color: #3498db;
+}
+
+.admin-sidebar ul {
   list-style: none;
   padding: 0;
   margin: 0;
   flex-grow: 1;
 }
 
-.admindash-sidebar ul li {
+.admin-sidebar ul li {
   padding: 15px 20px;
   margin-bottom: 10px;
   cursor: pointer;
   border-radius: 6px;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  user-select: none;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
 }
 
-.admindash-sidebar ul li:hover,
-.admindash-sidebar ul li.active {
+.admin-sidebar ul li .icon {
+  margin-right: 10px;
+  font-size: 18px;
+  min-width: 20px;
+  text-align: center;
+}
+
+.admin-sidebar ul li:hover,
+.admin-sidebar ul li.active {
   background-color: #34495e;
-  color: #fff;
 }
 
 /* Header */
-.admindash-header {
+.admin-header {
   height: 60px;
   background-color: #fff;
   border-bottom: 1px solid #ddd;
@@ -61,35 +94,33 @@
   justify-content: space-between;
   padding: 0 30px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-  box-sizing: border-box;
-  user-select: none;
 }
 
-.admindash-header .brand {
+.admin-header .brand {
   font-size: 20px;
   font-weight: 700;
   color: #2c3e50;
 }
 
-.admindash-header .user-info {
+.admin-header .user-info {
   font-size: 16px;
   color: #666;
 }
 
 /* Content Area */
-.admindash-content {
+.admin-content {
   flex-grow: 1;
   padding: 30px;
   overflow-y: auto;
-  box-sizing: border-box;
-  background-color: #fff;
-  border-radius: 8px;
-  margin: 20px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: margin-left 0.3s ease;
+}
+
+.admin-dashboard.collapsed .admin-content {
+  margin-left: 70px;
 }
 
 /* Card style for sections */
-.admindash-section {
+.admin-section {
   background-color: #fff;
   border-radius: 10px;
   padding: 25px;
@@ -98,7 +129,7 @@
 }
 
 /* Buttons */
-.admindash-dashboard button {
+.admin-dashboard button {
   background-color: #2c3e50;
   color: #ecf0f1;
   border: none;
@@ -107,52 +138,30 @@
   cursor: pointer;
   font-weight: 600;
   transition: background-color 0.3s ease;
-  user-select: none;
 }
 
-.admindash-dashboard button:hover {
+.admin-dashboard button:hover {
   background-color: #34495e;
-}
-
-/* Scrollbar styling for sidebar */
-.admindash-sidebar::-webkit-scrollbar {
-  width: 8px;
-}
-
-.admindash-sidebar::-webkit-scrollbar-track {
-  background: #2c3e50;
-}
-
-.admindash-sidebar::-webkit-scrollbar-thumb {
-  background-color: #34495e;
-  border-radius: 4px;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-  .admindash-dashboard {
+  .admin-dashboard {
     flex-direction: column;
-    height: auto;
   }
-  .admindash-sidebar {
+  .admin-sidebar {
     width: 100%;
     flex-direction: row;
     overflow-x: auto;
-    padding: 10px 0;
   }
-  .admindash-sidebar ul {
+  .admin-sidebar ul {
     display: flex;
     flex-direction: row;
-    margin: 0 10px;
   }
-  .admindash-sidebar ul li {
+  .admin-sidebar ul li {
     margin-right: 15px;
     margin-bottom: 0;
-    padding: 10px 15px;
   }
-  .admindash-content {
+  .admin-content {
     padding: 15px;
-    margin: 10px;
-    border-radius: 6px;
   }
-}

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
+import { FaImage, FaServicestack, FaListAlt, FaBuilding, FaUtensils, FaStar, FaEnvelope, FaBars, FaSearch } from "react-icons/fa";
 import EditBanner from "./EditBanner";
 import AdminService from "./AdminService";
 import AdminServiceTitleAndDescribe from "./AdminService_titleandDescribe";
@@ -6,14 +7,36 @@ import AdminBranch from "./AdminBranch";
 import AdminMenu from "./AdminMenu";
 import AdminReview from "./AdminReview";
 import AdminContact from "./AdminContact";
+import AdminOverview from "./AdminOverview";
 
 import "../Css/AdminDashboard.css";
 
+const menuItems = [
+  { key: "AdminOverview", label: "Overview", icon: <FaBars className="icon" /> },
+  { key: "EditBanner", label: "Edit Banner", icon: <FaImage className="icon" /> },
+  { key: "AdminService", label: "Services", icon: <FaServicestack className="icon" /> },
+  { key: "AdminServiceTitleAndDescribe", label: "Service Title & Description", icon: <FaListAlt className="icon" /> },
+  { key: "AdminBranch", label: "Branches", icon: <FaBuilding className="icon" /> },
+  { key: "AdminMenu", label: "Menu", icon: <FaUtensils className="icon" /> },
+  { key: "AdminReview", label: "Reviews", icon: <FaStar className="icon" /> },
+  { key: "AdminContact", label: "Contact", icon: <FaEnvelope className="icon" /> },
+];
+
 const Admin = () => {
-  const [activeSection, setActiveSection] = useState("EditBanner");
+  const [activeSection, setActiveSection] = useState("AdminOverview");
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const filteredMenuItems = useMemo(() => {
+    return menuItems.filter(item =>
+      item.label.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }, [searchTerm]);
 
   const renderSection = () => {
     switch (activeSection) {
+      case "AdminOverview":
+        return <AdminOverview />;
       case "EditBanner":
         return <EditBanner />;
       case "AdminService":
@@ -29,57 +52,43 @@ const Admin = () => {
       case "AdminContact":
         return <AdminContact />;
       default:
-        return <EditBanner />;
+        return <AdminOverview />;
     }
   };
 
   return (
-    <div className="admin-dashboard">
+    <div className={`admin-dashboard ${sidebarCollapsed ? "collapsed" : ""}`}>
       <aside className="admin-sidebar">
-        <h2>Coffee House Admin</h2>
+        <div className="sidebar-header">
+          <h2>Coffee House Admin</h2>
+          <button className="collapse-btn" onClick={() => setSidebarCollapsed(!sidebarCollapsed)}>
+            <FaBars />
+          </button>
+        </div>
+        <div className="sidebar-search" title={sidebarCollapsed ? "Expand sidebar to search" : ""}>
+          <FaSearch className="search-icon" />
+          <input
+            type="text"
+            placeholder={sidebarCollapsed ? "Expand sidebar to search" : "Search..."}
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            disabled={false}
+            style={{ cursor: sidebarCollapsed ? "not-allowed" : "text" }}
+            readOnly={sidebarCollapsed}
+          />
+        </div>
         <ul>
-          <li
-            className={activeSection === "EditBanner" ? "active" : ""}
-            onClick={() => setActiveSection("EditBanner")}
-          >
-            Edit Banner
-          </li>
-          <li
-            className={activeSection === "AdminService" ? "active" : ""}
-            onClick={() => setActiveSection("AdminService")}
-          >
-            Services
-          </li>
-          <li
-            className={activeSection === "AdminServiceTitleAndDescribe" ? "active" : ""}
-            onClick={() => setActiveSection("AdminServiceTitleAndDescribe")}
-          >
-            Service Title & Description
-          </li>
-          <li
-            className={activeSection === "AdminBranch" ? "active" : ""}
-            onClick={() => setActiveSection("AdminBranch")}
-          >
-            Branches
-          </li>
-          <li
-            className={activeSection === "AdminMenu" ? "active" : ""}
-            onClick={() => setActiveSection("AdminMenu")}
-          >
-            Menu
-          </li>
-          <li
-            className={activeSection === "AdminReview" ? "active" : ""}
-            onClick={() => setActiveSection("AdminReview")}
-          >
-            Reviews
-          </li>
-          <li
-            className={activeSection === "AdminContact" ? "active" : ""}
-            onClick={() => setActiveSection("AdminContact")}
-          >
-            Contact
-          </li>
+          {filteredMenuItems.map((item) => (
+            <li
+              key={item.key}
+              className={activeSection === item.key ? "active" : ""}
+              onClick={() => setActiveSection(item.key)}
+              title={sidebarCollapsed ? item.label : ""}
+            >
+              {item.icon}
+              {!sidebarCollapsed && <span className="menu-label">{item.label}</span>}
+            </li>
+          ))}
         </ul>
       </aside>
       <div className="admin-content">
