@@ -42,6 +42,12 @@ const Chatbot = () => {
   }, []);
 
   useEffect(() => {
+    if (!authData) {
+      setMessages([]);
+    }
+  }, [authData]);
+
+  useEffect(() => {
     if (messagesEndRef.current) {
       messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
     }
