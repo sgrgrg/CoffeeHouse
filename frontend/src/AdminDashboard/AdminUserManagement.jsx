@@ -19,7 +19,7 @@ const AdminUserManagement = () => {
 
   const fetchUsers = async () => {
     try {
-      const res = await axios.get("https://coffeehouse-4yii.onrender.com/api/user/admin/users");
+      const res = await axios.get("http://localhost:5000/api/user/admin/users");
       // Ensure res.data is an array before setting users state
       if (Array.isArray(res.data)) {
         setUsers(res.data);
@@ -58,7 +58,7 @@ const AdminUserManagement = () => {
 
   const handleSaveClick = async (userId) => {
     try {
-      await axios.put(`https://coffeehouse-4yii.onrender.com/api/user/admin/users/${userId}`, editFormData);
+      await axios.put(`http://localhost:5000/api/user/admin/users/${userId}`, editFormData);
       setEditingUserId(null);
       fetchUsers();
     } catch (err) {
@@ -69,7 +69,7 @@ const AdminUserManagement = () => {
   const handleDeleteClick = async (userId) => {
     if (!window.confirm("Are you sure you want to delete this user?")) return;
     try {
-      await axios.delete(`https://coffeehouse-4yii.onrender.com/api/user/admin/users/${userId}`);
+      await axios.delete(`http://localhost:5000/api/user/admin/users/${userId}`);
       fetchUsers();
     } catch (err) {
       console.error("Failed to delete user", err);
@@ -78,7 +78,7 @@ const AdminUserManagement = () => {
 
   const handleBlockToggle = async (userId, block) => {
     try {
-      await axios.put(`https://coffeehouse-4yii.onrender.com/api/user/admin/users/${userId}/block`, { block });
+      await axios.put(`http://localhost:5000/api/user/admin/users/${userId}/block`, { block });
       fetchUsers();
     } catch (err) {
       console.error("Failed to update block status", err);
