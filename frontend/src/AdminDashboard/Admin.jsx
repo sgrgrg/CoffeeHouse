@@ -11,6 +11,8 @@ import AdminOverview from "./AdminOverview";
 
 import "../Css/AdminDashboard.css";
 
+import AdminUserManagement from "./AdminUserManagement";
+
 const menuItems = [
   { key: "AdminOverview", label: "Overview", icon: <FaBars className="icon" /> },
   { key: "EditBanner", label: "Edit Banner", icon: <FaImage className="icon" /> },
@@ -20,6 +22,7 @@ const menuItems = [
   { key: "AdminMenu", label: "Menu", icon: <FaUtensils className="icon" /> },
   { key: "AdminReview", label: "Reviews", icon: <FaStar className="icon" /> },
   { key: "AdminContact", label: "Contact", icon: <FaEnvelope className="icon" /> },
+  { key: "AdminUserManagement", label: "User Management", icon: <FaBars className="icon" /> },
 ];
 
 const Admin = () => {
@@ -51,6 +54,8 @@ const Admin = () => {
         return <AdminReview />;
       case "AdminContact":
         return <AdminContact />;
+      case "AdminUserManagement":
+        return <AdminUserManagement />;
       default:
         return <AdminOverview />;
     }

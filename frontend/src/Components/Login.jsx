@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../contexts/AuthContext";
-import { useNavigate } from "react-router-dom";
 import "../Css/Auth.css";
 
 const Login = () => {
@@ -11,7 +10,6 @@ const Login = () => {
   });
   const [message, setMessage] = useState("");
   const { setAuthData } = useContext(AuthContext);
-  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -22,11 +20,8 @@ const Login = () => {
     setMessage("");
     try {
       const res = await axios.post("https://coffeehouse-4yii.onrender.com/api/auth/login", form);
-      console.log("Login response token:", res.data.token);
       setAuthData(res.data);
       setMessage("Login successful");
-      // Redirect to profile after successful login
-      navigate("/profile");
     } catch (error) {
       setMessage(error.response?.data?.message || "Login failed");
     }
