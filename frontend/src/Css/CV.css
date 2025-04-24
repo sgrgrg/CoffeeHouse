@@ -2,63 +2,200 @@
     body {
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
-    }}
+    }
+}
+
+.cv-printable-area {
+    padding: 20px;
+    background: white;
+}
+
 .cv-container {
-    background: linear-gradient(to right, #6a11cb, #2575fc);
+    background: linear-gradient(to right, #6a3d2a, #4e2c1f);
     color: white;
     padding: 40px;
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  }
-  
-  .cv-header {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.cv-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
     animation: fadeInDown 1s ease-in-out;
-  }
-  
-  .cv-section {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 15px;
-    margin: 20px 0;
+}
+
+.cv-profile-pic {
+    background-color: #fff;
+    border-radius: 50%;
+    padding: 10px;
+    margin-right: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 10px rgba(106, 61, 42, 0.7);
+}
+
+.cv-header-info {
+    flex-grow: 1;
+}
+
+.cv-name {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin: 0 0 10px 0;
+    color: white;
+}
+
+.cv-contact-info {
+    font-size: 1rem;
+    color: white;
+}
+
+.cv-contact-info div {
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.cv-icon {
+    margin-right: 8px;
+    color: white;
+}
+
+.cv-main-content {
+    display: flex;
+    gap: 40px;
+    animation: fadeInUp 1s ease-in-out;
+    flex-wrap: wrap;
+}
+
+.cv-left-column,
+.cv-right-column {
+    flex: 1;
+    min-width: 280px;
+}
+
+.cv-section {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 20px;
+    margin-bottom: 25px;
     border-radius: 8px;
     backdrop-filter: blur(5px);
-    animation: fadeInUp 1s ease-in-out;
-  }
-  
-  h2 {
+    box-shadow: 0 0 10px rgba(106, 61, 42, 0.3);
+}
+
+.cv-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 10px;
     border-bottom: 2px solid white;
     padding-bottom: 5px;
-    margin-bottom: 10px;
-  }
-  
-  .cv-download {
-    transition: all 0.3s ease-in-out;
-  }
-  
-  .cv-download:hover {
+}
+
+.cv-section-icon {
+    color: white;
+}
+
+.cv-timeline {
+    position: relative;
+    margin-left: 15px;
+    padding-left: 20px;
+    border-left: 3px solid white;
+}
+
+.cv-timeline-item {
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.cv-timeline-date {
+    font-weight: 700;
+    color: white;
+    margin-bottom: 5px;
+}
+
+.cv-timeline-content {
+    color: white;
+}
+
+.cv-skills {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.cv-skill {
+    display: flex;
+    flex-direction: column;
+}
+
+.cv-skill span {
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: white;
+}
+
+.cv-skill-bar {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    height: 12px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.cv-skill-level {
     background: white;
-    color: #2575fc;
-  }
-  
-  /* Animations */
-  @keyframes fadeInDown {
+    height: 100%;
+    border-radius: 10px 0 0 10px;
+    transition: width 0.5s ease-in-out;
+}
+
+.cv-download {
+    transition: all 0.3s ease-in-out;
+    background: white;
+    color: #6a3d2a;
+    border: none;
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(106, 61, 42, 0.5);
+}
+
+.cv-download:hover {
+    background: #f0f0f0;
+    color: #4e2c1f;
+}
+
+@media (max-width: 768px) {
+    .cv-main-content {
+        flex-direction: column;
+    }
+}
+
+@keyframes fadeInDown {
     from {
-      opacity: 0;
-      transform: translateY(-20px);
+        opacity: 0;
+        transform: translateY(-20px);
     }
     to {
-      opacity: 1;
-      transform: translateY(0);
+        opacity: 1;
+        transform: translateY(0);
     }
-  }
-  
-  @keyframes fadeInUp {
+}
+
+@keyframes fadeInUp {
     from {
-      opacity: 0;
-      transform: translateY(20px);
+        opacity: 0;
+        transform: translateY(20px);
     }
     to {
-      opacity: 1;
-      transform: translateY(0);
+        opacity: 1;
+        transform: translateY(0);
     }
-  }
-  
+}

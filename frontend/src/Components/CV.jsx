@@ -1,100 +1,147 @@
 import React, { useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 import "../Css/CV.css";
+import profilePic from "../assets/images/profile.png";
+import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaDownload, FaBriefcase, FaGraduationCap, FaCertificate, FaProjectDiagram, FaTools } from "react-icons/fa";
 
 const CV = () => {
-    const cvRef = useRef(null); // Assign reference
-    const contentRef = useRef(null); // New contentRef for react-to-print
+    const cvRef = useRef(null);
+    const contentRef = useRef(null);
 
     const handleDownload = useReactToPrint({
-        content: () => {
-            console.log("cvRef.current:", cvRef.current);
-            return cvRef.current || null;
-        },
+        content: () => cvRef.current || null,
         documentTitle: "Sagar_Gurung_CV",
         copyStyles: true,
-        contentRef, // Add this line
+        contentRef,
     });
 
     return (
         <>
-            {/* Printable CV Content */}
-            <div ref={(el) => { 
-                cvRef.current = el; 
-                contentRef.current = el; // Assign to contentRef as well
-            }} style={{ padding: "20px", background: "white" }}>
-                <div className="container cv-container py-5">
-                    <div className="text-center mb-4 cv-header">
-                        <h1 className="fw-bold text-light">SAGAR GURUNG</h1>
-                        <p className="text-light">📞 +9779863322914 | ✉️ sgrgrg34@gmail.com</p>
+            <div ref={(el) => {
+                cvRef.current = el;
+                contentRef.current = el;
+            }} className="cv-printable-area">
+                <div className="cv-container">
+                    <div className="cv-header">
+                        <div className="cv-profile-pic">
+                            <img src={profilePic} alt="Profile" className="profile-image" />
+                        </div>
+                        <div className="cv-header-info">
+                            <h1 className="cv-name">SAGAR GURUNG</h1>
+                            <div className="cv-contact-info">
+                                <div><FaPhone className="cv-icon" /> +977 9863 322914</div>
+                                <div><FaEnvelope className="cv-icon" /> sgrgrg34@gmail.com</div>
+                                <div><FaMapMarkerAlt className="cv-icon" /> Kathmandu, Nepal</div>
+                            </div>
+                        </div>
                     </div>
 
-                    <div className="cv-section">
-                        <h2>PROFESSIONAL SUMMARY</h2>
-                        <p> Aspiring MERN Stack Developer with hands-on experience...</p>
-                    </div>
+                    <div className="cv-main-content">
+                        <div className="cv-left-column">
+                            <section className="cv-section">
+                                <h2>Professional Summary</h2>
+                                <p>Experienced MERN Stack Developer with a proven track record in building dynamic, responsive, and user-friendly web applications. Developed the Coffee House e-commerce platform featuring real-time backend integration, interactive UI animations, and seamless user experience. Skilled in MongoDB, Express.js, React.js, and Node.js, with a strong focus on delivering high-quality software solutions.</p>
+                            </section>
 
-                    <div className="cv-section">
-                        <h2>EDUCATION</h2>
-                        <p><strong>ISMT College</strong> - Bachelor in Computer System Engineering (2023)</p>
-                    </div>
+                            <section className="cv-section">
+                                <h2>Education</h2>
+                                <div className="cv-timeline">
+                                    <div className="cv-timeline-item">
+                                        <div className="cv-timeline-date">2023</div>
+                                        <div className="cv-timeline-content">
+                                            <strong>ISMT College</strong> - Bachelor of Computer System Engineering
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
 
-                    <div className="cv-section">
-                        <h2>TRAINING & CERTIFICATIONS</h2>
-                        <p><strong>MERN Stack Training</strong> - Mindrisers (2025)</p>
-                    </div>
+                            <section className="cv-section">
+                                <h2>Training & Certifications</h2>
+                                <div className="cv-timeline">
+                                    <div className="cv-timeline-item">
+                                        <div className="cv-timeline-date">2025</div>
+                                        <div className="cv-timeline-content">
+                                            <strong>MERN Stack Development Training</strong> - Mindrisers
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
 
-                    <div className="cv-section">
-                        <h2>INTERNSHIP EXPERIENCE</h2>
-                        <ul>
-                            <li>Full-stack development using MongoDB, Express.js, React.js, and Node.js.</li>
-                            <li>Worked on front-end and back-end projects.</li>
-                            <li>Collaborated on real-world applications.</li>
-                        </ul>
-                    </div>
+                            <section className="cv-section">
+                                <h2>Internship Experience</h2>
+                                <ul>
+                                    <li>Developed and maintained the Coffee House website, implementing features such as dynamic menu display, backend API integration, and responsive design.</li>
+                                    <li>Collaborated with designers and backend developers to enhance UI/UX and optimize performance.</li>
+                                    <li>Implemented frontend animations using AOS library for engaging user interactions.</li>
+                                    <li>Participated in code reviews and contributed to improving code quality and maintainability.</li>
+                                </ul>
+                            </section>
+                        </div>
 
-                    <div className="cv-section">
-                        <h2>PROJECTS</h2>
-                        <p><strong>Coffee House</strong>: Developed a web-based platform for an online coffee shop.</p>
-                        <p><strong>AI-Solution Business Website</strong>: Designed a website offering AI-powered solutions.</p>
-                    </div>
+                        <div className="cv-right-column">
+                            <section className="cv-section">
+                                <h2>Projects</h2>
+                                <p><strong>Coffee House</strong>: Developed a full-featured e-commerce platform for a local coffee shop, including dynamic menu management, social media integration, and smooth animations for enhanced user experience.</p>
+                                <p><strong>AI-Solution Business Website</strong>: Created a modern website showcasing AI-powered solutions with interactive UI components and seamless user experience.</p>
+                            </section>
 
-                    <div className="cv-section">
-                        <h2>TECHNICAL SKILLS</h2>
-                        <ul>
-                            <li>Frontend: React.js, HTML, CSS, JavaScript</li>
-                            <li>Backend: Node.js, Express.js</li>
-                            <li>Database: MongoDB</li>
-                            <li>Version Control: Git, GitHub</li>
-                        </ul>
-                    </div>
+                            <section className="cv-section">
+                                <h2>Technical Skills</h2>
+                                <div className="cv-skills">
+                                    <div className="cv-skill">
+                                        <span>React.js</span>
+                                        <div className="cv-skill-bar">
+                                            <div className="cv-skill-level" style={{ width: "85%" }}></div>
+                                        </div>
+                                    </div>
+                                    <div className="cv-skill">
+                                        <span>Node.js</span>
+                                        <div className="cv-skill-bar">
+                                            <div className="cv-skill-level" style={{ width: "75%" }}></div>
+                                        </div>
+                                    </div>
+                                    <div className="cv-skill">
+                                        <span>MongoDB</span>
+                                        <div className="cv-skill-bar">
+                                            <div className="cv-skill-level" style={{ width: "70%" }}></div>
+                                        </div>
+                                    </div>
+                                    <div className="cv-skill">
+                                        <span>JavaScript</span>
+                                        <div className="cv-skill-bar">
+                                            <div className="cv-skill-level" style={{ width: "80%" }}></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
 
-                    <div className="cv-section">
-                        <h2>SOFT SKILLS</h2>
-                        <ul>
-                            <li>Problem-solving</li>
-                            <li>Team collaboration</li>
-                            <li>Communication</li>
-                            <li>Adaptability</li>
-                        </ul>
-                    </div>
+                            <section className="cv-section">
+                                <h2>Soft Skills</h2>
+                                <ul>
+                                    <li>Strong problem-solving abilities with attention to detail.</li>
+                                    <li>Effective team collaboration and communication skills.</li>
+                                    <li>Adaptable and quick learner, eager to embrace new technologies.</li>
+                                    <li>Time management and organizational skills to meet deadlines.</li>
+                                </ul>
+                            </section>
 
-                    <div className="cv-section">
-                        <h2>ADDITIONAL INFORMATION</h2>
-                        <ul>
-                            <li>Experience in Agile methodologies.</li>
-                            <li>Strong debugging skills.</li>
-                            <li>Passion for learning new technologies.</li>
-                            <li>Ability to work in a dynamic environment.</li>
-                        </ul>
+                            <section className="cv-section">
+                                <h2>Additional Information</h2>
+                                <ul>
+                                    <li>Experience working in Agile development environments.</li>
+                                    <li>Proficient in debugging and optimizing code for performance.</li>
+                                    <li>Passionate about continuous learning and professional growth.</li>
+                                    <li>Ability to work effectively in dynamic and fast-paced settings.</li>
+                                </ul>
+                            </section>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            {/* Download Button (Outside Printable Area) */}
             <div className="text-center mt-4">
                 <button className="btn btn-light btn-lg cv-download" onClick={handleDownload}>
-                    Download CV as PDF
+                    <FaDownload className="me-2" /> Download CV as PDF
                 </button>
             </div>
         </>

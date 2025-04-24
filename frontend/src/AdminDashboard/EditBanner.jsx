@@ -17,7 +17,7 @@ const EditBanner = () => {
   const [previewImage, setPreviewImage] = useState("");
 
   useEffect(() => {
-    axios.get("https://coffeehouse-4yii.onrender.com/api/banner")
+    axios.get("https://coffeehouse-4yii.onrender.com//api/banner")
       .then((res) => {
         const data = res.data;
         if (!data) {
@@ -43,7 +43,7 @@ const EditBanner = () => {
           image: data.image || null,
           _id: data._id || null,
         });
-        setPreviewImage(data.image ? `https://coffeehouse-4yii.onrender.com/${data.image}` : "");
+        setPreviewImage(data.image ? `https://coffeehouse-4yii.onrender.com//${data.image}` : "");
       })
       .catch((err) => console.error(err));
   }, []);
@@ -80,7 +80,7 @@ const EditBanner = () => {
     formData.append("youtube", banner.youtube);
     if (banner.image) formData.append("image", banner.image);
 
-    axios.put(`https://coffeehouse-4yii.onrender.com/api/banner/${banner._id}`, formData, {
+    axios.put(`https://coffeehouse-4yii.onrender.com//api/banner/${banner._id}`, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },

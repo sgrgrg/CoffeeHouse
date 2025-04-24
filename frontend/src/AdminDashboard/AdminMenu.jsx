@@ -22,7 +22,7 @@ const AdminMenu = () => {
 
   const fetchMenuItems = () => {
     setLoading(true);
-    axios.get("https://coffeehouse-4yii.onrender.com/api/menu")
+    axios.get("https://coffeehouse-4yii.onrender.com//api/menu")
       .then((res) => {
         setMenuItems(res.data.menuItems || []);
         setTitle(res.data.titleDescribe?.title || "");
@@ -38,7 +38,7 @@ const AdminMenu = () => {
   const handleTitleDescriptionSubmit = (e) => {
     e.preventDefault();
     axios
-      .put("https://coffeehouse-4yii.onrender.com/api/menu/title-describe", { title, description })
+      .put("https://coffeehouse-4yii.onrender.com//api/menu/title-describe", { title, description })
       .then((res) => alert(res.data.message))
       .catch((err) => console.error(err));
   };
@@ -83,7 +83,7 @@ const AdminMenu = () => {
     formData.append("price", newItem.price);
     formData.append("image", newItem.image);
 
-    axios.post("https://coffeehouse-4yii.onrender.com/api/menu/add", formData)
+    axios.post("https://coffeehouse-4yii.onrender.com//api/menu/add", formData)
       .then((res) => {
         setMenuItems(res.data.menuItems);
         setNewItem({ name: "", price: "", image: null });
@@ -109,7 +109,7 @@ const AdminMenu = () => {
     formData.append("price", editFormData.price);
     if (editFormData.image) formData.append("image", editFormData.image);
 
-    axios.put(`https://coffeehouse-4yii.onrender.com/api/menu/edit/${id}`, formData)
+    axios.put(`https://coffeehouse-4yii.onrender.com//api/menu/edit/${id}`, formData)
       .then((res) => {
         setMenuItems(res.data.menuItems);
         setEditingItem(null);
@@ -126,7 +126,7 @@ const AdminMenu = () => {
   const handleDeleteMenuItem = (id) => {
     if (!window.confirm("Are you sure you want to delete this menu item?")) return;
     setLoading(true);
-    axios.delete(`https://coffeehouse-4yii.onrender.com/api/menu/delete/${id}`)
+    axios.delete(`https://coffeehouse-4yii.onrender.com//api/menu/delete/${id}`)
       .then((res) => {
         setMenuItems(res.data.menuItems);
         alert(res.data.message);
@@ -140,7 +140,7 @@ const AdminMenu = () => {
 
   const handleToggleFeatured = (id) => {
     setLoading(true);
-    axios.put(`https://coffeehouse-4yii.onrender.com/api/menu/toggle-featured/${id}`)
+    axios.put(`https://coffeehouse-4yii.onrender.com//api/menu/toggle-featured/${id}`)
       .then((res) => {
         setMenuItems(res.data.menuItems);
         alert(res.data.message);
@@ -179,7 +179,7 @@ const AdminMenu = () => {
     setLoading(true);
     Promise.all(
       Array.from(selectedItems).map((id) =>
-        axios.delete(`https://coffeehouse-4yii.onrender.com/api/menu/delete/${id}`)
+        axios.delete(`https://coffeehouse-4yii.onrender.com//api/menu/delete/${id}`)
       )
     )
       .then(() => {
@@ -239,7 +239,7 @@ const AdminMenu = () => {
           <p>
             {item.name} - {item.price}
           </p>
-          <img src={`https://coffeehouse-4yii.onrender.com/${item.image}`} alt={item.name} width="100" />
+          <img src={`https://coffeehouse-4yii.onrender.com//${item.image}`} alt={item.name} width="100" />
           <p>Featured: {item.featured ? "Yes" : "No"}</p>
           <button onClick={() => handleToggleFeatured(item._id)} disabled={loading}>
             {item.featured ? "Unfeature" : "Feature"}

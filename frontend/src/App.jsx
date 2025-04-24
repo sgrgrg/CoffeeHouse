@@ -14,7 +14,11 @@ import CV from "./Components/CV";
 import Login from "./Components/Login";
 import Register from "./Components/Register";
 import UserProfile from "./Components/UserProfile";
+import Team from "./Components/Team";
+import FAQs from "./Components/FAQs";
+import Careers from "./Components/Careers";
 import { AuthContext } from "./contexts/AuthContext";
+import AdminRoute from "./Components/AdminRoute";
 
 const ProtectedRoute = ({ children }) => {
   const { authData } = useContext(AuthContext);
@@ -36,7 +40,14 @@ const App = () => {
           <Route path="/trainings" element={<Trainings />} />
           <Route path="/cv" element={<CV />} />
           <Route path="/menu" element={<Menu />} />
-          <Route path="/admin" element={<Admin />} />
+          <Route
+            path="/admin"
+            element={
+              <AdminRoute>
+                <Admin />
+              </AdminRoute>
+            }
+          />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/search" element={<SearchResult />} />
@@ -48,6 +59,9 @@ const App = () => {
               </ProtectedRoute>
             }
           />
+          <Route path="/team" element={<Team />} />
+          <Route path="/faqs" element={<FAQs />} />
+          <Route path="/careers" element={<Careers />} />
         </Routes>
       </Layout>
     </Router>

@@ -19,9 +19,16 @@ const Login = () => {
     e.preventDefault();
     setMessage("");
     try {
-      const res = await axios.post("https://coffeehouse-4yii.onrender.com/api/auth/login", form);
+      const res = await axios.post("https://coffeehouse-4yii.onrender.com//api/auth/login", form);
       setAuthData(res.data);
       setMessage("Login successful");
+
+      // Redirect based on admin status
+      if (res.data.user.isAdmin) {
+        window.location.href = "/admin";
+      } else {
+        window.location.href = "/";
+      }
     } catch (error) {
       setMessage(error.response?.data?.message || "Login failed");
     }

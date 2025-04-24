@@ -1,5 +1,4 @@
-
-  .banner-text {
+.banner-text {
     flex: 1;
     padding: 20px;
     animation: slideInFromLeft 1s ease-out;
@@ -22,20 +21,21 @@
   }
   
   .see-menu {
-    background-color: #6A3D2A;
-    color: white;
-    padding: 10px 30px;
-    border-radius: 0px;
-    transition: transform 0.3s, background-color 0.3s;
-    text-decoration: none;
-    font-size: 18.66px;
-    font-weight: 500;
+    background-color: #6A3D2A !important;
+    color: white !important;
+    padding: 10px 30px !important;
+    border-radius: 0px !important;
+    transition: transform 0.3s, background-color 0.3s !important;
+    text-decoration: none !important;
+    font-size: 18.66px !important;
+    font-weight: 500 !important;
   }
   
+  
   .see-menu:hover {
-    background-color: #4f2c1e;
-    color: white;
-    transform: scale(1.05);
+    background-color: #4f2c1e !important;
+    color: white !important;
+    transform: scale(1.05) !important;
   }
   
   .social-icons {
@@ -113,4 +113,3 @@
       opacity: 1;
     }
   }
-  

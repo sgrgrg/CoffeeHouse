@@ -18,7 +18,7 @@ const Register = () => {
     e.preventDefault();
     setMessage("");
     try {
-      const res = await axios.post("https://coffeehouse-4yii.onrender.com/api/auth/register", form);
+      const res = await axios.post("https://coffeehouse-4yii.onrender.com//api/auth/register", form);
       setMessage(res.data.message);
       setForm({ username: "", email: "", password: "" });
     } catch (error) {
