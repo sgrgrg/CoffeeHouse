@@ -25,7 +25,7 @@ const AdminAbout = () => {
 
   const fetchAboutData = async () => {
     try {
-      const { data } = await axios.get("https://coffeehouse-4yii.onrender.com//api/about");
+      const { data } = await axios.get("https://coffeehouse-4yii.onrender.com/api/about");
       if (data) {
         setAboutData({
           whoWeAre: data.whoWeAre || { title: "", content: "", image: "" },
@@ -178,7 +178,7 @@ const AdminAbout = () => {
         return;
       }
 
-      await axios.put("https://coffeehouse-4yii.onrender.com//api/about", formData, {
+      await axios.put("https://coffeehouse-4yii.onrender.com/api/about", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`
@@ -222,7 +222,7 @@ const AdminAbout = () => {
           />
           {aboutData.whoWeAre.image && (
             <img
-              src={`https://coffeehouse-4yii.onrender.com/${aboutData.whoWeAre.image.startsWith('/') ? '' : '/'}${aboutData.whoWeAre.image}`}
+              src={`https://coffeehouse-4yii.onrender.com${aboutData.whoWeAre.image.startsWith('/') ? '' : '/'}${aboutData.whoWeAre.image}`}
               alt="Who We Are"
               style={{ width: "150px", marginTop: "10px" }}
             />
@@ -259,7 +259,7 @@ const AdminAbout = () => {
           />
           {aboutData.whatWeDo.image && (
             <img
-              src={`https://coffeehouse-4yii.onrender.com/${aboutData.whatWeDo.image.startsWith('/') ? '' : '/'}${aboutData.whatWeDo.image}`}
+              src={`https://coffeehouse-4yii.onrender.com${aboutData.whatWeDo.image.startsWith('/') ? '' : '/'}${aboutData.whatWeDo.image}`}
               alt="What We Do"
               style={{ width: "150px", marginTop: "10px" }}
             />
@@ -296,7 +296,7 @@ const AdminAbout = () => {
           />
           {aboutData.whyChooseUs.image && (
             <img
-              src={`https://coffeehouse-4yii.onrender.com/${aboutData.whyChooseUs.image.startsWith('/') ? '' : '/'}${aboutData.whyChooseUs.image}`}
+              src={`https://coffeehouse-4yii.onrender.com${aboutData.whyChooseUs.image.startsWith('/') ? '' : '/'}${aboutData.whyChooseUs.image}`}
               alt="Why Choose Us"
               style={{ width: "150px", marginTop: "10px" }}
             />
@@ -385,7 +385,7 @@ const AdminAbout = () => {
                 />
                 {member.image && (
                   <img
-                    src={`https://coffeehouse-4yii.onrender.com/${member.image.startsWith('/') ? '' : '/'}${member.image}`}
+                    src={`https://coffeehouse-4yii.onrender.com${member.image.startsWith('/') ? '' : '/'}${member.image}`}
                     alt={`Meet The Team ${index + 1}`}
                     style={{ width: "150px", marginTop: "10px" }}
                   />

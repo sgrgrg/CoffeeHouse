@@ -13,7 +13,7 @@ const AdminTeam = () => {
 
   const fetchTeam = async () => {
     try {
-      const response = await axios.get('https://coffeehouse-4yii.onrender.com//api/team');
+      const response = await axios.get('https://coffeehouse-4yii.onrender.com/api/team');
       setTeamMembers(response.data);
     } catch (error) {
       console.error('Error fetching team members:', error);
@@ -33,7 +33,7 @@ const AdminTeam = () => {
     const data = new FormData();
     data.append('file', selectedFile);
     try {
-      const res = await axios.post('https://coffeehouse-4yii.onrender.com//api/upload', data, {
+      const res = await axios.post('https://coffeehouse-4yii.onrender.com/api/upload', data, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
       return res.data.filename; // Assuming backend returns { filename: 'uploadedfilename.ext' }
@@ -55,9 +55,9 @@ const AdminTeam = () => {
       }
       const payload = { ...formData, photo: photoFilename };
       if (editingId) {
-        await axios.put(`https://coffeehouse-4yii.onrender.com//api/team/${editingId}`, payload);
+        await axios.put(`https://coffeehouse-4yii.onrender.com/api/team/${editingId}`, payload);
       } else {
-        await axios.post('https://coffeehouse-4yii.onrender.com//api/team', payload);
+        await axios.post('https://coffeehouse-4yii.onrender.com/api/team', payload);
       }
       setFormData({ name: '', position: '', bio: '', photo: '' });
       setSelectedFile(null);
@@ -81,7 +81,7 @@ const AdminTeam = () => {
 
   const handleDelete = async id => {
     try {
-      await axios.delete(`https://coffeehouse-4yii.onrender.com//api/team/${id}`);
+      await axios.delete(`https://coffeehouse-4yii.onrender.com/api/team/${id}`);
       fetchTeam();
     } catch (error) {
       console.error('Error deleting team member:', error);
@@ -124,7 +124,7 @@ const AdminTeam = () => {
           <div>
             <p>Current Photo:</p>
             <img
-              src={`https://coffeehouse-4yii.onrender.com//uploads/${formData.photo}`}
+              src={`https://coffeehouse-4yii.onrender.com/uploads/${formData.photo}`}
               alt="Team Member"
               style={{ width: '100px', height: '100px', objectFit: 'cover' }}
             />

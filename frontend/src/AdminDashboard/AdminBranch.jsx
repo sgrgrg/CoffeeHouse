@@ -51,7 +51,7 @@ const AdminBranch = () => {
   const fetchBranches = async () => {
     setLoading(true);
     try {
-      const res = await axios.get("https://coffeehouse-4yii.onrender.com//api/admin/branches");
+      const res = await axios.get("https://coffeehouse-4yii.onrender.com/api/admin/branches");
       const branchData = res.data.branch;
       setBranches(branchData && Array.isArray(branchData.branches) ? branchData.branches : []);
       setTitle(branchData ? branchData.title : "");
@@ -67,7 +67,7 @@ const AdminBranch = () => {
   const handleTitleDescriptionSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.put("https://coffeehouse-4yii.onrender.com//api/admin/branches/title-description", { title, description });
+      const res = await axios.put("https://coffeehouse-4yii.onrender.com/api/admin/branches/title-description", { title, description });
       setFeedbackMessage(res.data.message);
     } catch (error) {
       console.error("Error updating title and description:", error);
@@ -141,7 +141,7 @@ const AdminBranch = () => {
       formData.append("featured", newBranch.featured);
       if (newBranch.image) formData.append("image", newBranch.image);
 
-      const res = await axios.post("https://coffeehouse-4yii.onrender.com//api/admin/branches/add", formData);
+      const res = await axios.post("https://coffeehouse-4yii.onrender.com/api/admin/branches/add", formData);
       setBranches(res.data.branch.branches);
       setFeedbackMessage(res.data.message);
       // Reset new branch form
@@ -169,7 +169,7 @@ const AdminBranch = () => {
     if (!window.confirm("Are you sure you want to delete this branch?")) return;
     setLoading(true);
     try {
-      const res = await axios.delete(`https://coffeehouse-4yii.onrender.com//api/admin/branches/delete/${branchId}`);
+      const res = await axios.delete(`https://coffeehouse-4yii.onrender.com/api/admin/branches/delete/${branchId}`);
       setBranches(res.data.branch.branches);
       setFeedbackMessage(res.data.message);
     } catch (error) {
@@ -248,7 +248,7 @@ const AdminBranch = () => {
       formData.append("featured", editFormData.featured);
       if (editFormData.image) formData.append("image", editFormData.image);
 
-      const res = await axios.put(`https://coffeehouse-4yii.onrender.com//api/admin/branches/edit/${branchId}`, formData);
+      const res = await axios.put(`https://coffeehouse-4yii.onrender.com/api/admin/branches/edit/${branchId}`, formData);
       setBranches(res.data.branch.branches);
       setEditingBranch(null);
       setFeedbackMessage(res.data.message);
@@ -290,7 +290,7 @@ const AdminBranch = () => {
     try {
       await Promise.all(
         Array.from(selectedBranches).map((branchId) =>
-          axios.delete(`https://coffeehouse-4yii.onrender.com//api/admin/branches/delete/${branchId}`)
+          axios.delete(`https://coffeehouse-4yii.onrender.com/api/admin/branches/delete/${branchId}`)
         )
       );
       alert("Selected branches deleted successfully.");
@@ -320,7 +320,7 @@ const AdminBranch = () => {
   const toggleFeatured = async (branchId) => {
     setLoading(true);
     try {
-      const res = await axios.put(`https://coffeehouse-4yii.onrender.com//api/admin/branches/toggle-featured/${branchId}`);
+      const res = await axios.put(`https://coffeehouse-4yii.onrender.com/api/admin/branches/toggle-featured/${branchId}`);
       setBranches(res.data.branch.branches);
     } catch (error) {
       console.error("Error toggling featured status:", error);
@@ -514,7 +514,7 @@ const AdminBranch = () => {
             <p>Featured Branch: {branch.featured ? "Yes" : "No"}</p>
 
             <img
-              src={`https://coffeehouse-4yii.onrender.com//${branch.image}`}
+              src={`https://coffeehouse-4yii.onrender.com/${branch.image}`}
               alt={branch.location}
               width="100"
               style={{ marginBottom: "10px" }}

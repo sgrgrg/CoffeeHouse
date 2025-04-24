@@ -8,7 +8,7 @@ const Team = () => {
   useEffect(() => {
     const fetchTeam = async () => {
       try {
-        const response = await axios.get('https://coffeehouse-4yii.onrender.com//api/team');
+        const response = await axios.get('https://coffeehouse-4yii.onrender.com/api/team');
         setTeamMembers(response.data);
       } catch (error) {
         console.error('Error fetching team members:', error);
@@ -25,7 +25,7 @@ const Team = () => {
           <div key={member._id} className="team-member" tabIndex={0} role="article" aria-label={`Team member ${member.name}`}>
             {member.photo && (
               <img
-                src={`https://coffeehouse-4yii.onrender.com//uploads/${member.photo}`}
+                src={`https://coffeehouse-4yii.onrender.com/uploads/${member.photo}`}
                 alt={member.name}
                 className="team-photo"
               />

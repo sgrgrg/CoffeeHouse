@@ -9,7 +9,7 @@ const FAQs = () => {
   useEffect(() => {
     const fetchFAQs = async () => {
       try {
-        const response = await axios.get('https://coffeehouse-4yii.onrender.com//api/faqs');
+        const response = await axios.get('https://coffeehouse-4yii.onrender.com/api/faqs');
         setFaqs(response.data);
       } catch (error) {
         console.error('Error fetching FAQs:', error);

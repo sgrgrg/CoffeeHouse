@@ -3,7 +3,7 @@ import axios from "axios";
 import "../Css/UserProfile.css";
 import { AuthContext } from "../contexts/AuthContext";
 
-const BASE_IMAGE_URL = "https://coffeehouse-4yii.onrender.com//";
+const BASE_IMAGE_URL = "https://coffeehouse-4yii.onrender.com/";
 
 const joinUrl = (base, path) => {
   if (!path) return "";
@@ -34,7 +34,7 @@ const UserProfile = () => {
       try {
         setLoading(true);
         console.log("Using token in UserProfile:", authData?.token);
-        const res = await axios.get("https://coffeehouse-4yii.onrender.com//api/user/profile", {
+        const res = await axios.get("https://coffeehouse-4yii.onrender.com/api/user/profile", {
           headers: { Authorization: `Bearer ${authData?.token}` },
         });
         setProfile(res.data);
@@ -75,7 +75,7 @@ const UserProfile = () => {
       if (profilePictureFile) formData.append("profilePicture", profilePictureFile);
       if (backgroundPictureFile) formData.append("profileBackgroundPicture", backgroundPictureFile);
 
-      const res = await axios.put("https://coffeehouse-4yii.onrender.com//api/user/profile", formData, {
+      const res = await axios.put("https://coffeehouse-4yii.onrender.com/api/user/profile", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${authData?.token}`,

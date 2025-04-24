@@ -13,7 +13,7 @@ const AdminFAQs = () => {
 
   const fetchFAQs = async () => {
     try {
-      const response = await axios.get('https://coffeehouse-4yii.onrender.com//api/faqs');
+      const response = await axios.get('https://coffeehouse-4yii.onrender.com/api/faqs');
       setFaqs(response.data);
     } catch (error) {
       console.error('Error fetching FAQs:', error);
@@ -28,9 +28,9 @@ const AdminFAQs = () => {
     e.preventDefault();
     try {
       if (editingId) {
-        await axios.put(`https://coffeehouse-4yii.onrender.com//api/faqs/${editingId}`, formData);
+        await axios.put(`https://coffeehouse-4yii.onrender.com/api/faqs/${editingId}`, formData);
       } else {
-        await axios.post('https://coffeehouse-4yii.onrender.com//api/faqs', formData);
+        await axios.post('https://coffeehouse-4yii.onrender.com/api/faqs', formData);
       }
       setFormData({ question: '', answer: '' });
       setEditingId(null);
@@ -50,7 +50,7 @@ const AdminFAQs = () => {
 
   const handleDelete = async id => {
     try {
-      await axios.delete(`https://coffeehouse-4yii.onrender.com//api/faqs/${id}`);
+      await axios.delete(`https://coffeehouse-4yii.onrender.com/api/faqs/${id}`);
       fetchFAQs();
     } catch (error) {
       console.error('Error deleting FAQ:', error);

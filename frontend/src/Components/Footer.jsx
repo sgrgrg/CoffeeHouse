@@ -13,7 +13,7 @@ const Footer = () => {
   useEffect(() => {
     const fetchMainBranch = async () => {
       try {
-        const res = await axios.get("https://coffeehouse-4yii.onrender.com//api/admin/branches");
+        const res = await axios.get("https://coffeehouse-4yii.onrender.com/api/admin/branches");
         const branches = res.data.branch.branches;
         const main = branches.find(branch => branch.isMain);
         setMainBranch(main);

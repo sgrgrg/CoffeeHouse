@@ -14,9 +14,9 @@ const Trainings = () => {
     const fetchData = async () => {
       try {
         const [trainingsRes, successStoriesRes, eventsRes] = await Promise.all([
-          axios.get('https://coffeehouse-4yii.onrender.com//api/trainings'),
-          axios.get('https://coffeehouse-4yii.onrender.com//api/student-success-stories'),
-          axios.get('https://coffeehouse-4yii.onrender.com//api/events'),
+          axios.get('https://coffeehouse-4yii.onrender.com/api/trainings'),
+          axios.get('https://coffeehouse-4yii.onrender.com/api/student-success-stories'),
+          axios.get('https://coffeehouse-4yii.onrender.com/api/events'),
         ]);
         setTrainings(trainingsRes.data);
         setSuccessStories(successStoriesRes.data);
@@ -36,7 +36,7 @@ const Trainings = () => {
         setEnrollMessage('Please log in to enroll.');
         return;
       }
-      const response = await axios.post('https://coffeehouse-4yii.onrender.com//api/trainings/enrollments/enroll', {
+      const response = await axios.post('https://coffeehouse-4yii.onrender.com/api/trainings/enrollments/enroll', {
         userId,
         trainingId,
       }, {
@@ -115,7 +115,7 @@ const Trainings = () => {
             {successStories.map(({ _id, photo, studentName, quote, rating, courseTaken }) => (
               <div key={_id} className="testimonial-card">
                 <img
-                  src={`https://coffeehouse-4yii.onrender.com/${photo}`}
+                  src={`https://coffeehouse-4yii.onrender.com${photo}`}
                   alt={`Photo of ${studentName}`}
                 />
                 <p><strong>{studentName}</strong></p>

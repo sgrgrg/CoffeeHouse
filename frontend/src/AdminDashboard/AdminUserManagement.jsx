@@ -21,7 +21,7 @@ const AdminUserManagement = () => {
   const fetchUsers = async () => {
     try {
       const token = localStorage.getItem("authData") ? JSON.parse(localStorage.getItem("authData")).token : null;
-      const res = await axios.get("https://coffeehouse-4yii.onrender.com//api/user/admin/users", {
+      const res = await axios.get("https://coffeehouse-4yii.onrender.com/api/user/admin/users", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -67,7 +67,7 @@ const AdminUserManagement = () => {
   const handleSaveClick = async (userId) => {
     try {
       const token = localStorage.getItem("authData") ? JSON.parse(localStorage.getItem("authData")).token : null;
-      await axios.put(`https://coffeehouse-4yii.onrender.com//api/user/admin/users/${userId}`, editFormData, {
+      await axios.put(`https://coffeehouse-4yii.onrender.com/api/user/admin/users/${userId}`, editFormData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -87,7 +87,7 @@ const AdminUserManagement = () => {
     if (!window.confirm("Are you sure you want to delete this user?")) return;
     try {
       const token = localStorage.getItem("authData") ? JSON.parse(localStorage.getItem("authData")).token : null;
-      await axios.delete(`https://coffeehouse-4yii.onrender.com//api/user/admin/users/${userId}`, {
+      await axios.delete(`https://coffeehouse-4yii.onrender.com/api/user/admin/users/${userId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -105,7 +105,7 @@ const AdminUserManagement = () => {
     }
     try {
       const token = localStorage.getItem("authData") ? JSON.parse(localStorage.getItem("authData")).token : null;
-      await axios.put(`https://coffeehouse-4yii.onrender.com//api/user/admin/users/${userId}/block`, { block }, {
+      await axios.put(`https://coffeehouse-4yii.onrender.com/api/user/admin/users/${userId}/block`, { block }, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

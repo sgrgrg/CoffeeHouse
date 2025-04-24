@@ -3,7 +3,7 @@ import axios from 'axios';
 import '../Css/AdminDashboard.css';
 import { AuthContext } from '../contexts/AuthContext';
 
-const BASE_URL = 'https://coffeehouse-4yii.onrender.com//api/student-success-stories';
+const BASE_URL = 'https://coffeehouse-4yii.onrender.com/api/student-success-stories';
 
 const AdminStudentSuccessStories = () => {
   const { authData } = useContext(AuthContext);
@@ -184,7 +184,7 @@ const AdminStudentSuccessStories = () => {
               <td>{'⭐'.repeat(story.rating)}</td>
               <td>{story.courseTaken}</td>
               <td>
-                {story.photo && <img src={`https://coffeehouse-4yii.onrender.com/${story.photo}`} alt={story.studentName} style={{ width: '80px', height: '80px', borderRadius: '50%' }} />}
+                {story.photo && <img src={`https://coffeehouse-4yii.onrender.com${story.photo}`} alt={story.studentName} style={{ width: '80px', height: '80px', borderRadius: '50%' }} />}
               </td>
               <td>
                 <button onClick={() => handleEdit(story)}>Edit</button>

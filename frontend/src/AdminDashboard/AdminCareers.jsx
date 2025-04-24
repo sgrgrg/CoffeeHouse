@@ -20,7 +20,7 @@ const AdminCareers = () => {
 
   const fetchCareers = async () => {
     try {
-      const response = await axios.get('https://coffeehouse-4yii.onrender.com//api/careers');
+      const response = await axios.get('https://coffeehouse-4yii.onrender.com/api/careers');
       setCareers(response.data);
     } catch (error) {
       console.error('Error fetching careers:', error);
@@ -35,9 +35,9 @@ const AdminCareers = () => {
     e.preventDefault();
     try {
       if (editingId) {
-        await axios.put(`https://coffeehouse-4yii.onrender.com//api/careers/${editingId}`, formData);
+        await axios.put(`https://coffeehouse-4yii.onrender.com/api/careers/${editingId}`, formData);
       } else {
-        await axios.post('https://coffeehouse-4yii.onrender.com//api/careers', formData);
+        await axios.post('https://coffeehouse-4yii.onrender.com/api/careers', formData);
       }
       setFormData({
         title: '',
@@ -68,7 +68,7 @@ const AdminCareers = () => {
 
   const handleDelete = async id => {
     try {
-      await axios.delete(`https://coffeehouse-4yii.onrender.com//api/careers/${id}`);
+      await axios.delete(`https://coffeehouse-4yii.onrender.com/api/careers/${id}`);
       fetchCareers();
     } catch (error) {
       console.error('Error deleting career:', error);

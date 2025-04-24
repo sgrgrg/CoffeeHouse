@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import { AuthContext } from '../contexts/AuthContext';
 
-const BASE_URL = 'https://coffeehouse-4yii.onrender.com//api/trainings';
+const BASE_URL = 'https://coffeehouse-4yii.onrender.com/api/trainings';
 
 const AdminTrainings = () => {
   const { authData } = useContext(AuthContext);

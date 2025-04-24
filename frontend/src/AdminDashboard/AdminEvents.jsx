@@ -3,7 +3,7 @@ import axios from 'axios';
 import '../Css/AdminDashboard.css';
 import { AuthContext } from '../contexts/AuthContext';
 
-const BASE_URL = 'https://coffeehouse-4yii.onrender.com//api/events';
+const BASE_URL = 'https://coffeehouse-4yii.onrender.com/api/events';
 
 const AdminEvents = () => {
   const { authData } = useContext(AuthContext);

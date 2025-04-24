@@ -18,11 +18,11 @@ const AdminOverview = () => {
       try {
         setLoading(true);
         const [servicesRes, branchesRes, menuRes, reviewsRes, contactsRes] = await Promise.all([
-          axios.get("https://coffeehouse-4yii.onrender.com//api/service"),
-          axios.get("https://coffeehouse-4yii.onrender.com//api/admin/branches"),
-          axios.get("https://coffeehouse-4yii.onrender.com//api/menu"),
-          axios.get("https://coffeehouse-4yii.onrender.com//api/reviews"),
-          axios.get("https://coffeehouse-4yii.onrender.com//api/admin/messages"),
+          axios.get("https://coffeehouse-4yii.onrender.com/api/service"),
+          axios.get("https://coffeehouse-4yii.onrender.com/api/admin/branches"),
+          axios.get("https://coffeehouse-4yii.onrender.com/api/menu"),
+          axios.get("https://coffeehouse-4yii.onrender.com/api/reviews"),
+          axios.get("https://coffeehouse-4yii.onrender.com/api/admin/messages"),
         ]);
         setStats({
           servicesCount: Array.isArray(servicesRes.data) ? servicesRes.data.length : 0,
@@ -50,11 +50,11 @@ const AdminOverview = () => {
         const fetchStats = async () => {
           try {
         const [servicesRes, branchesRes, menuRes, reviewsRes, contactsRes] = await Promise.all([
-          axios.get("https://coffeehouse-4yii.onrender.com//api/service"),
-          axios.get("https://coffeehouse-4yii.onrender.com//api/branch"),
-          axios.get("https://coffeehouse-4yii.onrender.com//api/menu"),
-          axios.get("https://coffeehouse-4yii.onrender.com//api/review"),
-          axios.get("https://coffeehouse-4yii.onrender.com//api/message"),
+          axios.get("https://coffeehouse-4yii.onrender.com/api/service"),
+          axios.get("https://coffeehouse-4yii.onrender.com/api/branch"),
+          axios.get("https://coffeehouse-4yii.onrender.com/api/menu"),
+          axios.get("https://coffeehouse-4yii.onrender.com/api/review"),
+          axios.get("https://coffeehouse-4yii.onrender.com/api/message"),
         ]);
         setStats({
           servicesCount: Array.isArray(servicesRes.data) ? servicesRes.data.length : 0,

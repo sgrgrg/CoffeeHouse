@@ -19,7 +19,7 @@ const Login = () => {
     e.preventDefault();
     setMessage("");
     try {
-      const res = await axios.post("https://coffeehouse-4yii.onrender.com//api/auth/login", form);
+      const res = await axios.post("https://coffeehouse-4yii.onrender.com/api/auth/login", form);
       setAuthData(res.data);
       setMessage("Login successful");
 

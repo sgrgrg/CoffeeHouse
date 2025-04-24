@@ -11,7 +11,7 @@ const About = () => {
 
   const fetchAboutData = async () => {
     try {
-      const response = await axios.get("https://coffeehouse-4yii.onrender.com//api/about");
+      const response = await axios.get("https://coffeehouse-4yii.onrender.com/api/about");
       setAboutData(response.data);
     } catch (error) {
       console.error("Error fetching About data:", error);
@@ -39,7 +39,7 @@ const About = () => {
                         <img
                           src={
                             member.image.startsWith("/uploads/")
-                              ? `https://coffeehouse-4yii.onrender.com/${member.image}`
+                              ? `https://coffeehouse-4yii.onrender.com${member.image}`
                               : member.image
                           }
                           alt={member.title}
@@ -64,7 +64,7 @@ const About = () => {
                   <img
                     src={
                       section.image.startsWith("/uploads/")
-                        ? `https://coffeehouse-4yii.onrender.com/${section.image}`
+                        ? `https://coffeehouse-4yii.onrender.com${section.image}`
                         : section.image
                     }
                     alt={section.title}

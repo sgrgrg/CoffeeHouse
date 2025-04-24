@@ -8,7 +8,7 @@ const Careers = () => {
   useEffect(() => {
     const fetchCareers = async () => {
       try {
-        const response = await axios.get('https://coffeehouse-4yii.onrender.com//api/careers');
+        const response = await axios.get('https://coffeehouse-4yii.onrender.com/api/careers');
         setCareers(response.data);
       } catch (error) {
         console.error('Error fetching careers:', error);
