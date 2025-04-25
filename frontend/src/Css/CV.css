@@ -199,3 +199,8 @@
         transform: translateY(0);
     }
 }
+
+
+.cv-section p{
+    color: #fff;
+}

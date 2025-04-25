@@ -1,7 +1,6 @@
 .branch-container {
     background-image: url("/src/assets/images/find.svg");
     background-repeat: no-repeat;
-   
   }
 
 .aos-init, .aos-animate {
@@ -9,49 +8,50 @@
   opacity: 1 !important;
 }
   
-  .branch-img {
-    width: 100%;
-    height: 203px;
-    border-radius: 15px;
-  }
+.branch-img {
+  width: 100%;
+  height: 203px;
+  border-radius: 15px;
+}
   
-  .branch {
-    border-radius: 15px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    background-color: #ffffff;
-    transition: transform 0.3s ease;
-  }
+.branch {
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  background-color: #ffffff;
+  transition: transform 0.3s ease;
+}
   
-  .branch:hover {
-    transform: scale(1.05);
-  }
+.branch:hover {
+  transform: scale(1.05);
+}
   
-  .findus-title {
-    font-weight: 700;
-    font-size: 2.25rem; 
-    line-height: 2.5rem;
-  }
+.findus-title {
+  font-weight: 700;
+  font-size: 2.25rem; 
+  line-height: 2.5rem;
+}
   
-  .findus-description {
-    font-weight: 400;
-    font-size: 1.125rem; 
-    line-height: 2rem; 
-    color: #68737f;
-  }
+.findus-description {
+  font-weight: 400;
+  font-size: 1.125rem; 
+  line-height: 2rem; 
+  color: #68737f;
+}
   
-  .row-findus {
-    padding-top: 70px
-  }
+.row-findus {
+  padding-top: 70px
+}
   
-  .branch-location {
-    font-weight: 800;
-    font-size: 1rem; 
-    line-height: 1.5rem; 
-    padding-top: 1rem;
-    color: #000000;
-  }
- /* Modal styles */
+.branch-location {
+  font-weight: 800;
+  font-size: 1rem; 
+  line-height: 1.5rem; 
+  padding-top: 1rem;
+  color: #000000;
+}
+
+/* Modal styles */
 .modal {
   display: flex;
   justify-content: center;
@@ -87,4 +87,56 @@
   cursor: pointer;
   background: transparent;
   border: none;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .branch-img {
+    height: 150px;
+  }
+
+  .findus-title {
+    font-size: 1.75rem;
+    text-align: center;
+  }
+
+  .findus-description {
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  .branch-location {
+    font-size: 0.9rem;
+    text-align: center;
+  }
+
+  .row-findus {
+    padding-top: 40px;
+  }
+
+  .modal-img {
+    height: 350px;
+  }
+}
+
+@media (max-width: 480px) {
+  .branch-img {
+    height: 120px;
+  }
+
+  .findus-title {
+    font-size: 1.5rem;
+  }
+
+  .findus-description {
+    font-size: 0.9rem;
+  }
+
+  .branch-location {
+    font-size: 0.8rem;
+  }
+
+  .modal-img {
+    height: 250px;
+  }
 }

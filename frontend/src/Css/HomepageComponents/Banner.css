@@ -113,3 +113,58 @@
       opacity: 1;
     }
   }
+
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .banner-text {
+      padding: 10px;
+      text-align: center;
+    }
+
+    .banner-title {
+      font-size: 32px;
+      padding: 60px 0 0 0;
+    }
+
+    .banner-describe {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    .see-menu {
+      font-size: 16px !important;
+      padding: 8px 20px !important;
+    }
+
+    .social-icons {
+      justify-content: center;
+      display: flex;
+    }
+
+    .banner-image {
+      margin-top: 20px;
+      height: auto;
+    }
+
+    .img-fluid {
+      height: auto;
+      max-height: 300px;
+      object-fit: contain;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .banner-title {
+      font-size: 24px;
+      padding: 40px 0 0 0;
+    }
+
+    .banner-describe {
+      font-size: 14px;
+    }
+
+    .see-menu {
+      font-size: 14px !important;
+      padding: 6px 16px !important;
+    }
+  }
