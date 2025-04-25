@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { FaServicestack, FaBuilding, FaUtensils, FaStar, FaEnvelope } from "react-icons/fa";
+import { FaServicestack, FaBuilding, FaUtensils, FaStar, FaEnvelope, FaUserShield } from "react-icons/fa";
 
 const AdminOverview = () => {
   const [stats, setStats] = useState({
@@ -9,34 +9,38 @@ const AdminOverview = () => {
     menuItemsCount: 0,
     reviewsCount: 0,
     contactsCount: 0,
+    adminsCount: 0,
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const fetchStats = async () => {
+    try {
+      setLoading(true);
+      const [servicesRes, branchesRes, menuRes, reviewsRes, contactsRes, adminsRes] = await Promise.all([
+        axios.get("https://coffeehouse-4yii.onrender.com/api/service"),
+        axios.get("https://coffeehouse-4yii.onrender.com/api/admin/branches"),
+        axios.get("https://coffeehouse-4yii.onrender.com/api/menu"),
+        axios.get("https://coffeehouse-4yii.onrender.com/api/reviews"),
+        axios.get("https://coffeehouse-4yii.onrender.com/api/admin/messages"),
+        axios.get("https://coffeehouse-4yii.onrender.com/api/admins"),
+      ]);
+      setStats({
+        servicesCount: Array.isArray(servicesRes.data) ? servicesRes.data.length : 0,
+        branchesCount: branchesRes.data.branch && Array.isArray(branchesRes.data.branch.branches) ? branchesRes.data.branch.branches.length : 0,
+        menuItemsCount: Array.isArray(menuRes.data) ? menuRes.data.length : 0,
+        reviewsCount: Array.isArray(reviewsRes.data) ? reviewsRes.data.length : 0,
+        contactsCount: Array.isArray(contactsRes.data) ? contactsRes.data.length : 0,
+        adminsCount: Array.isArray(adminsRes.data) ? adminsRes.data.length : 0,
+      });
+      setLoading(false);
+    } catch (err) {
+      setError("Failed to load stats: " + (err.message || ""));
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const fetchStats = async () => {
-      try {
-        setLoading(true);
-        const [servicesRes, branchesRes, menuRes, reviewsRes, contactsRes] = await Promise.all([
-          axios.get("https://coffeehouse-4yii.onrender.com/api/service"),
-          axios.get("https://coffeehouse-4yii.onrender.com/api/admin/branches"),
-          axios.get("https://coffeehouse-4yii.onrender.com/api/menu"),
-          axios.get("https://coffeehouse-4yii.onrender.com/api/reviews"),
-          axios.get("https://coffeehouse-4yii.onrender.com/api/admin/messages"),
-        ]);
-        setStats({
-          servicesCount: Array.isArray(servicesRes.data) ? servicesRes.data.length : 0,
-          branchesCount: branchesRes.data.branch && Array.isArray(branchesRes.data.branch.branches) ? branchesRes.data.branch.branches.length : 0,
-          menuItemsCount: Array.isArray(menuRes.data) ? menuRes.data.length : 0,
-          reviewsCount: Array.isArray(reviewsRes.data) ? reviewsRes.data.length : 0,
-          contactsCount: Array.isArray(contactsRes.data) ? contactsRes.data.length : 0,
-        });
-        setLoading(false);
-      } catch (err) {
-        setError("Failed to load stats: " + (err.message || ""));
-        setLoading(false);
-      }
-    };
     fetchStats();
   }, []);
 
@@ -46,29 +50,6 @@ const AdminOverview = () => {
       <p>{error}</p>
       <button onClick={() => {
         setError(null);
-        setLoading(true);
-        const fetchStats = async () => {
-          try {
-        const [servicesRes, branchesRes, menuRes, reviewsRes, contactsRes] = await Promise.all([
-          axios.get("https://coffeehouse-4yii.onrender.com/api/service"),
-          axios.get("https://coffeehouse-4yii.onrender.com/api/branch"),
-          axios.get("https://coffeehouse-4yii.onrender.com/api/menu"),
-          axios.get("https://coffeehouse-4yii.onrender.com/api/review"),
-          axios.get("https://coffeehouse-4yii.onrender.com/api/message"),
-        ]);
-        setStats({
-          servicesCount: Array.isArray(servicesRes.data) ? servicesRes.data.length : 0,
-          branchesCount: branchesRes.data.branch && Array.isArray(branchesRes.data.branch.branches) ? branchesRes.data.branch.branches.length : 0,
-          menuItemsCount: Array.isArray(menuRes.data) ? menuRes.data.length : 0,
-          reviewsCount: Array.isArray(reviewsRes.data) ? reviewsRes.data.length : 0,
-          contactsCount: Array.isArray(contactsRes.data) ? contactsRes.data.length : 0,
-        });
-            setLoading(false);
-          } catch (err) {
-            setError("Failed to load stats: " + (err.message || ""));
-            setLoading(false);
-          }
-        };
         fetchStats();
       }}>Retry</button>
     </div>
@@ -111,6 +92,13 @@ const AdminOverview = () => {
           <div className="stat-info">
             <h3>{stats.contactsCount}</h3>
             <p>Contacts</p>
+          </div>
+        </div>
+        <div className="stat-card">
+          <FaUserShield className="stat-icon" />
+          <div className="stat-info">
+            <h3>{stats.adminsCount}</h3>
+            <p>Admins</p>
           </div>
         </div>
       </div>
