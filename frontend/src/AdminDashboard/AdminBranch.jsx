@@ -305,7 +305,7 @@ const AdminBranch = () => {
 
   // Filter branches by search term
   const filteredBranches = branches.filter((branch) =>
-    branch.location.toLowerCase().includes(searchTerm.toLowerCase())
+    branch.location && branch.location.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   // Pagination calculations

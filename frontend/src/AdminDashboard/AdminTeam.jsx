@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 
 const AdminTeam = () => {
@@ -6,6 +6,7 @@ const AdminTeam = () => {
   const [formData, setFormData] = useState({ name: '', position: '', bio: '', photo: '' });
   const [editingId, setEditingId] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
+  const fileInputRef = useRef(null); // ⬅️ Reference to reset the file input
 
   useEffect(() => {
     fetchTeam();
@@ -36,7 +37,7 @@ const AdminTeam = () => {
       const res = await axios.post('https://coffeehouse-4yii.onrender.com/api/upload', data, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
-      return res.data.filename; // Assuming backend returns { filename: 'uploadedfilename.ext' }
+      return res.data.filename;
     } catch (error) {
       console.error('Error uploading image:', error);
       return null;
@@ -59,9 +60,15 @@ const AdminTeam = () => {
       } else {
         await axios.post('https://coffeehouse-4yii.onrender.com/api/team', payload);
       }
+
+      // Reset form and file input
       setFormData({ name: '', position: '', bio: '', photo: '' });
       setSelectedFile(null);
       setEditingId(null);
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+
       fetchTeam();
     } catch (error) {
       console.error('Error saving team member:', error);
@@ -77,6 +84,9 @@ const AdminTeam = () => {
     });
     setEditingId(member._id);
     setSelectedFile(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = ''; // Clear input on edit
+    }
   };
 
   const handleDelete = async id => {
@@ -119,6 +129,7 @@ const AdminTeam = () => {
           name="photo"
           accept="image/*"
           onChange={handleFileChange}
+          ref={fileInputRef} // ⬅️ Reference applied here
         />
         {formData.photo && !selectedFile && (
           <div>

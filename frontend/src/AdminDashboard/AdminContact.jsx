@@ -6,20 +6,11 @@ const socket = io("https://coffeehouse-4yii.onrender.com");
 
 const AdminContact = () => {
   const [messages, setMessages] = useState([]);
-  const [branches, setBranches] = useState([]);
   const [replyContent, setReplyContent] = useState({});
-  const [branchForm, setBranchForm] = useState({});
 
   useEffect(() => {
     axios.get("https://coffeehouse-4yii.onrender.com/api/admin/messages")
       .then((res) => setMessages(res.data))
-      .catch((err) => console.error(err));
-
-    axios.get("https://coffeehouse-4yii.onrender.com/api/admin/branches")
-      .then((res) => {
-        const branchData = res.data.branch;
-        setBranches(branchData && Array.isArray(branchData.branches) ? branchData.branches : []);
-      })
       .catch((err) => console.error(err));
 
     // Socket event listeners
@@ -50,7 +41,7 @@ const AdminContact = () => {
       return;
     }
     axios.patch(`https://coffeehouse-4yii.onrender.com/api/admin/messages/${id}/reply`, { replyContent: content })
-      .then((res) => {
+      .then(() => {
         alert("Reply sent");
         setReplyContent((prev) => {
           const newReply = { ...prev };
@@ -73,18 +64,6 @@ const AdminContact = () => {
       .catch((err) => console.error(err));
   };
 
-  const handleBranchForm = (e) => {
-    const { name, value } = e.target;
-    setBranchForm((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleBranchSubmit = (e) => {
-    e.preventDefault();
-    axios.post("https://coffeehouse-4yii.onrender.com/api/admin/branches/add", branchForm)
-      .then((res) => setBranches([...branches, res.data.branch]))
-      .catch((err) => console.error(err));
-  };
-
   return (
     <div>
       <h2>Admin Contact Management</h2>
@@ -92,7 +71,7 @@ const AdminContact = () => {
         <h3>Messages</h3>
         {messages.map((msg) => (
           <div key={msg._id}>
-          <p><strong>{msg.name} ({msg.email}):</strong> {msg.content}</p>
+            <p><strong>{msg.name} ({msg.email}):</strong> {msg.content}</p>
             <textarea
               placeholder="Type your reply here"
               value={replyContent[msg._id] || ""}
@@ -104,28 +83,8 @@ const AdminContact = () => {
           </div>
         ))}
       </div>
-
-      <div>
-        <h3>Branches</h3>
-        <form onSubmit={handleBranchSubmit}>
-          <input name="name" placeholder="Branch Name" value={branchForm.name || ""} onChange={handleBranchForm} />
-          <input name="address" placeholder="Address" value={branchForm.address || ""} onChange={handleBranchForm} />
-          <input name="phone" placeholder="Phone" value={branchForm.phone || ""} onChange={handleBranchForm} />
-          <button type="submit">Add Branch</button>
-        </form>
-        <div>
-          <h4>Branch List</h4>
-          {branches.length === 0 && <p>No branches available.</p>}
-          {branches.map((branch, index) => (
-            <div key={index}>
-              <p><strong>Name:</strong> {branch.name || branch.location || "N/A"}</p>
-              <p><strong>Address:</strong> {branch.address || "N/A"}</p>
-              <p><strong>Phone:</strong> {branch.phone || "N/A"}</p>
-            </div>
-          ))}
-        </div>
-      </div>
     </div>
   );
 };
+
 export default AdminContact;

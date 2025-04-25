@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import axios from 'axios';
 import '../Css/AdminDashboard.css';
 import { AuthContext } from '../contexts/AuthContext';
@@ -7,6 +7,7 @@ const BASE_URL = 'https://coffeehouse-4yii.onrender.com/api/student-success-stor
 
 const AdminStudentSuccessStories = () => {
   const { authData } = useContext(AuthContext);
+  const fileInputRef = useRef(null); // ✅ Reference to the file input
   const [stories, setStories] = useState([]);
   const [formData, setFormData] = useState({
     studentName: '',
@@ -66,6 +67,7 @@ const AdminStudentSuccessStories = () => {
           },
         });
       }
+
       setFormData({
         studentName: '',
         quote: '',
@@ -73,6 +75,11 @@ const AdminStudentSuccessStories = () => {
         courseTaken: '',
         photo: null,
       });
+
+      if (fileInputRef.current) {
+        fileInputRef.current.value = ''; // ✅ Clear file input
+      }
+
       setEditingId(null);
       fetchStories();
     } catch (error) {
@@ -89,6 +96,9 @@ const AdminStudentSuccessStories = () => {
       photo: null,
     });
     setEditingId(story._id);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
   };
 
   const handleDelete = async (id) => {
@@ -148,6 +158,7 @@ const AdminStudentSuccessStories = () => {
           name="photo"
           accept="image/*"
           onChange={handleChange}
+          ref={fileInputRef} // ✅ Assign ref to file input
           required={!editingId}
         />
         <button type="submit">{editingId ? 'Update' : 'Add'} Story</button>
@@ -161,6 +172,9 @@ const AdminStudentSuccessStories = () => {
               courseTaken: '',
               photo: null,
             });
+            if (fileInputRef.current) {
+              fileInputRef.current.value = '';
+            }
           }}>Cancel</button>
         )}
       </form>
