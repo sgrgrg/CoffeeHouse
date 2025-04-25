@@ -1,8 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { FaServicestack, FaBuilding, FaUtensils, FaStar, FaEnvelope, FaUserShield } from "react-icons/fa";
+import { AuthContext } from "../contexts/AuthContext";
 
 const AdminOverview = () => {
+  const { authData } = useContext(AuthContext);
+  const token = authData?.token || "";
+
   const [stats, setStats] = useState({
     servicesCount: 0,
     branchesCount: 0,
@@ -17,13 +21,18 @@ const AdminOverview = () => {
   const fetchStats = async () => {
     try {
       setLoading(true);
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
       const [servicesRes, branchesRes, menuRes, reviewsRes, contactsRes, adminsRes] = await Promise.all([
-        axios.get("https://coffeehouse-4yii.onrender.com/api/service"),
-        axios.get("https://coffeehouse-4yii.onrender.com/api/admin/branches"),
-        axios.get("https://coffeehouse-4yii.onrender.com/api/menu"),
-        axios.get("https://coffeehouse-4yii.onrender.com/api/reviews"),
-        axios.get("https://coffeehouse-4yii.onrender.com/api/admin/messages"),
-        axios.get("https://coffeehouse-4yii.onrender.com/api/admins"),
+        axios.get("https://coffeehouse-4yii.onrender.com/api/service", config),
+        axios.get("https://coffeehouse-4yii.onrender.com/api/admin/branches", config),
+        axios.get("https://coffeehouse-4yii.onrender.com/api/menu", config),
+        axios.get("https://coffeehouse-4yii.onrender.com/api/reviews", config),
+        axios.get("https://coffeehouse-4yii.onrender.com/api/admin/messages", config),
+        axios.get("https://coffeehouse-4yii.onrender.com/api/user/admin/users", config),
       ]);
       setStats({
         servicesCount: Array.isArray(servicesRes.data) ? servicesRes.data.length : 0,
@@ -31,7 +40,7 @@ const AdminOverview = () => {
         menuItemsCount: Array.isArray(menuRes.data) ? menuRes.data.length : 0,
         reviewsCount: Array.isArray(reviewsRes.data) ? reviewsRes.data.length : 0,
         contactsCount: Array.isArray(contactsRes.data) ? contactsRes.data.length : 0,
-        adminsCount: Array.isArray(adminsRes.data) ? adminsRes.data.length : 0,
+        adminsCount: Array.isArray(adminsRes.data) ? adminsRes.data.filter(admin => admin.isAdmin).length : 0,
       });
       setLoading(false);
     } catch (err) {
@@ -42,7 +51,7 @@ const AdminOverview = () => {
 
   useEffect(() => {
     fetchStats();
-  }, []);
+  }, [token]);
 
   if (loading) return <div className="loading-message">Loading overview...</div>;
   if (error) return (
