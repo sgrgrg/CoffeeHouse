@@ -1,6 +1,5 @@
 import React, { useState, useMemo, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaImage, FaServicestack, FaListAlt, FaBuilding, FaUtensils, FaStar, FaEnvelope, FaBars, FaSearch } from "react-icons/fa";
 import EditBanner from "./EditBanner";
 import AdminService from "./AdminService";
 import AdminServiceTitleAndDescribe from "./AdminService_titleandDescribe";
@@ -22,8 +21,28 @@ import AdminFAQs from "./AdminFAQs";
 import AdminCareers from "./AdminCareers";
 import { AuthContext } from "../contexts/AuthContext";
 
+import { 
+  FaImage, 
+  FaServicestack, 
+  FaListAlt, 
+  FaBuilding, 
+  FaUtensils, 
+  FaStar, 
+  FaEnvelope, 
+  FaBars, 
+  FaSearch,
+  FaUserCog,
+  FaChalkboardTeacher,
+  FaGraduationCap,
+  FaCalendarAlt,
+  FaUsers,
+  FaBriefcase,
+  FaQuestionCircle,
+  FaUsersCog
+} from "react-icons/fa";
+
 const menuItems = [
-  { key: "AdminOverview", label: "Overview", icon: <FaBars className="admin-icon" /> },
+  { key: "AdminOverview", label: "Overview", icon: <FaUserCog className="admin-icon" /> },
   { key: "EditBanner", label: "Edit Banner", icon: <FaImage className="admin-icon" /> },
   { key: "AdminService", label: "Services", icon: <FaServicestack className="admin-icon" /> },
   { key: "AdminServiceTitleAndDescribe", label: "Service Title & Description", icon: <FaListAlt className="admin-icon" /> },
@@ -31,14 +50,14 @@ const menuItems = [
   { key: "AdminMenu", label: "Menu", icon: <FaUtensils className="admin-icon" /> },
   { key: "AdminReview", label: "Reviews", icon: <FaStar className="admin-icon" /> },
   { key: "AdminContact", label: "Contact", icon: <FaEnvelope className="admin-icon" /> },
-  { key: "AdminAbout", label: "About Us", icon: <FaBars className="admin-icon" /> },
-  { key: "AdminUserManagement", label: "User Management", icon: <FaBars className="admin-icon" /> },
-  { key: "AdminTrainings", label: "Trainings", icon: <FaBars className="admin-icon" /> },
-  { key: "AdminStudentSuccessStories", label: "Student Success Stories", icon: <FaBars className="admin-icon" /> },
-  { key: "AdminEvents", label: "Upcoming Events & Workshops", icon: <FaBars className="admin-icon" /> },
-  { key: "AdminTeam", label: "Team", icon: <FaBars className="admin-icon" /> },
-  { key: "AdminFAQs", label: "FAQs", icon: <FaBars className="admin-icon" /> },
-  { key: "AdminCareers", label: "Careers", icon: <FaBars className="admin-icon" /> },
+  { key: "AdminAbout", label: "About Us", icon: <FaBriefcase className="admin-icon" /> },
+  { key: "AdminUserManagement", label: "User Management", icon: <FaUsersCog className="admin-icon" /> },
+  { key: "AdminTrainings", label: "Trainings", icon: <FaChalkboardTeacher className="admin-icon" /> },
+  { key: "AdminStudentSuccessStories", label: "Student Success Stories", icon: <FaGraduationCap className="admin-icon" /> },
+  { key: "AdminEvents", label: "Upcoming Events & Workshops", icon: <FaCalendarAlt className="admin-icon" /> },
+  { key: "AdminTeam", label: "Team", icon: <FaUsers className="admin-icon" /> },
+  { key: "AdminFAQs", label: "FAQs", icon: <FaQuestionCircle className="admin-icon" /> },
+  { key: "AdminCareers", label: "Careers", icon: <FaBriefcase className="admin-icon" /> },
 ];
 
 const Admin = () => {

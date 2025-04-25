@@ -195,3 +195,7 @@ input[type="file"]:focus {
   outline: none;
   border-color: #007bff;
 }
+
+p {
+  color: #fff! important;
+}
