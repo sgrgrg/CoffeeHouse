@@ -1,170 +1,170 @@
 .banner-text {
-    flex: 1;
-    padding: 20px;
-    animation: slideInFromLeft 1s ease-out;
-  }
+  flex: 1;
+  padding: 20px;
+  animation: slideInFromLeft 1s ease-out;
+}
+
+.banner-title {
+  font-weight: 700;
+  font-size: 48px;
+  padding: 130px 0 0  0;
+  color: #6A3D2A;
+  margin-bottom: 20px;
+}
+
+.banner-describe {
+  font-weight: 400;
+  font-size: 18px;
+  color: #747474;
+  line-height: 1.8;
+  margin-bottom: 30px;
+}
+
+.see-menu {
+  background-color: #6A3D2A !important;
+  color: white !important;
+  padding: 10px 30px !important;
+  border-radius: 0px !important;
+  transition: transform 0.3s, background-color 0.3s !important;
+  text-decoration: none !important;
+  font-size: 18.66px !important;
+  font-weight: 500 !important;
+}
+
+
+.see-menu:hover {
+  background-color: #4f2c1e !important;
+  color: white !important;
+  transform: scale(1.05) !important;
+}
+
+.social-icons {
+  margin-top: 20px;
+}
+
+.social-link {
+  margin-right: 15px;
+  color: #6A3D2A;
+  transition: transform 0.3s, color 0.3s;
+}
+
+.social-link:hover {
+  color: #4f2c1e;
+  transform: scale(1.2);
+}
+
+.banner-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: slideInFromRight 1s ease-out;
+}
+
+.img-fluid {
+  width: 100%;
+  height: 85vh;
+  object-fit: cover;
   
+}
+
+.animated-img {
+  animation: scaleUp 1.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-50%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(50%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes scaleUp {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .banner-text {
+    padding: 10px;
+    text-align: center;
+  }
+
   .banner-title {
-    font-weight: 700;
-    font-size: 48px;
-    padding: 130px 0 0  0;
-    color: #6A3D2A;
+    font-size: 32px;
+    padding: 60px 0 0 0;
+  }
+
+  .banner-describe {
+    font-size: 16px;
     margin-bottom: 20px;
   }
-  
-  .banner-describe {
-    font-weight: 400;
-    font-size: 18px;
-    color: #747474;
-    line-height: 1.8;
-    margin-bottom: 30px;
-  }
-  
+
   .see-menu {
-    background-color: #6A3D2A !important;
-    color: white !important;
-    padding: 10px 30px !important;
-    border-radius: 0px !important;
-    transition: transform 0.3s, background-color 0.3s !important;
-    text-decoration: none !important;
-    font-size: 18.66px !important;
-    font-weight: 500 !important;
+    font-size: 16px !important;
+    padding: 8px 20px !important;
   }
-  
-  
-  .see-menu:hover {
-    background-color: #4f2c1e !important;
-    color: white !important;
-    transform: scale(1.05) !important;
-  }
-  
+
   .social-icons {
-    margin-top: 20px;
-  }
-  
-  .social-link {
-    margin-right: 15px;
-    color: #6A3D2A;
-    transition: transform 0.3s, color 0.3s;
-  }
-  
-  .social-link:hover {
-    color: #4f2c1e;
-    transform: scale(1.2);
-  }
-  
-  .banner-image {
-    flex: 1;
-    display: flex;
     justify-content: center;
-    align-items: center;
-    animation: slideInFromRight 1s ease-out;
+    display: flex;
   }
-  
+
+  .banner-image {
+    margin-top: 20px;
+    height: auto;
+  }
+
   .img-fluid {
-    width: 100%;
-    height: 85vh;
-    object-fit: cover;
-    
+    height: auto;
+    max-height: 300px;
+    object-fit: contain;
   }
-  
-  .animated-img {
-    animation: scaleUp 1.5s ease-in-out;
-  }
-  
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-  
-  @keyframes slideInFromLeft {
-    from {
-      transform: translateX(-50%);
-      opacity: 0;
-    }
-    to {
-      transform: translateX(0);
-      opacity: 1;
-    }
-  }
-  
-  @keyframes slideInFromRight {
-    from {
-      transform: translateX(50%);
-      opacity: 0;
-    }
-    to {
-      transform: translateX(0);
-      opacity: 1;
-    }
-  }
-  
-  @keyframes scaleUp {
-    from {
-      transform: scale(0.9);
-      opacity: 0;
-    }
-    to {
-      transform: scale(1);
-      opacity: 1;
-    }
+}
+
+@media (max-width: 480px) {
+  .banner-title {
+    font-size: 24px;
+    padding: 40px 0 0 0;
   }
 
-  /* Responsive Styles */
-  @media (max-width: 768px) {
-    .banner-text {
-      padding: 10px;
-      text-align: center;
-    }
-
-    .banner-title {
-      font-size: 32px;
-      padding: 60px 0 0 0;
-    }
-
-    .banner-describe {
-      font-size: 16px;
-      margin-bottom: 20px;
-    }
-
-    .see-menu {
-      font-size: 16px !important;
-      padding: 8px 20px !important;
-    }
-
-    .social-icons {
-      justify-content: center;
-      display: flex;
-    }
-
-    .banner-image {
-      margin-top: 20px;
-      height: auto;
-    }
-
-    .img-fluid {
-      height: auto;
-      max-height: 300px;
-      object-fit: contain;
-    }
+  .banner-describe {
+    font-size: 14px;
   }
 
-  @media (max-width: 480px) {
-    .banner-title {
-      font-size: 24px;
-      padding: 40px 0 0 0;
-    }
-
-    .banner-describe {
-      font-size: 14px;
-    }
-
-    .see-menu {
-      font-size: 14px !important;
-      padding: 6px 16px !important;
-    }
+  .see-menu {
+    font-size: 14px !important;
+    padding: 6px 16px !important;
   }
+}

@@ -1,142 +1,142 @@
 .branch-container {
-    background-image: url("/src/assets/images/find.svg");
-    background-repeat: no-repeat;
-  }
+  background-image: url("/src/assets/images/find.svg");
+  background-repeat: no-repeat;
+}
 
 .aos-init, .aos-animate {
-  visibility: visible !important;
-  opacity: 1 !important;
+visibility: visible !important;
+opacity: 1 !important;
 }
-  
+
 .branch-img {
-  width: 100%;
-  height: 203px;
-  border-radius: 15px;
+width: 100%;
+height: 203px;
+border-radius: 15px;
 }
-  
+
 .branch {
-  border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  background-color: #ffffff;
-  transition: transform 0.3s ease;
+border-radius: 15px;
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+overflow: hidden;
+background-color: #ffffff;
+transition: transform 0.3s ease;
 }
-  
+
 .branch:hover {
-  transform: scale(1.05);
+transform: scale(1.05);
 }
-  
+
 .findus-title {
-  font-weight: 700;
-  font-size: 2.25rem; 
-  line-height: 2.5rem;
+font-weight: 700;
+font-size: 2.25rem; 
+line-height: 2.5rem;
 }
-  
+
 .findus-description {
-  font-weight: 400;
-  font-size: 1.125rem; 
-  line-height: 2rem; 
-  color: #68737f;
+font-weight: 400;
+font-size: 1.125rem; 
+line-height: 2rem; 
+color: #68737f;
 }
-  
+
 .row-findus {
-  padding-top: 70px
+padding-top: 70px
 }
-  
+
 .branch-location {
-  font-weight: 800;
-  font-size: 1rem; 
-  line-height: 1.5rem; 
-  padding-top: 1rem;
-  color: #000000;
+font-weight: 800;
+font-size: 1rem; 
+line-height: 1.5rem; 
+padding-top: 1rem;
+color: #000000;
 }
 
 /* Modal styles */
 .modal {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
-  z-index: 1000;
-  overflow: hidden;
+display: flex;
+justify-content: center;
+align-items: center;
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.8);
+z-index: 1000;
+overflow: hidden;
 }
 
 .modal-content {
-  position: relative;
-  max-width: 90%;
-  max-height: 90%;
+position: relative;
+max-width: 90%;
+max-height: 90%;
 }
 
 .modal-img {
-  width: 100%;
-  height: 550px;
-  object-fit: fill;
+width: 100%;
+height: 550px;
+object-fit: fill;
 }
 
 .close-btn {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  font-size: 4rem;
-  color: white;
-  cursor: pointer;
-  background: transparent;
-  border: none;
+position: absolute;
+top: 20px;
+right: 20px;
+font-size: 4rem;
+color: white;
+cursor: pointer;
+background: transparent;
+border: none;
 }
 
 /* Responsive Styles */
 @media (max-width: 768px) {
-  .branch-img {
-    height: 150px;
-  }
+.branch-img {
+  height: 150px;
+}
 
-  .findus-title {
-    font-size: 1.75rem;
-    text-align: center;
-  }
+.findus-title {
+  font-size: 1.75rem;
+  text-align: center;
+}
 
-  .findus-description {
-    font-size: 1rem;
-    text-align: center;
-  }
+.findus-description {
+  font-size: 1rem;
+  text-align: center;
+}
 
-  .branch-location {
-    font-size: 0.9rem;
-    text-align: center;
-  }
+.branch-location {
+  font-size: 0.9rem;
+  text-align: center;
+}
 
-  .row-findus {
-    padding-top: 40px;
-  }
+.row-findus {
+  padding-top: 40px;
+}
 
-  .modal-img {
-    height: 350px;
-  }
+.modal-img {
+  height: 350px;
+}
 }
 
 @media (max-width: 480px) {
-  .branch-img {
-    height: 120px;
-  }
+.branch-img {
+  height: 120px;
+}
 
-  .findus-title {
-    font-size: 1.5rem;
-  }
+.findus-title {
+  font-size: 1.5rem;
+}
 
-  .findus-description {
-    font-size: 0.9rem;
-  }
+.findus-description {
+  font-size: 0.9rem;
+}
 
-  .branch-location {
-    font-size: 0.8rem;
-  }
+.branch-location {
+  font-size: 0.8rem;
+}
 
-  .modal-img {
-    height: 250px;
-  }
+.modal-img {
+  height: 250px;
+}
 }

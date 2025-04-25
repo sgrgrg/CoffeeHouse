@@ -35,6 +35,16 @@
     justify-content: center;
     align-items: center;
     box-shadow: 0 0 10px rgba(106, 61, 42, 0.7);
+    max-width: 150px;
+    max-height: 150px;
+    overflow: hidden;
+}
+
+.cv-profile-pic img.profile-image {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+    display: block;
 }
 
 .cv-header-info {
@@ -176,6 +186,62 @@
     .cv-main-content {
         flex-direction: column;
     }
+    .cv-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .cv-profile-pic {
+        margin-right: 0;
+        margin-bottom: 15px;
+        max-width: 120px;
+        max-height: 120px;
+    }
+    .cv-name {
+        font-size: 2rem;
+    }
+    .cv-contact-info {
+        font-size: 0.9rem;
+    }
+    .cv-section {
+        padding: 15px;
+    }
+    .cv-download {
+        width: 100%;
+        padding: 14px 0;
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .cv-container {
+        padding: 20px;
+        border-radius: 0;
+        box-shadow: none;
+    }
+    .cv-name {
+        font-size: 1.6rem;
+    }
+    .cv-contact-info {
+        font-size: 0.85rem;
+    }
+    .cv-section h2 {
+        font-size: 1.2rem;
+    }
+    .cv-section {
+        padding: 10px;
+        margin-bottom: 20px;
+    }
+    .cv-skill-bar {
+        height: 10px;
+    }
+    .cv-skill-level {
+        border-radius: 5px 0 0 5px;
+    }
+    .cv-download {
+        font-size: 1rem;
+        padding: 12px 0;
+    }
 }
 
 @keyframes fadeInDown {
@@ -200,7 +266,6 @@
     }
 }
 
-
-.cv-section p{
+.cv-section p {
     color: #fff;
 }
