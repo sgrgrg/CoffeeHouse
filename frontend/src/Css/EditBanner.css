@@ -1,0 +1,86 @@
+.edit-banner {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #2c3e50;
+  transition: box-shadow 0.3s ease;
+}
+
+.edit-banner:hover {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+}
+
+.edit-banner h2 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 25px;
+  color: #34495e;
+  text-align: center;
+}
+
+.edit-banner form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.edit-banner label {
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #34495e;
+}
+
+.edit-banner input[type="text"],
+.edit-banner input[type="url"],
+.edit-banner textarea {
+  padding: 12px 15px;
+  border: 1.5px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+  resize: vertical;
+}
+
+.edit-banner input[type="text"]:focus,
+.edit-banner input[type="url"]:focus,
+.edit-banner textarea:focus {
+  border-color: #3498db;
+  outline: none;
+}
+
+.edit-banner button {
+  align-self: center;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.edit-banner button:hover {
+  background-color: #2980b9;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .edit-banner {
+    padding: 20px;
+  }
+
+  .edit-banner h2 {
+    font-size: 24px;
+  }
+
+  .edit-banner button {
+    width: 100%;
+    padding: 14px 0;
+  }
+}

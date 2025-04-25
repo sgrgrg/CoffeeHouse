@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "../Css/About.css"
+import "../Css/AdminAbout.css";
 
 const AdminAbout = () => {
   const [aboutData, setAboutData] = useState({

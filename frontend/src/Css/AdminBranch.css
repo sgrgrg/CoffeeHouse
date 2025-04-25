@@ -1,0 +1,197 @@
+.admin-branch {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+button {
+  padding: 8px 16px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: #007bff;
+  color: white;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Input and Textarea */
+input[type="text"],
+input[type="email"],
+input[type="file"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: #f9f9f9;
+}
+
+input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Form and Field Layout */
+form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+form label {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+form textarea {
+  height: 100px;
+}
+
+form .input-group {
+  display: flex;
+  align-items: center;
+}
+
+form .input-group input {
+  flex: 1;
+}
+
+form .input-group button {
+  margin-left: 10px;
+  padding: 5px 10px;
+  background-color: #dc3545;
+  font-size: 12px;
+}
+
+form .input-group button:hover {
+  background-color: #c82333;
+}
+
+/* Success & Loading Messages */
+.success-message {
+  color: #28a745;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+p {
+  color: #555;
+}
+
+/* Branch List */
+.branch-item {
+  background-color: #fafafa;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.branch-item p {
+  margin: 5px 0;
+}
+
+.branch-item img {
+  max-width: 100px;
+  margin-right: 10px;
+}
+
+.branch-item button {
+  margin-right: 10px;
+}
+
+.branch-item button:last-child {
+  margin-right: 0;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  padding: 8px 16px;
+  margin: 0 5px;
+  background-color: #f1f1f1;
+  color: #007bff;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+.pagination button:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.pagination button.active {
+  background-color: #007bff;
+  color: white;
+}
+
+.pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Loading Spinner */
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  color: #007bff;
+}
+
+/* Form Buttons */
+button[type="submit"] {
+  background-color: #28a745;
+}
+
+button[type="submit"]:hover {
+  background-color: #218838;
+}
+
+/* Additional Styles for Edits and Preview */
+img[alt="Preview"], img[alt="Edit Preview"] {
+  margin-top: 10px;
+  border-radius: 4px;
+}
+
+input[type="file"] {
+  border: none;
+  background-color: #f9f9f9;
+  margin-top: 5px;
+}
+
+input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+input[type="file"]:focus {
+  outline: none;
+  border-color: #007bff;
+}

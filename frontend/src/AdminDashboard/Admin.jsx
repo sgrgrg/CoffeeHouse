@@ -10,7 +10,7 @@ import AdminReview from "./AdminReview";
 import AdminContact from "./AdminContact";
 import AdminOverview from "./AdminOverview";
 
-import "../Css/AdminDashboard.css";
+import "../Css/AdminDashboardLayout.css";
 
 import AdminUserManagement from "./AdminUserManagement";
 import AdminAbout from "./AdminAbout";

@@ -1,212 +1,272 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import axios from 'axios';
+
+const ServiceTable = ({
+  services,
+  selectedServices,
+  onSelectService,
+  onEdit,
+  onDelete,
+  onFeature,
+  sortConfig,
+  onSort,
+  loading,
+}) => {
+  const getSortIcon = (key) => {
+    if (!sortConfig) return null;
+    if (sortConfig.key === key) {
+      return sortConfig.direction === 'ascending' ? '▲' : '▼';
+    }
+    return null;
+  };
+
+  const handleSort = (key) => {
+    let direction = 'ascending';
+    if (sortConfig && sortConfig.key === key && sortConfig.direction === 'ascending') {
+      direction = 'descending';
+    }
+    onSort({ key, direction });
+  };
+
+  return (
+    <table className="service-table">
+      <thead>
+        <tr>
+          <th>
+            <input
+              type="checkbox"
+              checked={services.length > 0 && selectedServices.size === services.length}
+              onChange={() => {
+                if (selectedServices.size === services.length) {
+                  onSelectService(new Set());
+                } else {
+                  onSelectService(new Set(services.map(s => s._id)));
+                }
+              }}
+            />
+          </th>
+          <th className="sortable" onClick={() => handleSort('title')}>
+            Title {getSortIcon('title')}
+          </th>
+          <th>Description</th>
+          <th>Image</th>
+          <th className="sortable" onClick={() => handleSort('isFeatured')}>
+            Featured {getSortIcon('isFeatured')}
+          </th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {services.length === 0 && (
+          <tr>
+            <td colSpan="6" style={{ textAlign: 'center' }}>
+              {loading ? 'Loading...' : 'No services found.'}
+            </td>
+          </tr>
+        )}
+        {services.map(service => (
+          <tr key={service._id} className={service.isFeatured ? 'featured-row' : ''}>
+            <td>
+              <input
+                type="checkbox"
+                checked={selectedServices.has(service._id)}
+                onChange={() => {
+                  const newSelected = new Set(selectedServices);
+                  if (newSelected.has(service._id)) {
+                    newSelected.delete(service._id);
+                  } else {
+                    newSelected.add(service._id);
+                  }
+                  onSelectService(newSelected);
+                }}
+              />
+            </td>
+            <td>{service.title}</td>
+            <td>{service.description}</td>
+            <td>
+              <img
+                src={`https://coffeehouse-4yii.onrender.com${service.image}`}
+                alt={service.title}
+                className="service-image"
+              />
+            </td>
+            <td>{service.isFeatured ? 'Yes' : 'No'}</td>
+            <td>
+              <button onClick={() => onEdit(service)}>Edit</button>
+              <button onClick={() => onDelete(service._id)}>Delete</button>
+              <button onClick={() => onFeature(service._id)}>
+                {service.isFeatured ? 'Unfeature' : 'Feature'}
+              </button>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+};
 
 const AdminService = () => {
   const [services, setServices] = useState([]);
   const [featuredServices, setFeaturedServices] = useState([]);
-  const [newService, setNewService] = useState({ title: '', description: '', image: '' });
+  const [newService, setNewService] = useState({ title: '', description: '', image: null });
   const [editingService, setEditingService] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const [servicesPerPage] = useState(5);
+  const servicesPerPage = 5;
   const [selectedServices, setSelectedServices] = useState(new Set());
   const [loading, setLoading] = useState(false);
   const [imagePreview, setImagePreview] = useState(null);
   const [editImagePreview, setEditImagePreview] = useState(null);
+  const [sortConfig, setSortConfig] = useState(null);
 
   const maxTitleLength = 50;
   const maxDescriptionLength = 200;
 
-  useEffect(() => {
-    fetchServices();
+  const fetchServices = useCallback(async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get('https://coffeehouse-4yii.onrender.com/api/service');
+      setServices(response.data);
+      setFeaturedServices(response.data.filter(service => service.isFeatured).slice(0, 4));
+    } catch (error) {
+      console.error('Error fetching services:', error);
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
-  const fetchServices = () => {
-    setLoading(true);
-    axios
-      .get('https://coffeehouse-4yii.onrender.com/api/service')
-      .then((response) => {
-        setServices(response.data);
-        setFeaturedServices(response.data.filter((service) => service.isFeatured).slice(0, 4));
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error('Error fetching services:', error);
-        setLoading(false);
-      });
-  };
+  useEffect(() => {
+    fetchServices();
+  }, [fetchServices]);
 
-  const handleImageChange = (e) => {
+  const handleImageChange = (e, isEdit = false) => {
     const file = e.target.files[0];
-    setNewService((prev) => ({ ...prev, image: file }));
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImagePreview(reader.result);
-      };
-      reader.readAsDataURL(file);
+    if (isEdit) {
+      setEditImagePreview(file ? URL.createObjectURL(file) : null);
+      setNewService(prev => ({ ...prev, image: file }));
     } else {
-      setImagePreview(null);
+      setImagePreview(file ? URL.createObjectURL(file) : null);
+      setNewService(prev => ({ ...prev, image: file }));
     }
   };
 
-  const handleEditImageChange = (e) => {
-    const file = e.target.files[0];
-    setNewService((prev) => ({ ...prev, image: file }));
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setEditImagePreview(reader.result);
-      };
-      reader.readAsDataURL(file);
+  const handleInputChange = (e, isEdit = false) => {
+    const { name, value } = e.target;
+    if (isEdit) {
+      setEditingService(prev => ({ ...prev, [name]: value }));
     } else {
-      setEditImagePreview(null);
+      setNewService(prev => ({ ...prev, [name]: value }));
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!newService.title.trim() || !newService.description.trim()) {
       alert('Title and description are required.');
       return;
     }
     setLoading(true);
-    const formData = new FormData();
-    formData.append('title', newService.title);
-    formData.append('description', newService.description);
-    formData.append('image', newService.image);
+    try {
+      const formData = new FormData();
+      formData.append('title', newService.title);
+      formData.append('description', newService.description);
+      if (newService.image) formData.append('image', newService.image);
 
-    axios
-      .post('https://coffeehouse-4yii.onrender.com/api/service', formData)
-      .then((response) => {
-        alert(response.data.message);
-        setNewService({ title: '', description: '', image: '' });
-        setImagePreview(null);
-        document.getElementById('image-input').value = '';
-        fetchServices();
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error('Error creating service:', error);
-        setLoading(false);
-      });
-  };
-
-  const handleFeatureService = (serviceId) => {
-    const service = services.find((s) => s._id === serviceId);
-    if (!service) return;
-
-    const isAddingToFeatured = !service.isFeatured;
-    if (isAddingToFeatured && featuredServices.length >= 4) {
-      alert('Only 4 services can be featured at a time.');
-      return;
+      const response = await axios.post('https://coffeehouse-4yii.onrender.com/api/service', formData);
+      alert(response.data.message);
+      setNewService({ title: '', description: '', image: null });
+      setImagePreview(null);
+      document.getElementById('image-input').value = '';
+      fetchServices();
+    } catch (error) {
+      console.error('Error creating service:', error);
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(true);
-    axios
-      .put(`https://coffeehouse-4yii.onrender.com/api/service/${serviceId}`, { isFeatured: isAddingToFeatured })
-      .then((response) => {
-        alert(response.data.message);
-        fetchServices();
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error('Error updating featured status:', error);
-        setLoading(false);
-      });
   };
 
-  const handleUpdate = (e, serviceId) => {
+  const handleUpdate = async (e) => {
     e.preventDefault();
     if (!editingService.title.trim() || !editingService.description.trim()) {
       alert('Title and description are required.');
       return;
     }
     setLoading(true);
-    const formData = new FormData();
-    formData.append('title', editingService.title);
-    formData.append('description', editingService.description);
+    try {
+      const formData = new FormData();
+      formData.append('title', editingService.title);
+      formData.append('description', editingService.description);
+      if (newService.image) formData.append('image', newService.image);
 
-    if (newService.image) {
-      formData.append('image', newService.image);
+      const response = await axios.put(`https://coffeehouse-4yii.onrender.com/api/service/${editingService._id}`, formData);
+      alert(response.data.message);
+      setEditingService(null);
+      setEditImagePreview(null);
+      fetchServices();
+    } catch (error) {
+      console.error('Error updating service:', error);
+    } finally {
+      setLoading(false);
     }
-
-    axios
-      .put(`https://coffeehouse-4yii.onrender.com/api/service/${serviceId}`, formData)
-      .then((response) => {
-        alert(response.data.message);
-        setEditingService(null);
-        setEditImagePreview(null);
-        fetchServices();
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error('Error updating service:', error);
-        setLoading(false);
-      });
   };
 
-  const handleDelete = (serviceId) => {
+  const handleDelete = async (serviceId) => {
     if (!window.confirm('Are you sure you want to delete this service?')) return;
     setLoading(true);
-    axios
-      .delete(`https://coffeehouse-4yii.onrender.com/api/service/${serviceId}`)
-      .then((response) => {
-        alert(response.data.message);
-        fetchServices();
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error('Error deleting service:', error);
-        setLoading(false);
-      });
+    try {
+      const response = await axios.delete(`https://coffeehouse-4yii.onrender.com/api/service/${serviceId}`);
+      alert(response.data.message);
+      fetchServices();
+    } catch (error) {
+      console.error('Error deleting service:', error);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleSelectService = (serviceId) => {
-    const newSelected = new Set(selectedServices);
-    if (newSelected.has(serviceId)) {
-      newSelected.delete(serviceId);
-    } else {
-      newSelected.add(serviceId);
+  const handleFeatureService = async (serviceId) => {
+    const service = services.find(s => s._id === serviceId);
+    if (!service) return;
+    const isAddingToFeatured = !service.isFeatured;
+    if (isAddingToFeatured && featuredServices.length >= 4) {
+      alert('Only 4 services can be featured at a time.');
+      return;
     }
+    setLoading(true);
+    try {
+      const response = await axios.put(`https://coffeehouse-4yii.onrender.com/api/service/${serviceId}`, { isFeatured: isAddingToFeatured });
+      alert(response.data.message);
+      fetchServices();
+    } catch (error) {
+      console.error('Error updating featured status:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSelectService = (newSelected) => {
     setSelectedServices(newSelected);
   };
 
-  const handleSelectAll = () => {
-    if (selectedServices.size === currentServices.length) {
-      setSelectedServices(new Set());
-    } else {
-      setSelectedServices(new Set(currentServices.map((s) => s._id)));
-    }
+  const handleSort = (config) => {
+    setSortConfig(config);
   };
 
-  const handleBulkDelete = () => {
-    if (selectedServices.size === 0) {
-      alert('No services selected for deletion.');
-      return;
-    }
-    if (!window.confirm(`Are you sure you want to delete ${selectedServices.size} selected services?`)) return;
-    setLoading(true);
-    Promise.all(
-      Array.from(selectedServices).map((serviceId) =>
-        axios.delete(`https://coffeehouse-4yii.onrender.com/api/service/${serviceId}`)
-      )
-    )
-      .then(() => {
-        alert('Selected services deleted successfully.');
-        setSelectedServices(new Set());
-        fetchServices();
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error('Error deleting selected services:', error);
-        setLoading(false);
+  const filteredServices = useMemo(() => {
+    let filtered = services.filter(service => service.title.toLowerCase().includes(searchTerm.toLowerCase()));
+    if (sortConfig !== null) {
+      filtered = filtered.sort((a, b) => {
+        if (a[sortConfig.key] < b[sortConfig.key]) {
+          return sortConfig.direction === 'ascending' ? -1 : 1;
+        }
+        if (a[sortConfig.key] > b[sortConfig.key]) {
+          return sortConfig.direction === 'ascending' ? 1 : -1;
+        }
+        return 0;
       });
-  };
-
-  const filteredServices = services.filter((service) =>
-    service.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+    }
+    return filtered;
+  }, [services, searchTerm, sortConfig]);
 
   const indexOfLastService = currentPage * servicesPerPage;
   const indexOfFirstService = indexOfLastService - servicesPerPage;
@@ -214,80 +274,111 @@ const AdminService = () => {
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+  const [showEditModal, setShowEditModal] = useState(false);
+
+  const openEditModal = (service) => {
+    setEditingService(service);
+    setEditImagePreview(null);
+    setShowEditModal(true);
+  };
+
+  const closeEditModal = () => {
+    setEditingService(null);
+    setEditImagePreview(null);
+    setShowEditModal(false);
+  };
+
   return (
-    <div className="admin-service-container">
+    <div className="admin-service">
       <h1>Admin Service Management</h1>
 
       <input
         type="text"
         placeholder="Search services..."
         value={searchTerm}
-        onChange={(e) => {
+        onChange={e => {
           setSearchTerm(e.target.value);
           setCurrentPage(1);
         }}
         className="search-input"
       />
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="service-form">
         <h3>Add New Service</h3>
         <input
           type="text"
           name="title"
           placeholder="Title"
           value={newService.title}
-          onChange={(e) => setNewService({ ...newService, title: e.target.value })}
+          onChange={e => handleInputChange(e)}
           maxLength={maxTitleLength}
+          required
         />
-        <div className="character-count">
-          Characters: {newService.title.length}/{maxTitleLength}
-        </div>
+        <div className="character-count">{newService.title.length}/{maxTitleLength}</div>
 
         <textarea
           name="description"
           placeholder="Description"
           value={newService.description}
-          onChange={(e) => setNewService({ ...newService, description: e.target.value })}
+          onChange={e => handleInputChange(e)}
           maxLength={maxDescriptionLength}
+          required
         />
-        <div className="character-count">
-          Characters: {newService.description.length}/{maxDescriptionLength}
-        </div>
+        <div className="character-count">{newService.description.length}/{maxDescriptionLength}</div>
 
-        <input id="image-input" type="file" onChange={handleImageChange} />
-        {imagePreview && <img src={imagePreview} alt="Preview" width="100" style={{ marginTop: '10px' }} />}
+        <input id="image-input" type="file" accept="image/*" onChange={e => handleImageChange(e)} />
+        {imagePreview && <img src={imagePreview} alt="Preview" className="image-preview" />}
+
         <button type="submit" disabled={loading}>{loading ? 'Adding...' : 'Add Service'}</button>
       </form>
 
-      <h3>All Services</h3>
-      <button onClick={handleSelectAll}>
-        {selectedServices.size === currentServices.length ? 'Deselect All' : 'Select All'}
-      </button>
-      <button onClick={handleBulkDelete} disabled={loading || selectedServices.size === 0}>
-        {loading ? 'Deleting...' : 'Delete Selected'}
-      </button>
-
-      {loading && <p>Loading services...</p>}
-
-      <div className="services-list">
-        {currentServices.map((service) => (
-          <div key={service._id} className="service-item">
-            <input
-              type="checkbox"
-              checked={selectedServices.has(service._id)}
-              onChange={() => handleSelectService(service._id)}
-            />
-            <img src={`https://coffeehouse-4yii.onrender.com${service.image}`} alt={service.title} width="100" />
-            <h4>{service.title}</h4>
-            <p>{service.description}</p>
-            <button onClick={() => setEditingService(service)}>Edit</button>
-            <button onClick={() => handleDelete(service._id)} disabled={loading}>Delete</button>
-            <button onClick={() => handleFeatureService(service._id)} disabled={loading}>
-              {service.isFeatured ? 'Unfeature' : 'Feature'}
-            </button>
-          </div>
-        ))}
+      <div className="bulk-actions">
+        <button
+          onClick={() => {
+            if (selectedServices.size === currentServices.length) {
+              handleSelectService(new Set());
+            } else {
+              handleSelectService(new Set(currentServices.map(s => s._id)));
+            }
+          }}
+        >
+          {selectedServices.size === currentServices.length ? 'Deselect All' : 'Select All'}
+        </button>
+        <button onClick={async () => {
+          if (selectedServices.size === 0) {
+            alert('No services selected for deletion.');
+            return;
+          }
+          if (!window.confirm(`Are you sure you want to delete ${selectedServices.size} selected services?`)) return;
+          setLoading(true);
+          try {
+            await Promise.all(Array.from(selectedServices).map(serviceId =>
+              axios.delete(`https://coffeehouse-4yii.onrender.com/api/service/${serviceId}`)
+            ));
+            alert('Selected services deleted successfully.');
+            handleSelectService(new Set());
+            fetchServices();
+          } catch (error) {
+            console.error('Error deleting selected services:', error);
+          } finally {
+            setLoading(false);
+          }
+        }} disabled={loading || selectedServices.size === 0}>
+          {loading ? 'Deleting...' : 'Delete Selected'}
+        </button>
       </div>
+
+      <ServiceTable
+        services={currentServices}
+        selectedServices={selectedServices}
+        onSelectService={handleSelectService}
+        onEdit={openEditModal}
+        onDelete={handleDelete}
+        onFeature={handleFeatureService}
+        sortConfig={sortConfig}
+        onSort={handleSort}
+        loading={loading}
+      />
 
       <div className="pagination">
         {Array.from({ length: Math.ceil(filteredServices.length / servicesPerPage) }, (_, i) => (
@@ -302,51 +393,37 @@ const AdminService = () => {
         ))}
       </div>
 
-      {editingService && (
-        <div className="edit-service-form">
+      {showEditModal && (
+        <div className="edit-service-modal">
           <h3>Edit Service</h3>
-          <input
-            type="text"
-            value={editingService.title}
-            onChange={(e) => setEditingService({ ...editingService, title: e.target.value })}
-            maxLength={maxTitleLength}
-          />
-          <div className="character-count">
-            Characters: {editingService.title.length}/{maxTitleLength}
-          </div>
+          <form onSubmit={handleUpdate}>
+            <input
+              type="text"
+              name="title"
+              value={editingService.title}
+              onChange={e => handleInputChange(e, true)}
+              maxLength={maxTitleLength}
+              required
+            />
+            <div className="character-count">{editingService.title.length}/{maxTitleLength}</div>
 
-          <textarea
-            value={editingService.description}
-            onChange={(e) =>
-              setEditingService({ ...editingService, description: e.target.value })
-            }
-            maxLength={maxDescriptionLength}
-          />
-          <div className="character-count">
-            Characters: {editingService.description.length}/{maxDescriptionLength}
-          </div>
+            <textarea
+              name="description"
+              value={editingService.description}
+              onChange={e => handleInputChange(e, true)}
+              maxLength={maxDescriptionLength}
+              required
+            />
+            <div className="character-count">{editingService.description.length}/{maxDescriptionLength}</div>
 
-          <input type="file" onChange={handleEditImageChange} />
-          {editImagePreview && <img src={editImagePreview} alt="Edit Preview" width="100" style={{ marginTop: '10px' }} />}
-          <button onClick={(e) => handleUpdate(e, editingService._id)} disabled={loading}>
-            {loading ? 'Updating...' : 'Update Service'}
-          </button>
-          <button onClick={() => { setEditingService(null); setEditImagePreview(null); }} disabled={loading}>
-            Cancel
-          </button>
+            <input type="file" accept="image/*" onChange={e => handleImageChange(e, true)} />
+            {editImagePreview && <img src={editImagePreview} alt="Edit Preview" className="image-preview" />}
+
+            <button type="submit" className="submit-btn" disabled={loading}>{loading ? 'Updating...' : 'Update Service'}</button>
+            <button type="button" className="cancel-btn" onClick={closeEditModal} disabled={loading}>Cancel</button>
+          </form>
         </div>
       )}
-
-      <h3>Featured Services</h3>
-      <div className="featured-services">
-        {featuredServices.map((service) => (
-          <div key={service._id} className="service-item">
-            <img src={`https://coffeehouse-4yii.onrender.com${service.image}`} alt={service.title} width="100" />
-            <h4>{service.title}</h4>
-            <p>{service.description}</p>
-          </div>
-        ))}
-      </div>
     </div>
   );
 };
