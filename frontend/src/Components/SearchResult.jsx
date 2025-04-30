@@ -33,15 +33,15 @@ const SearchResult = () => {
     axios.get("https://coffeehouse-4yii.onrender.com/api/service").then((res) => {
       setServices(res.data);
     });
-    axios.get("https://coffeehouse-4yii.onrender.com/api/branch").then((res) => {
+    axios.get("https://coffeehouse-4yii.onrender.com/api/admin/branches").then((res) => {
       if (res.data && res.data.branch && Array.isArray(res.data.branch.branches)) {
         setBranches(res.data.branch.branches);
       }
     });
-    axios.get("https://coffeehouse-4yii.onrender.com/api/training").then((res) => {
+    axios.get("https://coffeehouse-4yii.onrender.com/api/trainings").then((res) => {
       setTrainings(res.data);
     });
-    axios.get("https://coffeehouse-4yii.onrender.com/api/event").then((res) => {
+    axios.get("https://coffeehouse-4yii.onrender.com/api/events").then((res) => {
       setEvents(res.data);
     });
   }, []);
@@ -50,19 +50,19 @@ const SearchResult = () => {
     const lowerSearchTerm = searchTerm.toLowerCase();
 
     const filteredMenu = menuItems.filter((item) =>
-      item.name.toLowerCase().includes(lowerSearchTerm)
+      item.name && item.name.toLowerCase().includes(lowerSearchTerm)
     );
     const filteredServ = services.filter((service) =>
-      service.title.toLowerCase().includes(lowerSearchTerm)
+      service.title && service.title.toLowerCase().includes(lowerSearchTerm)
     );
     const filteredBranch = branches.filter((branch) =>
-      branch.location.toLowerCase().includes(lowerSearchTerm)
+      branch.location && branch.location.toLowerCase().includes(lowerSearchTerm)
     );
     const filteredTrain = trainings.filter((training) =>
-      training.title.toLowerCase().includes(lowerSearchTerm)
+      training.title && training.title.toLowerCase().includes(lowerSearchTerm)
     );
     const filteredEvent = events.filter((event) =>
-      event.title.toLowerCase().includes(lowerSearchTerm)
+      event.title && event.title.toLowerCase().includes(lowerSearchTerm)
     );
 
     setFilteredMenuItems(filteredMenu);

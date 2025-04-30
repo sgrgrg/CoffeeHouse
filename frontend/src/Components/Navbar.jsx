@@ -40,16 +40,39 @@ const Navbar = () => {
     setSearchVisible(!searchVisible);
   };
 
+  // Debounce search input to avoid excessive navigation
+  const [debounceTimeout, setDebounceTimeout] = React.useState(null);
+
+
   const handleSearchChange = (e) => {
-    setSearchTerm(e.target.value);
+    const value = e.target.value;
+    setSearchTerm(value);
+
+    if (debounceTimeout) {
+      clearTimeout(debounceTimeout);
+    }
+
+    setDebounceTimeout(
+      setTimeout(() => {
+        if (value.trim().length > 0) {
+          navigate(`/search?q=${encodeURIComponent(value.trim())}`);
+          // Do not clear text immediately
+          // setSearchTerm('');
+          // Do not close search box
+          // setSearchVisible(false);
+        }
+      }, 500)
+    );
   };
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     if (searchTerm.trim() !== '') {
       navigate(`/search?q=${encodeURIComponent(searchTerm.trim())}`);
-      setSearchTerm('');
-      setSearchVisible(false);
+      // Do not clear text immediately
+      // setSearchTerm('');
+      // Do not close search box
+      // setSearchVisible(false);
     }
   };
 
@@ -60,6 +83,27 @@ const Navbar = () => {
   const closeSideNav = () => {
     setSideNavOpen(false);
   };
+
+  // Close search box and clear text when clicking outside
+  React.useEffect(() => {
+    const handleClickOutside = (event) => {
+      const searchContainer = document.querySelector('.search-container');
+      if (searchContainer && !searchContainer.contains(event.target)) {
+        setSearchVisible(false);
+        setSearchTerm('');
+      }
+    };
+
+    if (searchVisible) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [searchVisible]);
 
   return (
     <>
