@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 import "../Css/CV.css";
 import profilePic from "../assets/images/profile.png";
-import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaDownload, FaBriefcase, FaGraduationCap, FaCertificate, FaProjectDiagram, FaTools } from "react-icons/fa";
+import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaDownload, FaBriefcase, FaGraduationCap, FaCertificate, FaProjectDiagram, FaTools, FaLinkedin, FaGithub, FaMedium, FaLink } from "react-icons/fa";
 
 const CV = () => {
     const cvRef = useRef(null);
@@ -33,6 +33,12 @@ const CV = () => {
                                 <div><FaEnvelope className="cv-icon" /> sgrgrg34@gmail.com</div>
                                 <div><FaMapMarkerAlt className="cv-icon" /> Kathmandu, Nepal</div>
                             </div>
+<div className="cv-social-links">
+    <a href="https://www.linkedin.com/in/baddepartment-gurung-b53659362/" target="_blank" rel="noopener noreferrer"><FaLinkedin className="cv-icon" /> LinkedIn</a>
+    <a href="https://github.com/sgrgrg" target="_blank" rel="noopener noreferrer"><FaGithub className="cv-icon" /> GitHub</a>
+    <a href="https://medium.com/@sgrgrg34" target="_blank" rel="noopener noreferrer"><FaMedium className="cv-icon" /> Medium</a>
+    <a href="https://frontend-production-b728.up.railway.app/cv" target="_blank" rel="noopener noreferrer"><FaLink className="cv-icon" /> Portfolio</a>
+</div>
                         </div>
                     </div>
 
@@ -47,9 +53,29 @@ const CV = () => {
                                 <h2>Education</h2>
                                 <div className="cv-timeline">
                                     <div className="cv-timeline-item">
-                                        <div className="cv-timeline-date">2023</div>
+                                        <div className="cv-timeline-date">Dec, 2020 - Present</div>
                                         <div className="cv-timeline-content">
-                                            <strong>ISMT College</strong> - Bachelor of Computer System Engineering
+                                            <strong>Bachelor City</strong><br />
+                                            school_name<br />
+                                            Mention your degree name with faculty<br />
+                                            CGPA (if completed)
+                                        </div>
+                                    </div>
+                                    <div className="cv-timeline-item">
+                                        <div className="cv-timeline-date">Apr, 2018 - Apr, 2020</div>
+                                        <div className="cv-timeline-content">
+                                            <strong>NEB City</strong><br />
+                                            school_name<br />
+                                            which faculty / stream<br />
+                                            you can mention your CGPA (optional)
+                                        </div>
+                                    </div>
+                                    <div className="cv-timeline-item">
+                                        <div className="cv-timeline-date">Jan, 2005 - Jan, 2018</div>
+                                        <div className="cv-timeline-content">
+                                            <strong>SEE City</strong><br />
+                                            school name<br />
+                                            you can mention your GPA (optional)
                                         </div>
                                     </div>
                                 </div>
@@ -59,30 +85,82 @@ const CV = () => {
                                 <h2>Training & Certifications</h2>
                                 <div className="cv-timeline">
                                     <div className="cv-timeline-item">
-                                        <div className="cv-timeline-date">2025</div>
+                                        <div className="cv-timeline-date">2024</div>
                                         <div className="cv-timeline-content">
-                                            <strong>MERN Stack Development Training</strong> - Mindrisers
+                                            <strong>Title of the training</strong><br />
+                                            Mind Risers Consortium<br />
+                                            Mention the details of the training and some notable skills you achieved. (2 lines max)<br />
+                                            Credential links (Compulsory): <a href="https://www.mindrisers.com.np/certificate/validate/MR-80287-PD" target="_blank" rel="noopener noreferrer">https://www.mindrisers.com.np/certificate/validate/MR-80287-PD</a>
+                                        </div>
+                                    </div>
+                                    <div className="cv-timeline-item">
+                                        <div className="cv-timeline-date">2023</div>
+                                        <div className="cv-timeline-content">
+                                            <strong>Title of the training</strong><br />
+                                            Company Name<br />
+                                            Mention the details of the training and some notable skills you achieved. (2 lines max)<br />
+                                            Credential links (if possible)
                                         </div>
                                     </div>
                                 </div>
                             </section>
 
                             <section className="cv-section">
-                                <h2>Internship Experience</h2>
+                                <h2>Achievements</h2>
                                 <ul>
-                                    <li>Developed and maintained the Coffee House website, implementing features such as dynamic menu display, backend API integration, and responsive design.</li>
-                                    <li>Collaborated with designers and backend developers to enhance UI/UX and optimize performance.</li>
-                                    <li>Implemented frontend animations using AOS library for engaging user interactions.</li>
-                                    <li>Participated in code reviews and contributed to improving code quality and maintainability.</li>
+                                    <li>What did you achieve?</li>
+                                    <li>Give a brief insight into how you achieved your milestone. This helps build your credibility!</li>
+                                    <li>Credential links (if possible)</li>
                                 </ul>
+                            </section>
+
+                            <section className="cv-section">
+                                <h2>Awards</h2>
+                                <div className="cv-timeline">
+                                    <div className="cv-timeline-item">
+                                        <div className="cv-timeline-date">2024</div>
+                                        <div className="cv-timeline-content">
+                                            <strong>Award Title</strong> - Location<br />
+                                            CompanyName<br />
+                                            Add a bit of background to your reward
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <section className="cv-section">
+                                <h2>Skills</h2>
+                                <ul>
+                                    <li>Add skills which you are confident of and can match the JD required skills too, SEO, MERN, Photoshop, Illustrator, Figma</li>
+                                </ul>
+                            </section>
+
+                            <section className="cv-section">
+                                <h2>Language</h2>
+                                <p>English, Nepali, others</p>
+                            </section>
+
+                            <section className="cv-section">
+                                <h2>References</h2>
+                                <p>MindRisers<br />
+                                MindRisers Institute of Technology<br />
+                                Available upon request</p>
+                                <p>Firstname Lastname - Manager<br />
+                                CompanyName<br />
+                                +977 xxxxxxxxxx<br />
+                                mail@gmail.com</p>
                             </section>
                         </div>
 
                         <div className="cv-right-column">
                             <section className="cv-section">
                                 <h2>Projects</h2>
-                                <p><strong>Coffee House</strong>: Developed a full-featured e-commerce platform for a local coffee shop, including dynamic menu management, social media integration, and smooth animations for enhanced user experience.</p>
-                                <p><strong>AI-Solution Business Website</strong>: Created a modern website showcasing AI-powered solutions with interactive UI components and seamless user experience.</p>
+                                <div>
+                                    <strong>Project Name</strong><br />
+                                    Overview of the project (Summary & Tech used) in 2-3 lines<br />
+                                    Top 5/6 Key Features<br />
+                                    <a href="https://github.com/link-to-github" target="_blank" rel="noopener noreferrer">link to your github or project domain</a>
+                                </div>
                             </section>
 
                             <section className="cv-section">
