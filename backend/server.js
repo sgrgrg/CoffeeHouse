@@ -4,6 +4,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 const http = require("http");
+const path = require("path");
 const { Server } = require("socket.io");
 const bannerRoute = require("./routes/bannerRoute");
 const serviceRoute = require('./routes/serviceRoute');
@@ -58,6 +59,14 @@ const eventRoute = require('./routes/eventRoute');
 app.use('/api/trainings', trainingRoute);
 app.use('/api/student-success-stories', studentSuccessStoryRoute);
 app.use('/api/events', eventRoute);
+
+// Serve frontend static files
+app.use(express.static(path.join(__dirname, '../frontend/dist')));
+
+// Catch-all route to serve frontend index.html for SPA routes like /admin
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
+});
 
 // Create HTTP server and wrap Express app
 const httpServer = http.createServer(app);
