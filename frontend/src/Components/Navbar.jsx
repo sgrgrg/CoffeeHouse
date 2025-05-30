@@ -145,9 +145,7 @@ const Navbar = () => {
               <li className="nav-item">
                 <Link className="nav-link" to="/contact">Contact</Link>
               </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/cv">CV</Link>
-              </li>
+           
               {!authData ? (
                 <>
                   <li className="nav-item">
@@ -220,9 +218,7 @@ const Navbar = () => {
           <li className="nav-item">
             <Link className="nav-link" to="/contact" onClick={closeSideNav}>Contact</Link>
           </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/cv" onClick={closeSideNav}>CV</Link>
-          </li>
+       
           {!authData ? (
             <>
               <li className="nav-item">

@@ -10,7 +10,7 @@ import Trainings from "./Components/Trainings";
 import Service from "./Components/Service";
 import Admin from "./AdminDashboard/Admin";
 import Menu from "./Components/Menu";
-import CV from "./Components/CV";
+
 import Login from "./Components/Login";
 import Register from "./Components/Register";
 import UserProfile from "./Components/UserProfile";
@@ -38,7 +38,7 @@ const App = () => {
           <Route path="/service" element={<Service />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/trainings" element={<Trainings />} />
-          <Route path="/cv" element={<CV />} />
+    
           <Route path="/menu" element={<Menu />} />
           <Route
             path="/admin"
